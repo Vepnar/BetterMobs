@@ -1,0 +1,17 @@
+name: BetterMobs
+main: vepnar.bettermobs.Main
+version: 1.0
+api-version: 1.15
+author: agdehaan@gmail.com
+website: www.example.com
+commands:
+  bettermobs-reload:
+    description: reload the bettermobs config file
+    aliases: bmr
+    permission: bettermobs.reload
+    permission-message: You not have have permission to use this command.
+    usage: "Usage: /<command>"
+permissions:
+  bettermobs.reload:
+    description: allows the the user to reload the config file
+    default: op
