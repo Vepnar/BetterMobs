@@ -33,7 +33,7 @@ public class MobListener implements Listener {
 	@EventHandler
 	public void onEntityInteractEvent(PlayerMoveEvent e) {
 		int rand = (int) (Math.random() * 50); // Reduce lag
-		if(rand != 1 || javaplugin.disabled) return;
+		if(rand != 1 || javaplugin.listen) return;
 		
 		for (EventClass event : javaplugin.eventList) {
 			if (!event.canBeCalled(e))
