@@ -10,6 +10,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
+import vepnar.bettermobs.Main;
+
 public class WSkeletonSwordSwitch extends SkeletonSwordSwitch{
 
 	/**
@@ -19,7 +21,8 @@ public class WSkeletonSwordSwitch extends SkeletonSwordSwitch{
 	 * @see SkeletonSwordSwitch.configname
 	 */
 	@Override
-	public String configName() {
+	public String configName(Main m) {
+		range = m.getConfig().getInt("witherSkeletonSwordSwitch.swordRange");
 		return "witherSkeletonSwordSwitch";
 	}	
 	

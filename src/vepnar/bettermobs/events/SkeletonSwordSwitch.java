@@ -18,15 +18,18 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import vepnar.bettermobs.EventClass;
+import vepnar.bettermobs.Main;
 
 public class SkeletonSwordSwitch implements EventClass {
-
+	int range = 6;
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
 	@Override
-	public String configName() {
+	public String configName(Main m) {
+		range = m.getConfig().getInt("skeletonSwordSwitch.swordRange");
 		return "skeletonSwordSwitch";
+		
 	}
 	
 	/**
@@ -135,8 +138,8 @@ public class SkeletonSwordSwitch implements EventClass {
 		Player player = MoveEvent.getPlayer();
 		
 		// Get entities in a radius.
-		List<LivingEntity> farEntities = filterEntities(player.getNearbyEntities(14, 8, 14));
-		List<LivingEntity> closestEntities = filterEntities(player.getNearbyEntities(6, 5, 6));
+		List<LivingEntity> farEntities = filterEntities(player.getNearbyEntities(range*2, range*2, range*2));
+		List<LivingEntity> closestEntities = filterEntities(player.getNearbyEntities(range, range, range));
 		
 		
 		// Remove closest entities from far entities.

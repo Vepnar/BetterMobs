@@ -8,12 +8,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 
+import vepnar.bettermobs.Main;
+
 public class ZombieChickenMount extends SkeletonSpiderMount {
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
 	@Override
-	public String configName() {
+	public String configName(Main m) {
+		updateRange = m.getConfig().getInt("zombieChickenMount.updateEntityfromPlayer");
+		mountFind = m.getConfig().getInt("zombieChickenMount.mountFindRange");
 		return "zombieChickenMount";
 	}
 	

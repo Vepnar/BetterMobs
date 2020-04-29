@@ -12,13 +12,18 @@ import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import vepnar.bettermobs.EventClass;
+import vepnar.bettermobs.Main;
 
 public class SkeletonSpiderMount implements EventClass {
+	int updateRange = 12;
+	int mountFind = 4;
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
 	@Override
-	public String configName() {
+	public String configName(Main m) {
+		updateRange = m.getConfig().getInt("skeletonSpiderMount.updateEntityfromPlayer");
+		mountFind = m.getConfig().getInt("skeletonSpiderMount.mountFindRange");
 		return "skeletonSpiderMount";
 	}
 
@@ -32,10 +37,10 @@ public class SkeletonSpiderMount implements EventClass {
 		PlayerMoveEvent MoveEvent = (PlayerMoveEvent) e;
 		Player player = MoveEvent.getPlayer();
 		
-		List<LivingEntity> PassengerEntities = filterPassengerEntities(player.getNearbyEntities(14, 8, 14));
+		List<LivingEntity> PassengerEntities = filterPassengerEntities(player.getNearbyEntities(updateRange, updateRange, updateRange));
 		
 		for(LivingEntity entity : PassengerEntities) {
-			Entity mount = filterMountableEntities(entity.getNearbyEntities(4, 4, 4));
+			Entity mount = filterMountableEntities(entity.getNearbyEntities(mountFind, mountFind, mountFind));
 			if (mount != null) mount.addPassenger(entity);
 		}
 		

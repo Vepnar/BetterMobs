@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class MobListener implements Listener {
 
 	Main javaplugin;
+	int tick = 50;
 
 	/**
 	 * Initialize the Bettermobs event listener
@@ -28,11 +29,11 @@ public class MobListener implements Listener {
 	
 	/**
 	 * Handle all PlayerMoveEvent's. and call events who are enabled in the configuration file.
-	 * Only do this rarely because this is quite cpu heavy when there are a lot of active players.
+	 * Only do this rarely because this is quite CPU heavy when there are a lot of active players.
 	 */
 	@EventHandler
 	public void onEntityInteractEvent(PlayerMoveEvent e) {
-		int rand = (int) (Math.random() * 50); // Reduce lag
+		int rand = (int) (Math.random() * tick); // Reduce lag
 		if(rand != 1 || javaplugin.listen) return;
 		
 		for (EventClass event : javaplugin.eventList) {
@@ -41,6 +42,7 @@ public class MobListener implements Listener {
 			event.callEvent(e);
 		}
 		
+		tick = javaplugin.getConfig().getInt("entityUpdateSpeed");
 	}
 	
 	

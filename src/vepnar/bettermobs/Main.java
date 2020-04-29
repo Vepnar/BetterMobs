@@ -112,7 +112,7 @@ public class Main extends JavaPlugin implements CommandExecutor{
 	public void enableEvents() {
 		eventList.clear();
 		for (EventClass event : unusedEventList) {
-			if(this.getConfig().getBoolean(event.configName()))
+			if(this.getConfig().getBoolean(event.configName(this) + ".enabled"))
 				eventList.add(event);
 		}
 		listen = false;

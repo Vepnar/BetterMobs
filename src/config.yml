@@ -1,15 +1,30 @@
 
+# Update frequency the entities will be updated
+entityUpdateSpeed: 50
+
 # Skeleton's will use swords to attack the player when the player is close enough. (6 block radius)
-skeletonSwordSwitch: true
+skeletonSwordSwitch:
+  enabled: true
+  swordRange: 6
 
 # Wither skeleton's will use fire bows when the player is too far for sword use. (6 block radius+)
-witherSkeletonSwordSwitch: true
+witherSkeletonSwordSwitch:
+  enabled: true
+  swordRange: 5
 
 # Make it possible for (wither) skeletons to ride (cave) spiders.
-skeletonSpiderMount: true
+skeletonSpiderMount:
+  enabled: true
+  updateEntityfromPlayer: 12 # Range to look for entities to update
+  mountFindRange: 4 # Range the entity will look for a mount
 
 # Make it possible for baby zombies to ride on chickens.
-zombieChickenMount: true
+zombieChickenMount:
+  enabled: true
+  updateEntityfromPlayer: 12 # Range to look for entities to update
+  mountFindRange: 4 # Range the entity will look for a mount
+
+
 
 ## TODO
 #skeletonHorseMount: true
