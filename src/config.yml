@@ -24,7 +24,11 @@ zombieChickenMount:
   updateEntityfromPlayer: 12 # Range to look for entities to update
   mountFindRange: 4 # Range the entity will look for a mount
 
-
+# Make it possible to spawn charged creepers
+chargedCreeperSpawn:
+  enabled: true
+  spawnChance: 100 # 1 in the given number will spawn a creeper;
+  # Higher number is a lower chance
 
 ## TODO
 #skeletonHorseMount: true
