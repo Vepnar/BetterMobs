@@ -5,8 +5,13 @@ skeletonSwordSwitch: true
 # Wither skeleton's will use fire bows when the player is too far for sword use. (6 block radius+)
 witherSkeletonSwordSwitch: true
 
+# Make it possible for (wither) skeletons to ride (cave) spiders.
+skeletonSpiderMount: true
+
+# Make it possible for baby zombies to ride on chickens.
+zombieChickenMount: true
+
 ## TODO
-#skeletonSpiderMount: true
 #skeletonHorseMount: true
 #fasterZombie: true
 #monsterHeal: true
