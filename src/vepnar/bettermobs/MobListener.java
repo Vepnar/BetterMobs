@@ -8,7 +8,7 @@ package vepnar.bettermobs;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
+import org.bukkit.event.entity.CreatureSpawnEvent;
 // Events
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -41,8 +41,22 @@ public class MobListener implements Listener {
 				continue;
 			event.callEvent(e);
 		}
-		
 		tick = javaplugin.getConfig().getInt("entityUpdateSpeed");
+	}
+	
+	/**
+	 * Handle all entity spawn events.
+	 * Don't call this function yourself!
+	 */
+	@EventHandler
+	public void onEntitySpawn(CreatureSpawnEvent e) {
+		if(javaplugin.listen) return;
+		
+		for (EventClass event : javaplugin.eventList) {
+			if (!event.canBeCalled(e))
+				continue;
+			event.callEvent(e);
+		}
 	}
 	
 	
