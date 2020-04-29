@@ -1,8 +1,8 @@
 /**
- * Main handler for the bettermobs plugin.
+ * Main handler for the BetterMobs plugin.
  * Here all the default values and commands will be processed and/or initialized.
  * 
- * @version 1.0
+ * @version 1.1
  * @author Arjan de Haan (Vepnar)
  */
 package vepnar.bettermobs;
@@ -67,11 +67,17 @@ public class Main extends JavaPlugin {
         saveConfig();
 	}
 	
+	/**
+	 * This will create the events and add them to the list of events.
+	 */
 	public void initializeEvents() {
 		unusedEventList.add(new SkeletonSwordSwitch());
 		unusedEventList.add(new WSkeletonSwordSwitch());
 	}
 	
+	/**
+	 * This will enable the events when they are enabled in the configuration file.
+	 */
 	public void enableEvents() {
 		eventList.clear();
 		for (EventClass event : unusedEventList) {

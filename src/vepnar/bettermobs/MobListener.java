@@ -26,6 +26,10 @@ public class MobListener implements Listener {
 		javaplugin = m;
 	}
 	
+	/**
+	 * Handle all PlayerMoveEvent's. and call events who are enabled in the configuration file.
+	 * Only do this rarely because this is quite cpu heavy when there are a lot of active players.
+	 */
 	@EventHandler
 	public void onEntityInteractEvent(PlayerMoveEvent e) {
 		int rand = (int) (Math.random() * 50); // Reduce lag

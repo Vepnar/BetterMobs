@@ -1,4 +1,8 @@
+
+# Skeleton's will use swords to attack the player when the player is close enough. (6 block radius)
 skeletonSwordSwitch: true
+
+# Wither skeleton's will use fire bows when the player is too far for sword use. (6 block radius+)
 witherSkeletonSwordSwitch: true
 
 ## TODO

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+// Yuck
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -14,14 +15,29 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import vepnar.bettermobs.EventClass;
 
 public class SkeletonSwordSwitch implements EventClass {
 
+	/**
+	 * Receive configuration name and check if this event is enabled.
+	 */
 	@Override
 	public String configName() {
 		return "skeletonSwordSwitch";
+	}
+	
+	/**
+	 * Check if this class is compatible with the given event. 
+	 * 
+	 * @param e event that should be checked.
+	 * @return true when it is compatible and false when it is not.
+	 */
+	@Override
+	public boolean canBeCalled(Event e) {
+		return e instanceof PlayerMoveEvent;
 	}
 	
 	/**
@@ -56,15 +72,27 @@ public class SkeletonSwordSwitch implements EventClass {
 			
 	}
 
+	/**
+	 * Create a damaged item from the given material.
+	 * 
+	 * @param m Material will be turned into a item stack with damage.
+	 * @return An Itemstack made for the given material.
+	 */
 	public ItemStack createItem(Material m) {
 		ItemStack is = new ItemStack(m);
 		Damageable damageable = (Damageable) is.getItemMeta();
 	
 		int damage = (int) (Math.random() * 25 + 10);
 		damageable.setDamage(damage);
+		is.setItemMeta((ItemMeta) damageable);
 		return is;
 	}
 	
+	/**
+	 * Update items holding of the closest entities.
+	 * 
+	 * @param entities list of entities that should be updated.
+	 */
 	public void updateClose(List<LivingEntity> entities) {
 		for (LivingEntity entity : entities) {
 			EntityEquipment equipment = entity.getEquipment();
@@ -76,6 +104,14 @@ public class SkeletonSwordSwitch implements EventClass {
 		}
 		
 	}
+	
+	/**
+	 * The same as updateClose but for entities that are far away.
+	 * 
+	 * @see updateClose
+	 * 
+	 * @param entities entities list of entities that should be updated.
+	 */
 	public void updateFar(List<LivingEntity> entities) {
 		for (LivingEntity entity : entities) {
 			EntityEquipment equipment = entity.getEquipment();
@@ -88,6 +124,11 @@ public class SkeletonSwordSwitch implements EventClass {
 		
 	}
 	
+	/**
+	 * Handle given event. this should only be called from the event handler.
+	 * 
+	 * @param e event that should be handled
+	 */
 	@Override
 	public void callEvent(Event e) {
 		PlayerMoveEvent MoveEvent = (PlayerMoveEvent) e;
@@ -104,11 +145,6 @@ public class SkeletonSwordSwitch implements EventClass {
 		updateFar(farEntities);
 		updateClose(closestEntities);		
 		
-	}
-
-	@Override
-	public boolean canBeCalled(Event e) {
-		return e instanceof PlayerMoveEvent;
 	}
 
 }
