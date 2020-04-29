@@ -105,6 +105,7 @@ public class Main extends JavaPlugin implements CommandExecutor{
 		unusedEventList.add(new SkeletonSpiderMount());
 		unusedEventList.add(new ZombieChickenMount());
 		unusedEventList.add(new ChargedCreeperSpawner());
+		unusedEventList.add(new CreeperSpawnPotionEffects());
 	}
 	
 	/**

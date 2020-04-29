@@ -53,8 +53,7 @@ public class MobListener implements Listener {
 		if(javaplugin.listen) return;
 		
 		for (EventClass event : javaplugin.eventList) {
-			if (!event.canBeCalled(e))
-				continue;
+			if (!event.canBeCalled(e)) continue;
 			event.callEvent(e);
 		}
 	}
