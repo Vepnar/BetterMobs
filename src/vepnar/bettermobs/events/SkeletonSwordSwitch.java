@@ -1,7 +1,6 @@
 package vepnar.bettermobs.events;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 // Yuck
@@ -19,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import vepnar.bettermobs.EventClass;
 import vepnar.bettermobs.Main;
+import vepnar.bettermobs.util;
 
 public class SkeletonSwordSwitch implements EventClass {
 	int range = 6;
@@ -41,22 +41,6 @@ public class SkeletonSwordSwitch implements EventClass {
 	@Override
 	public boolean canBeCalled(Event e) {
 		return e instanceof PlayerMoveEvent;
-	}
-	
-	/**
-	 * Subtract entities from a list with another list.
-	 * 
-	 * @param minuend The list of entities you want to subtract from.
-	 * @param subtrahend The list of entities you subtract
-	 */
-	public void subtractListfromList(List<LivingEntity> minuend, List<LivingEntity> subtrahend) {
-		
-		for (Iterator<LivingEntity> mIterator = minuend.listIterator(); mIterator.hasNext(); ) {
-			LivingEntity entity = mIterator.next();
-
-			if(subtrahend.contains(entity))
-				mIterator.remove();
-		}
 	}
 	
 	/**
@@ -143,7 +127,7 @@ public class SkeletonSwordSwitch implements EventClass {
 		
 		
 		// Remove closest entities from far entities.
-		subtractListfromList(farEntities, closestEntities);
+		util.subtractListfromList(farEntities, closestEntities);
 		
 		updateFar(farEntities);
 		updateClose(closestEntities);		
