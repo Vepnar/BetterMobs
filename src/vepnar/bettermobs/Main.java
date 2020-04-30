@@ -110,7 +110,7 @@ public class Main extends JavaPlugin implements CommandExecutor{
 		unusedEventList.add(new CreeperSpawnPotionEffects());
 		unusedEventList.add(new WitchNecromancer());
 		unusedEventList.add(new WitherReinforcements());
-		
+		unusedEventList.add(new WitherEffects());
 		
 	}
 	
