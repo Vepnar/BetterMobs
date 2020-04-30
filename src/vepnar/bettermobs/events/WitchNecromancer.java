@@ -30,7 +30,7 @@ public class WitchNecromancer implements EventClass {
 	@Override
 	public String configName(Main m) {
 		spawnamount = m.getConfig().getInt("witchNecromancer.spawnAmount");
-		cooldown = m.getConfig().getInt("witchNecromancer.cooldown");
+		cooldown = m.getConfig().getInt("witchNecromancer.cooldown") * 20;
 		spawnradius = m.getConfig().getInt("witchNecromancer.spawnRadius");
 		scanradius = m.getConfig().getInt("witchNecromancer.scanRadius");
 		return "witchNecromancer";

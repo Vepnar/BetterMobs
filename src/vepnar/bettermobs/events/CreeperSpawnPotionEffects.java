@@ -64,7 +64,7 @@ public class CreeperSpawnPotionEffects implements EventClass {
 		
 		// Give the entity an random effect
 		rand = (int) (Math.random() * effects.length);
-		PotionEffect effect = new PotionEffect((PotionEffectType) effects[rand], 3600, 1);
+		PotionEffect effect = new PotionEffect((PotionEffectType) effects[rand], 20*3600, 1);
 		spawn.getEntity().addPotionEffect(effect);
 
 	}
