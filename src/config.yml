@@ -45,9 +45,26 @@ creeperSpawnPotionEffect:
 witchNecromancer:
   enabled: true
   cooldown: 450 # Wait before the witch could spawn zombies again.
-  spawnAmount: 5 # The maximum amount of zombies could be spawn. this number is random.
+  spawnAmount: 3 # The maximum amount of zombies could be spawn. this number is random.
   spawnRadius: 3 # The distance the zombies spawn from the witch.
   scanRadius: 10 # The distance from the player that should be checked for witches.
+
+# Wither can spawn wither skeletons when attacked.
+witherReinforcements:
+  enabled: true
+  cooldown: 45 # wait till a new spawn wave in seconds.
+  spawnRadius: 10 # Max radius the skeletons could spawn.
+  spawnChance: 10 # Chance the skeletons spawn when attacked.
+  spawnAmount: 5 # Max amount of skeletons that could spawn.
+
+# Wither can give negative effects to players close  
+witherEffects:
+  enabled: true
+  cooldown: 30 # Wait before the attack is done again.
+  spawnChance: 10 # The chance the attack will happen on attack.
+  attackRadius: 7 # Max radius of the attack.
+  attackDuration: 30 # Duration of the given potion effect.
+  
 
 ## TODO
 #skeletonHorseMount: true
