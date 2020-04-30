@@ -1,8 +1,8 @@
 name: BetterMobs
 main: vepnar.bettermobs.Main
-version: 1.2
+version: 1.3
 api-version: 1.15
-author: agdehaan@gmail.com
+author: Vepnar
 website: www.example.com
 commands:
   bettermobs-reload:
@@ -11,7 +11,15 @@ commands:
     permission: bettermobs.reload
     permission-message: You not have have permission to use this command.
     usage: "Usage: /<command>"
+  bettermobs-author:
+    description: show the author of the bettermobs plugin
+    permission: bettermobs.author
+    permission-message: You not have have permission to use this command.
+    usage: "Usage: /<command>"
 permissions:
   bettermobs.reload:
     description: allows the the user to reload the config file
     default: op
+  bettermobs.author:
+    description: Allow the user to show the author of the better mobs plugin.
+    default: true

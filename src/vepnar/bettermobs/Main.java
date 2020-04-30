@@ -19,6 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.common.io.ByteStreams;
 
+import vepnar.bettermobs.commands.AuthorCommand;
 import vepnar.bettermobs.commands.ReloadCommand;
 import vepnar.bettermobs.events.*;
 
@@ -92,6 +93,7 @@ public class Main extends JavaPlugin implements CommandExecutor{
 	 */
 	public void initializeCommands() {
 		this.getCommand("bettermobs-reload").setExecutor(new ReloadCommand(this));
+		this.getCommand("bettermobs-author").setExecutor(new AuthorCommand(this));
 	}
 	
 	/**
@@ -106,6 +108,7 @@ public class Main extends JavaPlugin implements CommandExecutor{
 		unusedEventList.add(new ZombieChickenMount());
 		unusedEventList.add(new ChargedCreeperSpawner());
 		unusedEventList.add(new CreeperSpawnPotionEffects());
+		
 	}
 	
 	/**
