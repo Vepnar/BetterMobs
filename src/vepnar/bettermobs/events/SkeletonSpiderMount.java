@@ -17,6 +17,7 @@ import vepnar.bettermobs.Main;
 public class SkeletonSpiderMount implements EventClass {
 	int updateRange = 12;
 	int mountFind = 4;
+
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */

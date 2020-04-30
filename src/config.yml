@@ -40,6 +40,15 @@ creeperSpawnPotionEffect:
   rareEffects: true
   # Examples: LEVITATION, DOLPHINS GRACE, GLOWING, LUCK, BAD_OMEN
 
+# Turn witches into necromancers who spawn baby zombies.
+# Only works at night
+witchNecromancer:
+  enabled: true
+  cooldown: 450 # Wait before the witch could spawn zombies again.
+  spawnAmount: 5 # The maximum amount of zombies could be spawn. this number is random.
+  spawnRadius: 3 # The distance the zombies spawn from the witch.
+  scanRadius: 10 # The distance from the player that should be checked for witches.
+
 ## TODO
 #skeletonHorseMount: true
 #fasterZombie: true
