@@ -68,7 +68,8 @@ public class WitchNecromancer implements EventClass {
 		if (!(e.getEntity() instanceof Zombie))
 			return;
 		Zombie monster = (Zombie) e.getEntity();
-		if (monster.getCustomName().equals("§c§lWitch companion"))
+		
+		if (monster.getCustomName() != null && monster.getCustomName().equals("§c§lWitch companion"))
 			e.getDrops().clear();
 
 	}

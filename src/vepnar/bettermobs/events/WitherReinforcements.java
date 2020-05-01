@@ -48,7 +48,7 @@ public class WitherReinforcements implements EventClass {
 	public void deathEvent(EntityDeathEvent e) {
 		if (e.getEntity() instanceof WitherSkeleton) {
 			WitherSkeleton monster = (WitherSkeleton) e.getEntity();
-			if (monster.getCustomName().equals("§c§lWither companion")) e.getDrops().clear();
+			if (monster.getCustomName() != null && monster.getCustomName().equals("§c§lWither companion")) e.getDrops().clear();
 		}
 	}
 	
