@@ -15,8 +15,7 @@ import vepnar.bettermobs.EventClass;
 import vepnar.bettermobs.Main;
 
 public class SkeletonSpiderMount implements EventClass {
-	int updateRange = 12;
-	int mountFind = 4;
+	int updateRange, mountFind;
 
 	/**
 	 * Receive configuration name and check if this event is enabled.
@@ -37,18 +36,20 @@ public class SkeletonSpiderMount implements EventClass {
 	public void callEvent(Event e) {
 		PlayerMoveEvent MoveEvent = (PlayerMoveEvent) e;
 		Player player = MoveEvent.getPlayer();
-		
-		List<LivingEntity> PassengerEntities = filterPassengerEntities(player.getNearbyEntities(updateRange, updateRange, updateRange));
-		
-		for(LivingEntity entity : PassengerEntities) {
+
+		List<LivingEntity> PassengerEntities = filterPassengerEntities(
+				player.getNearbyEntities(updateRange, updateRange, updateRange));
+
+		for (LivingEntity entity : PassengerEntities) {
 			Entity mount = filterMountableEntities(entity.getNearbyEntities(mountFind, mountFind, mountFind));
-			if (mount != null) mount.addPassenger(entity);
+			if (mount != null)
+				mount.addPassenger(entity);
 		}
-		
+
 	}
 
 	/**
-	 * Check if this class is compatible with the given event. 
+	 * Check if this class is compatible with the given event.
 	 * 
 	 * @param e event that should be checked.
 	 * @return true when it is compatible and false when it is not.
@@ -57,9 +58,10 @@ public class SkeletonSpiderMount implements EventClass {
 	public boolean canBeCalled(Event e) {
 		return e instanceof PlayerMoveEvent;
 	}
-	
+
 	/**
-	 * Filter all entities that can mount another entity and ain't riding on another entity
+	 * Filter all entities that can mount another entity and ain't riding on another
+	 * entity
 	 * 
 	 * @param entities you want to be filtered
 	 * @return List of living entities filtered
@@ -68,12 +70,12 @@ public class SkeletonSpiderMount implements EventClass {
 
 		List<LivingEntity> lEntities = new ArrayList<LivingEntity>();
 		for (Entity entity : entities)
-			if(entity instanceof Skeleton && !entity.isInsideVehicle()) 
+			if (entity instanceof Skeleton && !entity.isInsideVehicle())
 				lEntities.add((LivingEntity) entity);
 		return lEntities;
-			
+
 	}
-	
+
 	/**
 	 * Find rideable entities close to the skeletons with currently no passengers.
 	 * 
@@ -82,9 +84,8 @@ public class SkeletonSpiderMount implements EventClass {
 	 */
 	public Entity filterMountableEntities(List<Entity> entities) {
 		for (Entity entity : entities)
-			if(entity instanceof Spider && entity.getPassengers().isEmpty()) 
+			if (entity instanceof Spider && entity.getPassengers().isEmpty())
 				return entity;
 		return null;
 	}
 }
-

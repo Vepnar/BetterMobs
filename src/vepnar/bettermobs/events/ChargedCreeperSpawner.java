@@ -8,11 +8,12 @@ import vepnar.bettermobs.EventClass;
 import vepnar.bettermobs.Main;
 
 public class ChargedCreeperSpawner implements EventClass {
-	int spawnchance = 100;
-	
+	int spawnchance;
+
 	/**
-	 * Receive configuration information from the configuration file.
-	 * And return the name of this event
+	 * Receive configuration information from the configuration file. And return the
+	 * name of this event
+	 * 
 	 * @param JavaPlugin
 	 * @return Name of this event in the configuration file
 	 */
@@ -24,6 +25,7 @@ public class ChargedCreeperSpawner implements EventClass {
 
 	/**
 	 * Handle the event.
+	 * 
 	 * @param e
 	 */
 	@Override
@@ -34,11 +36,11 @@ public class ChargedCreeperSpawner implements EventClass {
 			if (rand == 1)
 				((Creeper) spawn.getEntity()).setPowered(true);
 		}
-		
+
 	}
-	
+
 	/**
-	 * Check if this class is compatible with the given event. 
+	 * Check if this class is compatible with the given event.
 	 * 
 	 * @param e event that should be checked.
 	 * @return true when it is compatible and false when it is not.

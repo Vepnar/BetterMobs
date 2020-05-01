@@ -21,7 +21,8 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.util;
 
 public class SkeletonSwordSwitch implements EventClass {
-	int range = 6;
+	int range;
+
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
@@ -29,11 +30,11 @@ public class SkeletonSwordSwitch implements EventClass {
 	public String configName(Main m) {
 		range = m.getConfig().getInt("skeletonSwordSwitch.swordRange");
 		return "skeletonSwordSwitch";
-		
+
 	}
-	
+
 	/**
-	 * Check if this class is compatible with the given event. 
+	 * Check if this class is compatible with the given event.
 	 * 
 	 * @param e event that should be checked.
 	 * @return true when it is compatible and false when it is not.
@@ -42,7 +43,7 @@ public class SkeletonSwordSwitch implements EventClass {
 	public boolean canBeCalled(Event e) {
 		return e instanceof PlayerMoveEvent;
 	}
-	
+
 	/**
 	 * Remove all unused entities from a entity list.
 	 * 
@@ -53,10 +54,10 @@ public class SkeletonSwordSwitch implements EventClass {
 
 		List<LivingEntity> lEntities = new ArrayList<LivingEntity>();
 		for (Entity entity : entities)
-			if(entity.getType() == EntityType.SKELETON) 
+			if (entity.getType() == EntityType.SKELETON)
 				lEntities.add((LivingEntity) entity);
 		return lEntities;
-			
+
 	}
 
 	/**
@@ -68,13 +69,13 @@ public class SkeletonSwordSwitch implements EventClass {
 	public ItemStack createItem(Material m) {
 		ItemStack is = new ItemStack(m);
 		Damageable damageable = (Damageable) is.getItemMeta();
-	
+
 		int damage = (int) (Math.random() * 25 + 10);
 		damageable.setDamage(damage);
 		is.setItemMeta((ItemMeta) damageable);
 		return is;
 	}
-	
+
 	/**
 	 * Update items holding of the closest entities.
 	 * 
@@ -87,11 +88,11 @@ public class SkeletonSwordSwitch implements EventClass {
 
 			if (hand.getEnchantments().size() == 0 && hand.getType() == Material.BOW)
 				equipment.setItemInMainHand(createItem(Material.WOODEN_SWORD));
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * The same as updateClose but for entities that are far away.
 	 * 
@@ -106,11 +107,11 @@ public class SkeletonSwordSwitch implements EventClass {
 
 			if (hand.getEnchantments().size() == 0 && hand.getType() == Material.WOODEN_SWORD)
 				equipment.setItemInMainHand(createItem(Material.BOW));
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * Handle given event. this should only be called from the event handler.
 	 * 
@@ -120,18 +121,17 @@ public class SkeletonSwordSwitch implements EventClass {
 	public void callEvent(Event e) {
 		PlayerMoveEvent MoveEvent = (PlayerMoveEvent) e;
 		Player player = MoveEvent.getPlayer();
-		
+
 		// Get entities in a radius.
-		List<LivingEntity> farEntities = filterEntities(player.getNearbyEntities(range*2, range*2, range*2));
+		List<LivingEntity> farEntities = filterEntities(player.getNearbyEntities(range * 2, range * 2, range * 2));
 		List<LivingEntity> closestEntities = filterEntities(player.getNearbyEntities(range, range, range));
-		
-		
+
 		// Remove closest entities from far entities.
 		util.subtractListfromList(farEntities, closestEntities);
-		
+
 		updateFar(farEntities);
-		updateClose(closestEntities);		
-		
+		updateClose(closestEntities);
+
 	}
 
 }
