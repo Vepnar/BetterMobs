@@ -1,6 +1,7 @@
 package vepnar.bettermobs.events;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
 import org.bukkit.entity.WitherSkull;
@@ -15,7 +16,7 @@ import vepnar.bettermobs.util;
 
 public class WitherReinforcements implements EventClass {
 	int spawnradius, cooldown, spawnamount, spawnchance;
-	
+
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
@@ -27,10 +28,9 @@ public class WitherReinforcements implements EventClass {
 		spawnchance = m.getConfig().getInt("witherReinforcements.spawnChance");
 		return "witherReinforcements";
 	}
-	
-	
+
 	/**
-	 * Check if this class is compatible with the given event. 
+	 * Check if this class is compatible with the given event.
 	 * 
 	 * @param e event that should be checked.
 	 * @return true when it is compatible and false when it is not.
@@ -40,44 +40,46 @@ public class WitherReinforcements implements EventClass {
 		return e instanceof ProjectileLaunchEvent;
 	}
 
-
 	@Override
 	public void callEvent(Event e) {
 		ProjectileLaunchEvent event = (ProjectileLaunchEvent) e;
 		// Check if shot entity is a wither skull.
 		if (event.getEntity() instanceof WitherSkull) {
 			WitherSkull wSkull = (WitherSkull) event.getEntity();
-			
+
 			// Apply random chance.
-			if (util.random(1, spawnchance) != 1) return;
-			
+			if (util.random(1, spawnchance) != 1)
+				return;
+
 			// Check if shot by wither and if it is a charged skull
-			if (!(wSkull.getShooter() instanceof Wither || wSkull.isCharged())) return;
+			if (!(wSkull.getShooter() instanceof Wither || wSkull.isCharged()))
+				return;
 			Wither wither = (Wither) wSkull.getShooter();
-			if (wither.hasPotionEffect(PotionEffectType.LUCK)) return;
-			
+			if (wither.hasPotionEffect(PotionEffectType.LUCK))
+				return;
+
 			// Create random values.
 			int random_radius = (int) (Math.random() * spawnradius) + 2;
 			int random_amount = (int) (Math.random() * spawnamount) + 1;
-			
+
 			// Make a circle and loop through locations.
 			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), random_radius, random_amount);
 			for (Location spawnLocation : spawnLocations) {
-				
+
 				// Check if the wither skeleton can spawn.
 				spawnLocation = util.shouldSpawn(spawnLocation, random_radius, 2);
-				if (spawnLocation == null) continue;
-				
+				if (spawnLocation == null)
+					continue;
+
 				// Spawn a wither skeleton.
+				spawnLocation.getWorld().spawnParticle(Particle.FLAME, spawnLocation, 60);
 				spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
-				
+
 			}
 			// Add cooldown
 			wither.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, cooldown, 0), false);
-			
-			
-			
+
 		}
-		
+
 	}
 }
