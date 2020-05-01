@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -42,7 +43,7 @@ public class WitchNecromancer implements EventClass {
 	 */
 	@Override
 	public boolean canBeCalled(Event e) {
-		return e instanceof PlayerMoveEvent;
+		return e instanceof PlayerMoveEvent || e instanceof EntityDeathEvent;
 	}
 
 	/**
@@ -52,7 +53,29 @@ public class WitchNecromancer implements EventClass {
 	 */
 	@Override
 	public void callEvent(Event e) {
-		PlayerMoveEvent event = (PlayerMoveEvent) e;
+		if (e instanceof EntityDeathEvent) {
+			deathEvent((EntityDeathEvent) e);
+		
+		} else if (e instanceof PlayerMoveEvent)
+			onPlayerMove((PlayerMoveEvent) e);
+		
+
+	}
+	
+	/**
+	 * Handle the death of the summoned zombies.
+	 */
+	public void deathEvent(EntityDeathEvent e) {
+		if (e.getEntity() instanceof Zombie) {
+			Zombie monster = (Zombie) e.getEntity();
+			if (monster.getCustomName().equals("§c§lWitch companion")) e.getDrops().clear();
+		}
+	}
+	
+	/**
+	 * Handle player move events.
+	 */
+	public void onPlayerMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		long time = player.getWorld().getTime();
 
@@ -80,13 +103,14 @@ public class WitchNecromancer implements EventClass {
 				// Spawn a baby zombie.
 				Zombie monster = (Zombie) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
 				spawnLocation.getWorld().spawnParticle(Particle.FLAME, spawnLocation, 60);
+				monster.setCustomName("§c§lWitch companion");
+				monster.setCustomNameVisible(false);
 				monster.setBaby(true);
 			}
 
 			// Add potion effect to the witch.
 			entity.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, cooldown, 1), false);
 		}
-
 	}
 
 	/**

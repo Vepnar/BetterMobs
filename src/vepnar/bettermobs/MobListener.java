@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EnderDragonChangePhaseEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 // Events
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -95,6 +97,36 @@ public class MobListener implements Listener {
 		for (EventClass event : javaplugin.eventList) {
 			if (e.isCancelled())
 				break;
+			if (!event.canBeCalled(e))
+				continue;
+			event.callEvent(e);
+		}
+	}
+
+	/**
+	 * Handle entity death events. Don't call this function yourself!
+	 */
+	@EventHandler
+	public void onEntityDeath(EntityDeathEvent e) {
+		if (javaplugin.listen)
+			return;
+
+		for (EventClass event : javaplugin.eventList) {
+			if (!event.canBeCalled(e))
+				continue;
+			event.callEvent(e);
+		}
+	}
+
+	/**
+	 * Handle entity by entity damage events.
+	 */
+	@EventHandler
+	public void onEntityHitEvent(EntityDamageByEntityEvent e) {
+		if (javaplugin.listen)
+			return;
+
+		for (EventClass event : javaplugin.eventList) {
 			if (!event.canBeCalled(e))
 				continue;
 			event.callEvent(e);

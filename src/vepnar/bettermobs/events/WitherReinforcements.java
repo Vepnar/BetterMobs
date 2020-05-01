@@ -4,8 +4,10 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -37,12 +39,23 @@ public class WitherReinforcements implements EventClass {
 	 */
 	@Override
 	public boolean canBeCalled(Event e) {
-		return e instanceof ProjectileLaunchEvent;
+		return e instanceof ProjectileLaunchEvent || e instanceof EntityDeathEvent;
 	}
 
-	@Override
-	public void callEvent(Event e) {
-		ProjectileLaunchEvent event = (ProjectileLaunchEvent) e;
+	/**
+	 * Handle the death of the summoned skeletons
+	 */
+	public void deathEvent(EntityDeathEvent e) {
+		if (e.getEntity() instanceof WitherSkeleton) {
+			WitherSkeleton monster = (WitherSkeleton) e.getEntity();
+			if (monster.getCustomName().equals("§c§lWither companion")) e.getDrops().clear();
+		}
+	}
+	
+	/*
+	 * Handle projectile shoot events
+	 */
+	public void projectileEvent(ProjectileLaunchEvent event) {
 		// Check if shot entity is a wither skull.
 		if (event.getEntity() instanceof WitherSkull) {
 			WitherSkull wSkull = (WitherSkull) event.getEntity();
@@ -73,13 +86,27 @@ public class WitherReinforcements implements EventClass {
 
 				// Spawn a wither skeleton.
 				spawnLocation.getWorld().spawnParticle(Particle.FLAME, spawnLocation, 60);
-				spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
+				WitherSkeleton monster = (WitherSkeleton) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
+				monster.setCustomName("§c§lWither companion");
+				monster.setCustomNameVisible(false);
 
 			}
 			// Add cooldown
 			wither.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, cooldown, 0), false);
 
 		}
-
+	}
+	
+	/**
+	 * Handle all events.
+	 */
+	@Override
+	public void callEvent(Event e) {
+		
+		if (e instanceof EntityDeathEvent) {
+			deathEvent((EntityDeathEvent) e);
+		
+		} else if (e instanceof ProjectileLaunchEvent)
+			projectileEvent((ProjectileLaunchEvent) e);
 	}
 }
