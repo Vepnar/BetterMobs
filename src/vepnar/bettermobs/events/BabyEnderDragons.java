@@ -51,7 +51,6 @@ public class BabyEnderDragons implements EventClass {
 	 * Handle spawn moments
 	 */
 	public void DragonPhaseEvent(EnderDragonChangePhaseEvent e) {
-		System.out.println(e.getCurrentPhase());
 		// Check if the dragon is in the correct phase
 		// Calculate chance.
 		if (util.random(1, chance) != 1)

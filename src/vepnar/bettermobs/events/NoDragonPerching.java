@@ -36,7 +36,6 @@ public class NoDragonPerching implements EventClass {
 				event.setNewPhase(Phase.CHARGE_PLAYER);
 			} else
 				event.setNewPhase(Phase.STRAFING);
-			System.out.println("Changed");
 
 		}
 
