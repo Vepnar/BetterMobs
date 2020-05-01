@@ -55,23 +55,24 @@ public class WitchNecromancer implements EventClass {
 	public void callEvent(Event e) {
 		if (e instanceof EntityDeathEvent) {
 			deathEvent((EntityDeathEvent) e);
-		
+
 		} else if (e instanceof PlayerMoveEvent)
 			onPlayerMove((PlayerMoveEvent) e);
-		
 
 	}
-	
+
 	/**
 	 * Handle the death of the summoned zombies.
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		if (e.getEntity() instanceof Zombie) {
-			Zombie monster = (Zombie) e.getEntity();
-			if (monster.getCustomName().equals("§c§lWitch companion")) e.getDrops().clear();
-		}
+		if (!(e.getEntity() instanceof Zombie))
+			return;
+		Zombie monster = (Zombie) e.getEntity();
+		if (monster.getCustomName().equals("§c§lWitch companion"))
+			e.getDrops().clear();
+
 	}
-	
+
 	/**
 	 * Handle player move events.
 	 */

@@ -124,4 +124,20 @@ public class util {
 		return lEntities;
 
 	}
+	
+	/**
+	 * Filter entities on the given radius.
+	 * 
+	 * @param loc    Center of location that should check for players
+	 * @param radius Radius of area that should be checked!
+	 * @return Return list of LivingEntities with only just players
+	 */
+	public static List<LivingEntity> filterEntity(Location loc, int radius, EntityType entitytype) {
+		List<LivingEntity> lEntities = new ArrayList<LivingEntity>();
+		for (Entity entity : loc.getWorld().getNearbyEntities(loc, radius, radius, radius))
+			if (entity.getType() == entitytype)
+				lEntities.add((LivingEntity) entity);
+		return lEntities;
+
+	}
 }
