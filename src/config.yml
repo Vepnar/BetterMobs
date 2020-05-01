@@ -69,6 +69,15 @@ witherEffects:
 # Disables the dragon sitting on the end portal
 NoDragonPerching:
   enabled: true
+  
+# Spawn baby ender dragons to kill the player.
+BabyEnderDragons:
+  enabled: true
+  radius: 10 # Max distance from the dragon where the babies could spawn.
+  chance: 20 # Chance the baby enderdragons will spawn
+  amount: 5 # The max amount of baby dragons that could spawn.
+  damagebooster: 2 # Amount of extra damage the baby dragons get.
+  regen: true # the dragon will regen when the baby dragon hit a player
 
 ## TODO
 #skeletonHorseMount: true
