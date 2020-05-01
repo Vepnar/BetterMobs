@@ -32,6 +32,7 @@ chargedCreeperSpawn:
 # Make creepers spawn with potion effects
 creeperSpawnPotionEffect:
   enabled: true
+  effectDuration: 60 # duration of the given effect.
   spawnChance: 50 # 1 in the 50 will spawn a creeper with a potion effect
   positiveEffects: true
   # Examples: ABSORPTION, HEALING, SPEED, STRENGTH, FIRE RESISTANCE
@@ -57,14 +58,17 @@ witherReinforcements:
   spawnChance: 10 # Chance the skeletons spawn when attacked.
   spawnAmount: 5 # Max amount of skeletons that could spawn.
 
-# Wither can give negative effects to players close  
+# Wither can give negative effects to players nearby.  
 witherEffects:
   enabled: true
   cooldown: 30 # Wait before the attack is done again.
   spawnChance: 10 # The chance the attack will happen on attack.
   attackRadius: 7 # Max radius of the attack.
   attackDuration: 30 # Duration of the given potion effect.
-  
+
+# Disables the dragon sitting on the end portal
+NoDragonPerching:
+  enabled: true
 
 ## TODO
 #skeletonHorseMount: true
