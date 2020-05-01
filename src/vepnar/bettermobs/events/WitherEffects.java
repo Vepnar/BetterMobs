@@ -67,11 +67,11 @@ public class WitherEffects implements EventClass {
 			if (wither.hasPotionEffect(PotionEffectType.UNLUCK)) return;
 			
 			// Generate random radius and effect.
-			int random_radius = util.random(1, radius)+2;
+			int randomRadius = util.random(1, radius)+2;
 			int random_effect = util.random(1, WITHEREFFECTS.length)-1;
 			
 			// Get entities in the radius of the wither.
-			List<LivingEntity> entities = filterEntities(wither.getNearbyEntities(random_radius, random_radius, random_radius));
+			List<LivingEntity> entities = filterEntities(wither.getNearbyEntities(randomRadius, randomRadius, randomRadius));
 			if (entities.size() == 0) return;
 		
 			// Apply effects.
@@ -80,7 +80,7 @@ public class WitherEffects implements EventClass {
 			
 			
 			// Make a circle and play particle effects.
-			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), random_radius, 8);
+			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), randomRadius, 8);
 			for (Location spawnLocation : spawnLocations) {
 				
 				// Check if the particles should spawn.

@@ -3,8 +3,8 @@ package vepnar.bettermobs.events;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Wither;
-import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -18,6 +18,8 @@ import vepnar.bettermobs.util;
 
 public class WitherReinforcements implements EventClass {
 	int spawnradius, cooldown, spawnamount, spawnchance;
+	final String companionname = "§c§lWither companion";
+	final EntityType companion = EntityType.WITHER_SKELETON;
 
 	/**
 	 * Receive configuration name and check if this event is enabled.
@@ -46,10 +48,7 @@ public class WitherReinforcements implements EventClass {
 	 * Handle the death of the summoned skeletons
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		if (e.getEntity() instanceof WitherSkeleton) {
-			WitherSkeleton monster = (WitherSkeleton) e.getEntity();
-			if (monster.getCustomName() != null && monster.getCustomName().equals("§c§lWither companion")) e.getDrops().clear();
-		}
+		if (util.checkCompanion(e.getEntity(), companion, companionname)) e.getDrops().clear();
 	}
 	
 	/*
@@ -72,22 +71,22 @@ public class WitherReinforcements implements EventClass {
 				return;
 
 			// Create random values.
-			int random_radius = (int) (Math.random() * spawnradius) + 2;
-			int random_amount = (int) (Math.random() * spawnamount) + 1;
+			int randomRadius = (int) (Math.random() * spawnradius) + 2;
+			int randomAmount = (int) (Math.random() * spawnamount) + 1;
 
 			// Make a circle and loop through locations.
-			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), random_radius, random_amount);
+			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), randomRadius, randomAmount);
 			for (Location spawnLocation : spawnLocations) {
 
 				// Check if the wither skeleton can spawn.
-				spawnLocation = util.shouldSpawn(spawnLocation, random_radius, 2);
+				spawnLocation = util.shouldSpawn(spawnLocation, randomRadius, 2);
 				if (spawnLocation == null)
 					continue;
 
 				// Spawn a wither skeleton.
 				spawnLocation.getWorld().spawnParticle(Particle.FLAME, spawnLocation, 60);
-				WitherSkeleton monster = (WitherSkeleton) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.WITHER_SKELETON);
-				monster.setCustomName("§c§lWither companion");
+				LivingEntity monster = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, companion);
+				monster.setCustomName(companionname);
 				monster.setCustomNameVisible(false);
 
 			}

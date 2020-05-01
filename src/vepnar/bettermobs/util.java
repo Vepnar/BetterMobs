@@ -80,6 +80,8 @@ public class util {
 	 */
 	public static Location shouldSpawn(Location spawn, int radius, int height) {
 		double starty = spawn.getY() - radius - height;
+		if (!(spawn.getWorld().isChunkLoaded(spawn.getChunk())))
+			return null;
 		for (int i = 0; height + (radius * 2) > i; i++) {
 			spawn.setY(starty + i);
 			if (canSpawn(spawn, height))
@@ -139,5 +141,21 @@ public class util {
 				lEntities.add((LivingEntity) entity);
 		return lEntities;
 
+	}
+	
+	/**
+	 * If the given entity matches with the entity we want.
+	 * 
+	 * @param monster Unknown type of entity.
+	 * @param companion Entity type we want.
+	 * @param companionname Name of the entity we want.
+	 * @return True when matches and false when it doesn't.
+	 */
+	public static boolean checkCompanion(Entity monster, EntityType companion, String companionname) {
+		if (monster.getType() != companion) return false;
+		if (monster.getCustomName() == null) return false;
+		if (monster.getCustomName().equals(companionname)) return true;
+		return false;
+		
 	}
 }

@@ -22,6 +22,8 @@ import vepnar.bettermobs.util;
 
 public class WitchNecromancer implements EventClass {
 	int spawnradius, cooldown, spawnamount, scanradius;
+	final String companionname = "§c§lWitch companion";
+	final EntityType companion = EntityType.ZOMBIE;
 
 	/**
 	 * Receive configuration name and check if this event is enabled.
@@ -65,12 +67,7 @@ public class WitchNecromancer implements EventClass {
 	 * Handle the death of the summoned zombies.
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		if (!(e.getEntity() instanceof Zombie))
-			return;
-		Zombie monster = (Zombie) e.getEntity();
-		
-		if (monster.getCustomName() != null && monster.getCustomName().equals("§c§lWitch companion"))
-			e.getDrops().clear();
+		if (util.checkCompanion(e.getEntity(), companion, companionname)) e.getDrops().clear();
 
 	}
 
@@ -90,22 +87,22 @@ public class WitchNecromancer implements EventClass {
 		for (LivingEntity entity : entities) {
 
 			// Create random values.
-			int random_radius = (int) (Math.random() * spawnradius) + 2;
-			int random_amount = (int) (Math.random() * spawnamount) + 1;
+			int randomRadius = (int) (Math.random() * spawnradius) + 2;
+			int randomAmount = (int) (Math.random() * spawnamount) + 1;
 
 			// Make a circle and loop through locations.
-			Location[] spawnLocations = util.getArcSpots(entity.getLocation(), random_radius, random_amount);
+			Location[] spawnLocations = util.getArcSpots(entity.getLocation(), randomRadius, randomAmount);
 			for (Location spawnLocation : spawnLocations) {
 
 				// Check if the zombie can spawn.
-				spawnLocation = util.shouldSpawn(spawnLocation, random_radius, 2);
+				spawnLocation = util.shouldSpawn(spawnLocation, randomRadius, 2);
 				if (spawnLocation == null)
 					continue;
 
 				// Spawn a baby zombie.
-				Zombie monster = (Zombie) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
+				Zombie monster = (Zombie) spawnLocation.getWorld().spawnEntity(spawnLocation, companion);
 				spawnLocation.getWorld().spawnParticle(Particle.FLAME, spawnLocation, 60);
-				monster.setCustomName("§c§lWitch companion");
+				monster.setCustomName(companionname);
 				monster.setCustomNameVisible(false);
 				monster.setBaby(true);
 			}
