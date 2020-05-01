@@ -6,14 +6,15 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Phantom;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.EnderDragon;
-import org.bukkit.entity.EnderDragon.Phase;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EnderDragonChangePhaseEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -25,51 +26,71 @@ public class BabyEnderDragons implements EventClass {
 	int radius, amount, chance, damagebooster;
 	boolean regen;
 
+	final EntityType companion = EntityType.PHANTOM;
+	final String companionname = "§c§lBaby Dragon";
+	final boolean newtarget = true;
+
 	/**
 	 * Receive values from the configuration file.
 	 */
 	@Override
 	public String configName(Main m) {
-		radius = m.getConfig().getInt("BabyEnderDragons.spawnRadius");
-		chance = m.getConfig().getInt("BabyEnderDragons.spawnchance");
-		amount = m.getConfig().getInt("BabyEnderDragons.spawnAmount");
-		damagebooster = m.getConfig().getInt("BabyEnderDragons.damageBooster");
-		regen = m.getConfig().getBoolean("BabyEnderDragons.dragonRegen");
-		return "BabyEnderDragons";
+		radius = m.getConfig().getInt("babyEnderDragons.spawnRadius");
+		chance = m.getConfig().getInt("babyEnderDragons.spawnChance");
+		amount = m.getConfig().getInt("babyEnderDragons.spawnAmount");
+		damagebooster = m.getConfig().getInt("babyEnderDragons.damageBooster");
+		regen = m.getConfig().getBoolean("babyEnderDragons.dragonRegen");
+		return "babyEnderDragons";
+	}
+	
+	private boolean checkName(Entity monster) {
+		return util.checkCompanion(monster, companion, companionname);	
 	}
 
-	/* 
+	/*
 	 * Handle spawn moments
 	 */
 	public void DragonPhaseEvent(EnderDragonChangePhaseEvent e) {
+		System.out.println(e.getCurrentPhase());
 		// Check if the dragon is in the correct phase
-		if (e.getNewPhase() != Phase.HOVER)
-			return;
-		
 		// Calculate chance.
-		if (util.random(0, chance) != 1)
+		if (util.random(1, chance) != 1)
 			return;
 
 		// Generate random values.
-		int random_radius = (int) (Math.random() * radius) + 2;
-		int random_amount = (int) (Math.random() * amount) + 1;
+		int randomRadius = util.random(0, radius) + 5;
+		int randomAmount = util.random(1, amount) + 1;
+		
+		// Check if there are players in range
+		if (util.filterPlayers(e.getEntity().getLocation(), 150).size() == 0)
+			return;
 
-		Location[] spawnLocations = util.getArcSpots(e.getEntity().getLocation(), random_radius, random_amount);
+		Location[] spawnLocations = util.getArcSpots(e.getEntity().getLocation(), randomRadius, randomAmount);
 		for (Location spawnLocation : spawnLocations) {
 
 			// Check if the baby dragon can spawn.
-			spawnLocation = util.shouldSpawn(spawnLocation, random_radius, 1);
+			spawnLocation = util.shouldSpawn(spawnLocation, randomRadius, 1);
 			if (spawnLocation == null)
 				continue;
 
 			// Spawn particles for the new entities.
 			spawnLocation.getWorld().spawnParticle(Particle.DRAGON_BREATH, spawnLocation, 60);
-			
+
 			// Spawn phantoms with names and special effects
-			Phantom monster = (Phantom) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.PHANTOM);
+			LivingEntity monster = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, companion);
 			monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 9999, damagebooster), false);
-			monster.setCustomName("§c§lBaby dragon");
+			monster.setCustomName(companionname);
 			monster.setCustomNameVisible(false);
+		}
+	}
+	
+	public void newTarget(PlayerMoveEvent e) {
+		Player player = e.getPlayer();
+		for (Entity livingent : player.getNearbyEntities(50, 50, 50)) {
+			if(!checkName(livingent)) continue;
+			Mob entity = (Mob) livingent;
+			if (entity.getTarget() == null) entity.setTarget(player);
+			
 		}
 	}
 
@@ -79,20 +100,31 @@ public class BabyEnderDragons implements EventClass {
 	@SuppressWarnings("deprecation")
 	public void EntityDamage(EntityDamageByEntityEvent e) {
 		
-		// Check if the damage is done on a player by a phantom
-		if (!(e.getDamager() instanceof Phantom && e.getEntity() instanceof Player))
-			return;
-		
-		// Receive entities
-		LivingEntity phantom = (LivingEntity) e.getDamager();
-		LivingEntity player = (LivingEntity) e.getEntity();
-
-		// Get dragon and remove phantom when there is no dragon
-		List<LivingEntity> dragons = util.filterEntity(player.getLocation(), 150, EntityType.ENDER_DRAGON);
-		if (dragons.size() == 0) {
+		// The dragon can't damage her own babies!
+		if (e.getEntity() instanceof EnderDragon) {
+			if (checkName(e.getDamager())) 		
 			e.setCancelled(true);
-			phantom.remove();
-			return;
+			
+		// Check if the damage is done on a player by a phantom
+		} else if (!(e.getEntity() instanceof Player))
+					return;
+			if (!checkName(e.getDamager())) return;
+			
+			// Receive entities
+			LivingEntity monster = (LivingEntity) e.getDamager();
+			LivingEntity player = (LivingEntity) e.getEntity();
+	
+			// Check if the given name matches our companion name
+			if (!(monster.getCustomName() != null && monster.getCustomName().equals(companionname)))
+				return;
+	
+			// Get dragon and remove phantom when there is no dragon
+			List<LivingEntity> dragons = util.filterEntity(player.getLocation(), 150, EntityType.ENDER_DRAGON);
+			if (dragons.size() == 0) {
+				e.setCancelled(true);
+				monster.remove();
+				return;
+				
 		}
 
 		// Regen the dragon when it is found.
@@ -109,18 +141,16 @@ public class BabyEnderDragons implements EventClass {
 	 * Handle the death of the baby dragons and the dragon itself
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		
+
 		// Check if the entity is a baby dragon and disable the drops if it is found.
-		if (e.getEntity() instanceof Phantom) {
-			Phantom monster = (Phantom) e.getEntity();
-			if (monster.getCustomName() != null && monster.getCustomName().equals("§c§lBaby dragon"))
-				e.getDrops().clear();
-			
-		// Check if the entity is a enderdragon and remove all the baby dragons.
+		if (checkName(e.getEntity())) {
+			e.getDrops().clear();
+
+			// Check if the entity is a enderdragon and remove all the baby dragons.
 		} else if (e.getEntity() instanceof EnderDragon) {
 			EnderDragon dragon = (EnderDragon) e.getEntity();
-			for (LivingEntity living : util.filterEntity(dragon.getLocation(), 150, EntityType.PHANTOM)) {
-				if (living.getCustomName().equals("§c§lBaby dragon"))
+			for (LivingEntity living : util.filterEntity(dragon.getLocation(), 150, companion)) {
+				if(checkName(living))
 					living.remove();
 			}
 		}
@@ -135,14 +165,15 @@ public class BabyEnderDragons implements EventClass {
 			DragonPhaseEvent((EnderDragonChangePhaseEvent) e);
 		} else if (e instanceof EntityDeathEvent) {
 			deathEvent((EntityDeathEvent) e);
-		} else
+		} else if (e instanceof EntityDamageByEntityEvent) {
 			EntityDamage((EntityDamageByEntityEvent) e);
+		} else newTarget((PlayerMoveEvent) e);
 	}
 
 	@Override
 	public boolean canBeCalled(Event e) {
 		return e instanceof EnderDragonChangePhaseEvent || e instanceof EntityDeathEvent
-				|| (e instanceof EntityDamageByEntityEvent && regen);
+				|| (e instanceof EntityDamageByEntityEvent && regen) || (e instanceof PlayerMoveEvent && newtarget);
 	}
 
 }

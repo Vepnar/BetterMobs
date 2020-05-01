@@ -108,8 +108,9 @@ public class Main extends JavaPlugin {
 		unusedEventList.add(new WitchNecromancer());
 		unusedEventList.add(new WitherReinforcements());
 		unusedEventList.add(new WitherEffects());
-		unusedEventList.add(new NoDragonPerching());
 		unusedEventList.add(new BabyEnderDragons());
+		unusedEventList.add(new EnderDragonMites());
+		unusedEventList.add(new NoDragonPerching());
 
 	}
 

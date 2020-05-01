@@ -71,13 +71,22 @@ NoDragonPerching:
   enabled: true
   
 # Spawn baby ender dragons to kill the player.
-BabyEnderDragons:
+babyEnderDragons:
   enabled: true
-  radius: 10 # Max distance from the dragon where the babies could spawn.
-  chance: 20 # Chance the baby enderdragons will spawn
-  amount: 5 # The max amount of baby dragons that could spawn.
-  damagebooster: 2 # Amount of extra damage the baby dragons get.
-  regen: true # the dragon will regen when the baby dragon hit a player
+  spawnRadius: 5 # Max distance from the dragon where the babies could spawn.
+  spawnChance: 5 # Chance the baby enderdragons will spawn
+  spawnAmount: 5 # The max amount of baby dragons that could spawn.
+  damageBooster: 2 # Amount of extra damage the baby dragons get.
+  dragonRegen: true # the dragon will regen when the baby dragon hit a player
+  
+# Spawn baby ender dragons to kill the player.
+enderDragonMites:
+  enabled: true
+  spawnRadius: 15 # Max distance from the dragon where the babies could spawn.
+  spawnChance: 10 # Chance the baby enderdragons will spawn
+  spawnAmount: 10 # The max amount of baby dragons that could spawn.
+  damageBooster: 2 # Amount of extra damage the baby dragons get.
+  dragonRegen: true # the dragon will regen when the baby dragon hit a player
 
 ## TODO
 #skeletonHorseMount: true
