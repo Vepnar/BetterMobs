@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 
 public class ReloadCommand implements CommandExecutor {
-	
+
 	Main javaplugin;
-	
+
 	/**
 	 * Initialize the Bettermobs reload command listener
 	 * 
@@ -20,17 +20,17 @@ public class ReloadCommand implements CommandExecutor {
 	}
 
 	/**
-	 * Handle the /bettermobs-reload and /bmr command.
-	 * Reload config, create new config and reload events.
-	 * Will also send a message when the reload has completed.
+	 * Handle the /bettermobs-reload and /bmr command. Reload config, create new
+	 * config and reload events. Will also send a message when the reload has
+	 * completed.
 	 */
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-    	javaplugin.reloadConfig();
-    	javaplugin.loadDefaultConfig();
-        javaplugin.enableEvents();
-        sender.sendMessage(javaplugin.prefix + "has been reloaded");
-        return true;
-    }
+		javaplugin.reloadConfig();
+		javaplugin.loadDefaultConfig();
+		javaplugin.enableEvents();
+		sender.sendMessage(javaplugin.prefix + "has been reloaded");
+		return true;
+	}
 }

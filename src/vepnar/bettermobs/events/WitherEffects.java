@@ -21,9 +21,9 @@ import vepnar.bettermobs.util;
 
 public class WitherEffects implements EventClass {
 	int radius, cooldown, duration, chance;
-	final PotionEffectType[] WITHEREFFECTS = {PotionEffectType.HUNGER, PotionEffectType.WEAKNESS,
-			PotionEffectType.SLOW_DIGGING, PotionEffectType.BLINDNESS, PotionEffectType.CONFUSION};
-	
+	final PotionEffectType[] WITHEREFFECTS = { PotionEffectType.HUNGER, PotionEffectType.WEAKNESS,
+			PotionEffectType.SLOW_DIGGING, PotionEffectType.BLINDNESS, PotionEffectType.CONFUSION };
+
 	/**
 	 * Receive configuration name and check if this event is enabled.
 	 */
@@ -35,9 +35,9 @@ public class WitherEffects implements EventClass {
 		chance = m.getConfig().getInt("witherEffects.attackChance");
 		return "witherEffects";
 	}
-	
+
 	/**
-	 * Check if this class is compatible with the given event. 
+	 * Check if this class is compatible with the given event.
 	 * 
 	 * @param e event that should be checked.
 	 * @return true when it is compatible and false when it is not.
@@ -49,6 +49,7 @@ public class WitherEffects implements EventClass {
 
 	/**
 	 * Handle the event.
+	 * 
 	 * @param e
 	 */
 	@Override
@@ -57,47 +58,53 @@ public class WitherEffects implements EventClass {
 		// Check if shot entity is a wither skull.
 		if (event.getEntity() instanceof WitherSkull) {
 			WitherSkull wSkull = (WitherSkull) event.getEntity();
-			
+
 			// Apply random chance.
-			if (util.random(1, chance) != 1) return;
-			
+			if (util.random(1, chance) != 1)
+				return;
+
 			// Check if it is shot by a wither and the wither has no cooldown.
-			if (!(wSkull.getShooter() instanceof Wither)) return;
+			if (!(wSkull.getShooter() instanceof Wither))
+				return;
 			Wither wither = (Wither) wSkull.getShooter();
-			if (wither.hasPotionEffect(PotionEffectType.UNLUCK)) return;
-			
+			if (wither.hasPotionEffect(PotionEffectType.UNLUCK))
+				return;
+
 			// Generate random radius and effect.
-			int randomRadius = util.random(1, radius)+2;
-			int random_effect = util.random(1, WITHEREFFECTS.length)-1;
-			
+			int randomRadius = util.random(1, radius) + 2;
+			int random_effect = util.random(1, WITHEREFFECTS.length) - 1;
+
 			// Get entities in the radius of the wither.
-			List<LivingEntity> entities = filterEntities(wither.getNearbyEntities(randomRadius, randomRadius, randomRadius));
-			if (entities.size() == 0) return;
-		
+			List<LivingEntity> entities = filterEntities(
+					wither.getNearbyEntities(randomRadius, randomRadius, randomRadius));
+			if (entities.size() == 0)
+				return;
+
 			// Apply effects.
-			for(LivingEntity entity : entities)
+			for (LivingEntity entity : entities)
 				entity.addPotionEffect(new PotionEffect(WITHEREFFECTS[random_effect], duration, 0), true);
-			
-			
+
 			// Make a circle and play particle effects.
 			Location[] spawnLocations = util.getArcSpots(wither.getLocation(), randomRadius, 8);
 			for (Location spawnLocation : spawnLocations) {
-				
+
 				// Check if the particles should spawn.
 				spawnLocation = util.shouldSpawn(spawnLocation, 3, 1);
-				if (spawnLocation == null) continue;
-				
+				if (spawnLocation == null)
+					continue;
+
 				// Spawn particles.
 				spawnLocation.getWorld().spawnParticle(Particle.SQUID_INK, spawnLocation, 60);
 
 			}
 			// Add cooldown to the wither.
-			wither.addPotionEffect(new PotionEffect(PotionEffectType.UNLUCK, cooldown, 0), false);	
+			wither.addPotionEffect(new PotionEffect(PotionEffectType.UNLUCK, cooldown, 0), false);
 		}
 	}
-	
+
 	/**
 	 * Filter only players.
+	 * 
 	 * @param entities List of entities close to a location.
 	 * @return A list of living entities with only players.
 	 */
@@ -105,9 +112,9 @@ public class WitherEffects implements EventClass {
 
 		List<LivingEntity> lEntities = new ArrayList<LivingEntity>();
 		for (Entity entity : entities)
-			if(entity.getType() == EntityType.PLAYER)
+			if (entity.getType() == EntityType.PLAYER)
 				lEntities.add((LivingEntity) entity);
 		return lEntities;
-	
+
 	}
 }

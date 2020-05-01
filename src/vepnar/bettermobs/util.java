@@ -126,7 +126,7 @@ public class util {
 		return lEntities;
 
 	}
-	
+
 	/**
 	 * Filter entities on the given radius.
 	 * 
@@ -142,20 +142,23 @@ public class util {
 		return lEntities;
 
 	}
-	
+
 	/**
 	 * If the given entity matches with the entity we want.
 	 * 
-	 * @param monster Unknown type of entity.
-	 * @param companion Entity type we want.
+	 * @param monster       Unknown type of entity.
+	 * @param companion     Entity type we want.
 	 * @param companionname Name of the entity we want.
 	 * @return True when matches and false when it doesn't.
 	 */
 	public static boolean checkCompanion(Entity monster, EntityType companion, String companionname) {
-		if (monster.getType() != companion) return false;
-		if (monster.getCustomName() == null) return false;
-		if (monster.getCustomName().equals(companionname)) return true;
+		if (monster.getType() != companion)
+			return false;
+		if (monster.getCustomName() == null)
+			return false;
+		if (monster.getCustomName().equals(companionname))
+			return true;
 		return false;
-		
+
 	}
 }

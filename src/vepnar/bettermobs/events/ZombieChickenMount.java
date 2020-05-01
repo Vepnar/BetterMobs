@@ -20,9 +20,10 @@ public class ZombieChickenMount extends SkeletonSpiderMount {
 		mountFind = m.getConfig().getInt("zombieChickenMount.mountFindRange");
 		return "zombieChickenMount";
 	}
-	
+
 	/**
-	 * Filter all entities that can mount another entity and ain't riding on another entity
+	 * Filter all entities that can mount another entity and ain't riding on another
+	 * entity
 	 * 
 	 * @param entities you want to be filtered
 	 * @return List of living entities filtered
@@ -33,12 +34,12 @@ public class ZombieChickenMount extends SkeletonSpiderMount {
 		List<LivingEntity> lEntities = new ArrayList<LivingEntity>();
 		for (Entity entity : entities)
 			if (entity instanceof Zombie)
-				if(((Zombie) entity).isBaby() && !entity.isInsideVehicle()) 
+				if (((Zombie) entity).isBaby() && !entity.isInsideVehicle())
 					lEntities.add((LivingEntity) entity);
 		return lEntities;
-			
+
 	}
-	
+
 	/**
 	 * Find rideable entities close to the zombie with currently no passengers.
 	 * 
@@ -48,8 +49,8 @@ public class ZombieChickenMount extends SkeletonSpiderMount {
 	@Override
 	public Entity filterMountableEntities(List<Entity> entities) {
 		for (Entity entity : entities)
-				if(entity instanceof Chicken && entity.getPassengers().isEmpty()) 
-						return entity;
+			if (entity instanceof Chicken && entity.getPassengers().isEmpty())
+				return entity;
 		return null;
 	}
 

@@ -48,9 +48,10 @@ public class WitherReinforcements implements EventClass {
 	 * Handle the death of the summoned skeletons
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		if (util.checkCompanion(e.getEntity(), companion, companionname)) e.getDrops().clear();
+		if (util.checkCompanion(e.getEntity(), companion, companionname))
+			e.getDrops().clear();
 	}
-	
+
 	/*
 	 * Handle projectile shoot events
 	 */
@@ -95,16 +96,16 @@ public class WitherReinforcements implements EventClass {
 
 		}
 	}
-	
+
 	/**
 	 * Handle all events.
 	 */
 	@Override
 	public void callEvent(Event e) {
-		
+
 		if (e instanceof EntityDeathEvent) {
 			deathEvent((EntityDeathEvent) e);
-		
+
 		} else if (e instanceof ProjectileLaunchEvent)
 			projectileEvent((ProjectileLaunchEvent) e);
 	}

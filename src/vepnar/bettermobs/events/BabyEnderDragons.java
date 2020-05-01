@@ -42,9 +42,9 @@ public class BabyEnderDragons implements EventClass {
 		regen = m.getConfig().getBoolean("babyEnderDragons.dragonRegen");
 		return "babyEnderDragons";
 	}
-	
+
 	private boolean checkName(Entity monster) {
-		return util.checkCompanion(monster, companion, companionname);	
+		return util.checkCompanion(monster, companion, companionname);
 	}
 
 	/*
@@ -60,7 +60,7 @@ public class BabyEnderDragons implements EventClass {
 		// Generate random values.
 		int randomRadius = util.random(0, radius) + 5;
 		int randomAmount = util.random(1, amount) + 1;
-		
+
 		// Check if there are players in range
 		if (util.filterPlayers(e.getEntity().getLocation(), 150).size() == 0)
 			return;
@@ -83,14 +83,16 @@ public class BabyEnderDragons implements EventClass {
 			monster.setCustomNameVisible(false);
 		}
 	}
-	
+
 	public void newTarget(PlayerMoveEvent e) {
 		Player player = e.getPlayer();
 		for (Entity livingent : player.getNearbyEntities(50, 50, 50)) {
-			if(!checkName(livingent)) continue;
+			if (!checkName(livingent))
+				continue;
 			Mob entity = (Mob) livingent;
-			if (entity.getTarget() == null) entity.setTarget(player);
-			
+			if (entity.getTarget() == null)
+				entity.setTarget(player);
+
 		}
 	}
 
@@ -99,32 +101,33 @@ public class BabyEnderDragons implements EventClass {
 	 */
 	@SuppressWarnings("deprecation")
 	public void EntityDamage(EntityDamageByEntityEvent e) {
-		
+
 		// The dragon can't damage her own babies!
 		if (e.getEntity() instanceof EnderDragon) {
-			if (checkName(e.getDamager())) 		
-			e.setCancelled(true);
-			
-		// Check if the damage is done on a player by a phantom
-		} else if (!(e.getEntity() instanceof Player))
-					return;
-			if (!checkName(e.getDamager())) return;
-			
-			// Receive entities
-			LivingEntity monster = (LivingEntity) e.getDamager();
-			LivingEntity player = (LivingEntity) e.getEntity();
-	
-			// Check if the given name matches our companion name
-			if (!(monster.getCustomName() != null && monster.getCustomName().equals(companionname)))
-				return;
-	
-			// Get dragon and remove phantom when there is no dragon
-			List<LivingEntity> dragons = util.filterEntity(player.getLocation(), 150, EntityType.ENDER_DRAGON);
-			if (dragons.size() == 0) {
+			if (checkName(e.getDamager()))
 				e.setCancelled(true);
-				monster.remove();
-				return;
-				
+
+			// Check if the damage is done on a player by a phantom
+		} else if (!(e.getEntity() instanceof Player))
+			return;
+		if (!checkName(e.getDamager()))
+			return;
+
+		// Receive entities
+		LivingEntity monster = (LivingEntity) e.getDamager();
+		LivingEntity player = (LivingEntity) e.getEntity();
+
+		// Check if the given name matches our companion name
+		if (!(monster.getCustomName() != null && monster.getCustomName().equals(companionname)))
+			return;
+
+		// Get dragon and remove phantom when there is no dragon
+		List<LivingEntity> dragons = util.filterEntity(player.getLocation(), 150, EntityType.ENDER_DRAGON);
+		if (dragons.size() == 0) {
+			e.setCancelled(true);
+			monster.remove();
+			return;
+
 		}
 
 		// Regen the dragon when it is found.
@@ -150,7 +153,7 @@ public class BabyEnderDragons implements EventClass {
 		} else if (e.getEntity() instanceof EnderDragon) {
 			EnderDragon dragon = (EnderDragon) e.getEntity();
 			for (LivingEntity living : util.filterEntity(dragon.getLocation(), 150, companion)) {
-				if(checkName(living))
+				if (checkName(living))
 					living.remove();
 			}
 		}
@@ -167,7 +170,8 @@ public class BabyEnderDragons implements EventClass {
 			deathEvent((EntityDeathEvent) e);
 		} else if (e instanceof EntityDamageByEntityEvent) {
 			EntityDamage((EntityDamageByEntityEvent) e);
-		} else newTarget((PlayerMoveEvent) e);
+		} else
+			newTarget((PlayerMoveEvent) e);
 	}
 
 	@Override

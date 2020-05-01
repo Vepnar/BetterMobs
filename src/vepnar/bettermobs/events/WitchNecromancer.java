@@ -67,7 +67,8 @@ public class WitchNecromancer implements EventClass {
 	 * Handle the death of the summoned zombies.
 	 */
 	public void deathEvent(EntityDeathEvent e) {
-		if (util.checkCompanion(e.getEntity(), companion, companionname)) e.getDrops().clear();
+		if (util.checkCompanion(e.getEntity(), companion, companionname))
+			e.getDrops().clear();
 
 	}
 
