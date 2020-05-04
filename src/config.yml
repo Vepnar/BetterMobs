@@ -86,12 +86,3 @@ enderDragonMites:
   damageBooster: 2 # Amount of damage that the Endermite will do.
   dragonRegen: true # Whether The Ender Dragon will regenerate health if an Endermite hits a player.
 
-## TODO
-#skeletonHorseMount: true
-#fasterZombie: true
-#monsterHeal: true
-#ghastMachineGun: true
-#enderDragonNoSitting
-#enderDragonMachineGun
-#enderDragonRain
-#enderDragonReinforcements
