@@ -30,10 +30,6 @@ public class Main extends JavaPlugin {
 	List<EventClass> eventList = new ArrayList<EventClass>();
 	List<EventClass> unusedEventList = new ArrayList<EventClass>();
 
-	/**
-	 * This runs when the plugin gets started. Here we can initialize all settings
-	 * and load files.
-	 */
 	@Override
 	public void onEnable() {
 
@@ -49,27 +45,29 @@ public class Main extends JavaPlugin {
 
 	}
 
-	/**
-	 * This runs when the plugin gets disabled
-	 */
 	@Override
 	public void onDisable() {
+		// Destroy every registered event and disable every listener.
 		eventList.clear();
 		unusedEventList.clear();
 		listen = true;
 
 	}
-
-	/*
-	 * Copy the default config file to the plugin directory. The default config file
-	 * will be copied from /src/config.yml to /pluginname/config.yml
+	
+	/**
+	 * Attempt to create a configuration file in BetterMobs directory when there is no configuration file.
 	 */
 	public void loadDefaultConfig() {
 
+		// Create the BetterMobs directory when it does not exist.
 		File folder = getDataFolder();
 		if (!folder.exists())
 			folder.mkdir();
+		
+		// Access configuration file.
 		File resourceFile = new File(folder, "config.yml");
+		
+		// Attempt to write to the configuration file.
 		try {
 			if (!resourceFile.exists()) {
 				resourceFile.createNewFile();
@@ -77,16 +75,19 @@ public class Main extends JavaPlugin {
 						OutputStream out = new FileOutputStream(resourceFile)) {
 					ByteStreams.copy(in, out);
 				}
+				
+				// Report on our success.
 				getLogger().info("Config successfully created!");
 			}
 		} catch (Exception e) {
+			// Report the issue to the console.
 			getLogger().warning("Can't create config file");
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Register all commands and listen to them
+	 * Register command handlers.
 	 */
 	public void initializeCommands() {
 		this.getCommand("bettermobs-reload").setExecutor(new ReloadCommand(this));
@@ -94,11 +95,15 @@ public class Main extends JavaPlugin {
 	}
 
 	/**
-	 * This will create the events and add them to the list of events.
+	 * Handle the initialization of all the events.
+	 * The order of initialization is really important. 
 	 */
 	public void initializeEvents() {
+		
+		// Register general event listener
 		getServer().getPluginManager().registerEvents(new MobListener(this), this);
 
+		// Initialize all the event classes.
 		unusedEventList.add(new SkeletonSwordSwitch());
 		unusedEventList.add(new WSkeletonSwordSwitch());
 		unusedEventList.add(new SkeletonSpiderMount());
@@ -115,14 +120,22 @@ public class Main extends JavaPlugin {
 	}
 
 	/**
-	 * This will enable the events when they are enabled in the configuration file.
+	 * Used to unload and load all events previously registered.
+	 * @see initializeEvents for registering events.
 	 */
 	public void enableEvents() {
+		// Clear event list.
 		eventList.clear();
+		
+		// Load new events.
 		for (EventClass event : unusedEventList) {
+			
+			// Check if the given event is allowed to run and add it to the list if it is.
 			if (this.getConfig().getBoolean(event.configName(this) + ".enabled"))
 				eventList.add(event);
 		}
+		
+		// Enable the listener.
 		listen = false;
 	}
 

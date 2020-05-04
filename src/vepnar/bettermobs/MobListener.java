@@ -1,7 +1,7 @@
 /**
  * Here all events will be handled.
  * 
- * @version 1.0
+ * @version 1.4
  * @author Arjan de Haan (Vepnar)
  */
 package vepnar.bettermobs;
@@ -19,41 +19,42 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class MobListener implements Listener {
 
 	Main javaplugin;
-	int tick = 50;
+	int tick;
+	long lastcheck = System.currentTimeMillis();
 
-	/**
-	 * Initialize the Bettermobs event listener
-	 * 
-	 * @param m the JavaPlugin class or main file
-	 */
 	public MobListener(Main m) {
 
 		javaplugin = m;
 	}
 
-	/**
-	 * Handle all PlayerMoveEvent's. and call events who are enabled in the
-	 * configuration file. Only do this rarely because this is quite CPU heavy when
-	 * there are a lot of active players.
-	 */
 	@EventHandler
 	public void onEntityInteractEvent(PlayerMoveEvent e) {
-		int rand = (int) (Math.random() * tick); // Reduce lag
-		if (rand != 1 || javaplugin.listen)
+
+		// Verify if the given delay has passed and if the event listener is enabled.
+		if (System.currentTimeMillis() - lastcheck > tick || javaplugin.listen)
 			return;
 
+		// Reset the delay
+		lastcheck = System.currentTimeMillis();
+
+		// Loop through all enabled events
 		for (EventClass event : javaplugin.eventList) {
+
+			// Interrupt the for-loop when the event has been cancelled.
 			if (e.isCancelled())
 				break;
-			if (!event.canBeCalled(e))
-				continue;
-			event.callEvent(e);
+
+			// Verify if this event listens to this kind of events.
+			if (event.canBeCalled(e))
+				event.callEvent(e);
 		}
+
+		// Receive updates from the configuration file.
 		tick = javaplugin.getConfig().getInt("entityUpdateSpeed");
 	}
 
 	/**
-	 * Handle all entity spawn events. Don't call this function yourself!
+	 * @see onEntityInteractEvent
 	 */
 	@EventHandler
 	public void onEntitySpawn(CreatureSpawnEvent e) {
@@ -70,7 +71,7 @@ public class MobListener implements Listener {
 	}
 
 	/**
-	 * Handle all projectile launch events. Don't call this function yourself!
+	 * @see onEntityInteractEvent
 	 */
 	@EventHandler
 	public void onProjectileLaunch(ProjectileLaunchEvent e) {
@@ -87,7 +88,7 @@ public class MobListener implements Listener {
 	}
 
 	/**
-	 * Handle all dragon phases events. Don't call this function yourself!
+	 * @see onEntityInteractEvent
 	 */
 	@EventHandler
 	public void onDragonChangePhase(EnderDragonChangePhaseEvent e) {
@@ -104,7 +105,7 @@ public class MobListener implements Listener {
 	}
 
 	/**
-	 * Handle entity death events. Don't call this function yourself!
+	 * @see onEntityInteractEvent
 	 */
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent e) {
@@ -119,7 +120,7 @@ public class MobListener implements Listener {
 	}
 
 	/**
-	 * Handle entity by entity damage events.
+	 * @see onEntityInteractEvent
 	 */
 	@EventHandler
 	public void onEntityHitEvent(EntityDamageByEntityEvent e) {
