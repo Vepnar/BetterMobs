@@ -1,92 +1,90 @@
-# Update frequency the entities will be updated
-entityUpdateSpeed: 50
+# Entity Update frequency in Milliseconds.
+entityUpdateSpeed: 100
 
-# Skeleton's will use swords to attack the player when the player is close enough. (6 block radius)
-skeletonSwordSwitch:
-  enabled: true
-  swordRange: 6
-
-# Wither skeleton's will use fire bows when the player is too far for sword use. (6 block radius+)
-witherSkeletonSwordSwitch:
+# At what range in blocks the Skeletons will use a sword.
+skeletonSwordSwitch: # Skeletons will use a wooden sword.
   enabled: true
   swordRange: 5
 
-# Make it possible for (wither) skeletons to ride (cave) spiders.
+# At what range in blocks the Wither Skeletons will use a sword.
+witherSkeletonSwordSwitch: # Wither Skeletons will use a bow with the flame enchantment.
+  enabled: true
+  swordRange: 8
+
+# Makes it possible for (Wither) Skeletons to mount (Cave) Spiders.
 skeletonSpiderMount:
   enabled: true
-  updateEntityfromPlayer: 12 # Range to look for entities to update
-  mountFindRange: 4 # Range the entity will look for a mount
+  updateEntityfromPlayer: 16 # How many blocks from the player the updating starts. 
+  mountFindRange: 4 # Amount of blocks that (Wither) Skeletons will search for a (Cave) Spider to mount.
 
-# Make it possible for baby zombies to ride on chickens.
+# Makes it possible for Baby Zombies to mount Chickens.
 zombieChickenMount:
   enabled: true
-  updateEntityfromPlayer: 12 # Range to look for entities to update
-  mountFindRange: 4 # Range the entity will look for a mount
+  updateEntityfromPlayer: 16 # How many blocks from the player the updating starts. 
+  mountFindRange: 4 # Amount of blocks that Baby Zombies will search for a Chicken to mount.
 
-# Make it possible to spawn charged creepers
+# Makes it possible for Charged Creepers to spawn more regularly.
 chargedCreeperSpawn:
   enabled: true
-  spawnChance: 100 # 1 in the 100 will spawn a charged creeper
-  # Higher number is a lower chance
+  spawnChance: 50 # 1 in 50 Creepers will be a Charged Creeper.
   
-# Make creepers spawn with potion effects
+# Makes Creepers spawn more regularly with effects.
 creeperSpawnPotionEffect:
   enabled: true
-  effectDuration: 60 # duration of the given effect.
-  spawnChance: 50 # 1 in the 50 will spawn a creeper with a potion effect
+  effectDuration: 60 # Duration of the given effect.
+  spawnChance: 20 # 1 in 20 Creepers spawns with an effect.
   positiveEffects: true
-  # Examples: ABSORPTION, HEALING, SPEED, STRENGTH, FIRE RESISTANCE
+  # Includes: ABSORPTION, RESISTANCE, INVISIBILITY, JUMP BOOST, WATER BREATHING, REGENERATION, SPEED, STRENGTH, FIRE RESISTANCE, HASTE
   negativeEffects: true
-  # Examples: POISON, WITHER, BLINDNESS, SLOW DIGGING, WEAKNESS, HUNGER
+  # Includes: POISON, WITHER, BLINDNESS, MINING FATIQUE, WEAKNESS, HUNGER, NAUSEA
   rareEffects: true
-  # Examples: LEVITATION, DOLPHINS GRACE, GLOWING, LUCK, BAD_OMEN
+  # Includes: LEVITATION, DOLPHINS GRACE, GLOWING, LUCK, BAD OMEN, SATURATION, CONDUIT POWER
 
-# Turn witches into necromancers who spawn baby zombies.
-# Only works at night
-witchNecromancer:
+# Whether Witches can spawn Baby Zombies at night to help it fight the player.
+witchNecromancer: # Summoned Baby Zombies won't drop Anything.
   enabled: true
-  cooldown: 450 # Wait before the witch could spawn zombies again.
-  spawnAmount: 3 # The maximum amount of zombies could be spawn. this number is random.
-  spawnRadius: 3 # The distance the zombies spawn from the witch.
-  scanRadius: 10 # The distance from the player that should be checked for witches.
+  cooldown: 30 # How many Seconds to wait before summoning again.
+  spawnAmount: 3 # The maximum amount of Zombies that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
+  spawnRadius: 3 # How many blocks away from the Witch the Baby Zombies can spawn.
+  scanRadius: 16 # The distance from the player that will be checked for Witches.
 
-# Wither can spawn wither skeletons when attacked.
-witherReinforcements:
+# Wether the Wither can spawn Wither Skeletons to help him in battle.
+witherReinforcements: # Summoned Wither Skeletons won't drop Anything
   enabled: true
-  cooldown: 45 # wait till a new spawn wave in seconds.
-  spawnRadius: 10 # Max radius the skeletons could spawn.
-  spawnChance: 10 # Chance the skeletons spawn when attacked.
-  spawnAmount: 5 # Max amount of skeletons that could spawn.
+  cooldown: 45 # How many Seconds to wait before summoning again.
+  spawnRadius: 10 # Maximum amount of blocks that Wither Skeletons can spawn from the Wither.
+  spawnChance: 10 # 1/100 Procental Chance that reinforcements will spawn if the Wither is attacked.
+  spawnAmount: 2 # Maximum amount of Wither Skeletons that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
 
-# Wither can give negative effects to players nearby.  
-witherEffects:
+# Wether the Wither can give negative effects to players around it.
+witherEffects: # Includes: BLINDNESS, NAUSEA, HUNGER, MINING FATIQUE, WEAKNESS
   enabled: true
-  cooldown: 30 # Wait before the attack is done again.
-  spawnChance: 10 # The chance the attack will happen on attack.
-  attackRadius: 7 # Max radius of the attack.
-  attackDuration: 30 # Duration of the given potion effect.
+  cooldown: 40 # How many Seconds to wait before releasing effects again.
+  spawnChance: 10 # The chance the effects will happen if the Wither is attacked.
+  attackRadius: 8 # Maximum radius of the attack.
+  attackDuration: 10 # Duration of the given potion effect.
 
-# Disables the dragon sitting on the end portal
+# Wether the Ender Dragon will rest on The End Portal.
 NoDragonPerching:
   enabled: true
-  
-# Spawn baby ender dragons to kill the player.
+
+# Wether The Ender Dragon spawns Baby Ender Dragons to kill the player.
 babyEnderDragons:
   enabled: true
-  spawnRadius: 15 # Max distance from the dragon where the babies could spawn.
-  spawnChance: 10 # Chance the baby enderdragons will spawn
-  spawnAmount: 5 # The max amount of baby dragons that could spawn.
-  damageBooster: 2 # Amount of extra damage the baby dragons get.
-  dragonRegen: true # the dragon will regen when the baby dragon hit a player
-  
-# Spawn baby ender dragons to kill the player.
+  spawnRadius: 15 # Maximum amount of blocks that Baby Ender Dragons can spawn from The Ender Dragon.
+  spawnChance: 10 # 1/100 Procental Chance that the Baby Ender Dragon spawn will occur.
+  spawnAmount: 2 # Maximum amount of Baby Ender Dragons that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
+  damageBooster: 2 # Amount of damage that the Baby Ender Dragons will do.
+  dragonRegen: true # Whether The Ender Dragon will regenerate health if a Baby Ender Dragon hits a player.
+
+# Wether The Ender Dragon spawns Endermites to kill the player.
 enderDragonMites:
   enabled: true
   spawnRadius: 15 # Max distance from the dragon where the babies could spawn.
-  spawnChance: 10 # Chance the baby enderdragons will spawn
-  spawnAmount: 10 # The max amount of baby dragons that could spawn.
-  damageBooster: 2 # Amount of extra damage the baby dragons get.
-  dragonRegen: true # the dragon will regen when the baby dragon hit a player
+  spawnChance: 10 # 1/100 Procental Chance that the Endermite spawn will occur.
+  spawnAmount: 2 # Maximum amount of Endermite that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
+  damageBooster: 2 # Amount of damage that the Endermite will do.
+  dragonRegen: true # Whether The Ender Dragon will regenerate health if an Endermite hits a player.
 
 ## TODO
 #skeletonHorseMount: true
