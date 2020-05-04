@@ -35,4 +35,4 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 
 
 # Amazing people who helped me out on this project!
-- [JeannotM]("https://github.com/JeannotM/") Improving grammar errors & adding ideas.
+- [JeannotM](https://github.com/JeannotM/) Improving grammar errors & adding ideas.
