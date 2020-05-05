@@ -38,7 +38,7 @@ creeperSpawnPotionEffect:
   negativeEffects: true
   # Includes: POISON, WITHER, BLINDNESS, MINING FATIQUE, WEAKNESS, HUNGER, NAUSEA
   rareEffects: true
-  # Includes: LEVITATION, DOLPHINS GRACE, GLOWING, LUCK, BAD OMEN, SATURATION, CONDUIT POWER
+  # Includes: LEVITATION, DOLPHINS GRACE, GLOWING, LUCK, BAD OMEN, SATURATION
 
 # Whether Witches can spawn Baby Zombies at night to help it fight the player.
 witchNecromancer: # Summoned Baby Zombies won't drop Anything.

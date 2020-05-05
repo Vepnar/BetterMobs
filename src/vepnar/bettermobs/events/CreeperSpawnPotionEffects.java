@@ -25,15 +25,14 @@ public class CreeperSpawnPotionEffects implements EventClass {
 			PotionEffectType.HUNGER };
 
 	final PotionEffectType[] RAREEFFECTS = { PotionEffectType.LEVITATION, PotionEffectType.DOLPHINS_GRACE,
-			PotionEffectType.GLOWING, PotionEffectType.CONDUIT_POWER, PotionEffectType.LUCK,
+			PotionEffectType.GLOWING, PotionEffectType.LUCK,
 			PotionEffectType.SATURATION, PotionEffectType.BAD_OMEN };
 
 	/**
-	 * Receive configuration information from the configuration file. And return the
-	 * name of this event
+     * Get configuration data of the configuration file, also return the title of this handler.
 	 * 
 	 * @param JavaPlugin
-	 * @return Name of this event in the configuration file
+	 * @return title of this event in the configuration file
 	 */
 	@Override
 	public String configName(Main m) {
@@ -53,13 +52,14 @@ public class CreeperSpawnPotionEffects implements EventClass {
 	@Override
 	public void callEvent(Event e) {
 		CreatureSpawnEvent spawn = (CreatureSpawnEvent) e;
+		// Check if given entity is a creeper
 		if (!(spawn.getEntity() instanceof Creeper))
 			return;
-		int rand = (int) (Math.random() * spawnchance);
-		if (rand != 1)
+		// Check if the creeper should spawn with special effects.
+		if ((int) (Math.random() * spawnchance) != 1)
 			return;
 
-		// Combine all effects in one big list when they are enabled.
+		// Merge all enabled effects within one big array.
 		Object[] effects = {};
 		if (positiveeffect)
 			effects = ArrayUtils.addAll(effects, POSITIVEEFFECTS);
@@ -67,11 +67,13 @@ public class CreeperSpawnPotionEffects implements EventClass {
 			effects = ArrayUtils.addAll(effects, NEGATIVEEFFECTS);
 		if (rareeffect)
 			effects = ArrayUtils.addAll(effects, RAREEFFECTS);
+		
+		// Check if there are any added effects.
 		if (effects.length == 0)
 			return;
 
-		// Give the entity an random effect
-		rand = (int) (Math.random() * effects.length);
+		// Select a random effect of the big list.
+		int rand = (int) (Math.random() * effects.length);
 		PotionEffect effect = new PotionEffect((PotionEffectType) effects[rand], effectduration, 0);
 		((LivingEntity) spawn.getEntity()).addPotionEffect(effect);
 
