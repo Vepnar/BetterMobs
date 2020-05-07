@@ -80,7 +80,7 @@ public class util {
 	 */
 	public static Location shouldSpawn(Location spawn, int radius, int height) {
 		double starty = spawn.getY() - radius - height;
-		if (!(spawn.getWorld().isChunkLoaded(spawn.getChunk())))
+		if (!(spawn.isWorldLoaded() || spawn.getChunk().isLoaded()))
 			return null;
 		for (int i = 0; height + (radius * 2) > i; i++) {
 			spawn.setY(starty + i);
@@ -106,6 +106,8 @@ public class util {
 
 		endportal.setX(0);
 		endportal.setZ(0);
+		if (!(endportal.isWorldLoaded() || endportal.getChunk().isLoaded()))
+			return null;
 
 		endportal = endportal.getWorld().getHighestBlockAt(endportal).getLocation();
 		return endportal;
@@ -144,7 +146,7 @@ public class util {
 	}
 
 	/**
-	 * If the given entity matches with the entity we want.
+	 * Verify the given entity matches the entity we want.
 	 * 
 	 * @param monster       Unknown type of entity.
 	 * @param companion     Entity type we want.

@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
 
 	List<EventClass> eventList = new ArrayList<EventClass>();
 	List<EventClass> unusedEventList = new ArrayList<EventClass>();
+	public final long serverStart = System.currentTimeMillis();
 
 	@Override
 	public void onEnable() {
@@ -53,9 +54,10 @@ public class Main extends JavaPlugin {
 		listen = true;
 
 	}
-	
+
 	/**
-	 * Attempt to create a configuration file in BetterMobs directory when there is no configuration file.
+	 * Attempt to create a configuration file in BetterMobs directory when there is
+	 * no configuration file.
 	 */
 	public void loadDefaultConfig() {
 
@@ -63,10 +65,10 @@ public class Main extends JavaPlugin {
 		File folder = getDataFolder();
 		if (!folder.exists())
 			folder.mkdir();
-		
+
 		// Access configuration file.
 		File resourceFile = new File(folder, "config.yml");
-		
+
 		// Attempt to write to the configuration file.
 		try {
 			if (!resourceFile.exists()) {
@@ -75,7 +77,7 @@ public class Main extends JavaPlugin {
 						OutputStream out = new FileOutputStream(resourceFile)) {
 					ByteStreams.copy(in, out);
 				}
-				
+
 				// Report on our success.
 				getLogger().info("Config successfully created!");
 			}
@@ -95,11 +97,11 @@ public class Main extends JavaPlugin {
 	}
 
 	/**
-	 * Handle the initialization of all the events.
-	 * The order of initialization is really important. 
+	 * Handle the initialization of all the events. The order of initialization is
+	 * really important.
 	 */
 	public void initializeEvents() {
-		
+
 		// Register general event listener
 		getServer().getPluginManager().registerEvents(new MobListener(this), this);
 
@@ -115,28 +117,29 @@ public class Main extends JavaPlugin {
 		unusedEventList.add(new WitherEffects());
 		unusedEventList.add(new BabyEnderDragons());
 		unusedEventList.add(new EnderDragonMites());
+		unusedEventList.add(new EnderDragonRain());
 		unusedEventList.add(new NoDragonPerching());
 
 	}
 
 	/**
 	 * Used to unload and load all events previously registered.
+	 * 
 	 * @see initializeEvents for registering events.
 	 */
 	public void enableEvents() {
 		// Clear event list.
 		eventList.clear();
-		
+
 		// Load new events.
 		for (EventClass event : unusedEventList) {
-			
+
 			// Check if the given event is allowed to run and add it to the list if it is.
 			if (this.getConfig().getBoolean(event.configName(this) + ".enabled"))
 				eventList.add(event);
 		}
-		
+
 		// Enable the listener.
-		listen = false;
 	}
 
 }

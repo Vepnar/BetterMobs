@@ -1,5 +1,7 @@
 # Entity Update frequency in Milliseconds.
 entityUpdateSpeed: 100
+# Delay before the events will start (in Milliseconds).
+handleListenDelay: 5000
 
 # At what range in blocks the Skeletons will use a sword.
 skeletonSwordSwitch: # Skeletons will use a wooden sword.
@@ -48,7 +50,7 @@ witchNecromancer: # Summoned Baby Zombies won't drop Anything.
   spawnRadius: 3 # How many blocks away from the Witch the Baby Zombies can spawn.
   scanRadius: 16 # The distance from the player that will be checked for Witches.
 
-# Wether the Wither can spawn Wither Skeletons to help him in battle.
+# Whether the Wither can spawn Wither Skeletons to help him in battle.
 witherReinforcements: # Summoned Wither Skeletons won't drop Anything
   enabled: true
   cooldown: 45 # How many Seconds to wait before summoning again.
@@ -56,7 +58,7 @@ witherReinforcements: # Summoned Wither Skeletons won't drop Anything
   spawnChance: 10 # 1/100 Procental Chance that reinforcements will spawn if the Wither is attacked.
   spawnAmount: 2 # Maximum amount of Wither Skeletons that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
 
-# Wether the Wither can give negative effects to players around it.
+# Whether the Wither can give negative effects to players around it.
 witherEffects: # Includes: BLINDNESS, NAUSEA, HUNGER, MINING FATIQUE, WEAKNESS
   enabled: true
   cooldown: 40 # How many Seconds to wait before releasing effects again.
@@ -64,11 +66,11 @@ witherEffects: # Includes: BLINDNESS, NAUSEA, HUNGER, MINING FATIQUE, WEAKNESS
   attackRadius: 8 # Maximum radius of the attack.
   attackDuration: 10 # Duration of the given potion effect.
 
-# Wether the Ender Dragon will rest on The End Portal.
+# Whether the Ender Dragon will rest on The End Portal.
 NoDragonPerching:
   enabled: true
 
-# Wether The Ender Dragon spawns Baby Ender Dragons to kill the player.
+# Whether The Ender Dragon spawns Baby Ender Dragons to kill the player.
 babyEnderDragons:
   enabled: true
   spawnRadius: 15 # Maximum amount of blocks that Baby Ender Dragons can spawn from The Ender Dragon.
@@ -77,12 +79,20 @@ babyEnderDragons:
   damageBooster: 2 # Amount of damage that the Baby Ender Dragons will do.
   dragonRegen: true # Whether The Ender Dragon will regenerate health if a Baby Ender Dragon hits a player.
 
-# Wether The Ender Dragon spawns Endermites to kill the player.
+# Whether The Ender Dragon spawns Endermites to kill the player.
 enderDragonMites:
   enabled: true
-  spawnRadius: 15 # Max distance from the dragon where the babies could spawn.
+  spawnRadius: 15 # Max distance from the portal where the endermite could spawn.
   spawnChance: 10 # 1/100 Procental Chance that the Endermite spawn will occur.
   spawnAmount: 2 # Maximum amount of Endermite that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
   damageBooster: 2 # Amount of damage that the Endermite will do.
   dragonRegen: true # Whether The Ender Dragon will regenerate health if an Endermite hits a player.
-
+  
+# Whether the enderdragon uses his rain ability or not
+enderDragonRain:
+  enabled: true
+  attackChance: 2  # 1/100 Procental Chance that the Rain will occur.
+  attackStrength: 5 # Maximum amount of fireballs that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
+  attackSpeed: 20 # How many ticks to wait before releasing another fireball on the player.
+  attackRange: 100 # Max distance from the portal where the fireballs could spawn.
+  attackWarning: true # Whether the players will see a visible warning before the attack.

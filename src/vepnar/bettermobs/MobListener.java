@@ -28,7 +28,11 @@ public class MobListener implements Listener {
 	}
 
 	@EventHandler
-	public void onEntityInteractEvent(PlayerMoveEvent e) {
+	public void onEntityMoveEvent(PlayerMoveEvent e) {
+
+		if (javaplugin.listen && System.currentTimeMillis() - javaplugin.serverStart > javaplugin.getConfig()
+				.getInt("handleListenDelay"))
+			javaplugin.listen = false;
 
 		// Verify if the given delay has passed and if the event listener is enabled.
 		if (System.currentTimeMillis() - lastcheck > tick || javaplugin.listen)
