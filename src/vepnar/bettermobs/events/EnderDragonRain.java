@@ -70,7 +70,7 @@ public class EnderDragonRain implements EventClass {
 		for (LivingEntity livingentity : players) {
 			if (livingentity.hasPotionEffect(PotionEffectType.BLINDNESS))
 				continue;
-			livingentity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 1), false);
+			livingentity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 1), false);
 
 		}
 

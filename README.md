@@ -10,7 +10,6 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [ ] Make the wither more aggressive.
 - [ ] Make ghasts more aggressive.
 - [ ] Make the ender dragon more aggressive.
-- [ ] Add a fireball rain ability for the ender dragon.
 - [ ] Make monsters regenerate.
 - [ ] Increase zombie walk speed.
 - [ ] Skeletons can throw TNT.
@@ -30,6 +29,7 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [x] The ender dragon can spawn endermites
 - [x] the ender dragon doesn't preform perching.
 - [x] The ender dragon spawns baby ender dragons.
+- [x] Add a fireball rain ability for the ender dragon.
 - [x] (Wither) skeletons can switch between weapons.
 - [x] (Wither) skeletons can mount (cave) spiders.
 

@@ -18,7 +18,8 @@ public class SkeletonSpiderMount implements EventClass {
 	int updateRange, mountFind;
 
 	/**
-	 * Receive configuration name and check if this event is enabled.
+	 * Return the configuration name and receive some settings for this event.
+	 * dvzsdvsds
 	 */
 	@Override
 	public String configName(Main m) {
@@ -77,9 +78,9 @@ public class SkeletonSpiderMount implements EventClass {
 	}
 
 	/**
-	 * Find rideable entities close to the skeletons with currently no passengers.
+	 * Find mountable entities near the skeletons with no riders.
 	 * 
-	 * @param entities list of entities close to the skeleton.
+	 * @param entities list of entities near the skeletons.
 	 * @return entity where a skeleton could ride on.
 	 */
 	public Entity filterMountableEntities(List<Entity> entities) {

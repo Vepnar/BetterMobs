@@ -91,8 +91,8 @@ enderDragonMites:
 # Whether the enderdragon uses his rain ability or not
 enderDragonRain:
   enabled: true
-  attackChance: 2  # 1/100 Procental Chance that the Rain will occur.
-  attackStrength: 5 # Maximum amount of fireballs that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
-  attackSpeed: 20 # How many ticks to wait before releasing another fireball on the player.
+  attackChance: 20  # 1/100 Procental Chance that the Rain will occur.
+  attackStrength: 10 # Maximum amount of fireballs that will spawn at each interval. (note: Spawn amounts will differ due to RNG).
+  attackSpeed: 40 # How many ticks to wait before releasing another fireball on the player.
   attackRange: 100 # Max distance from the portal where the fireballs could spawn.
   attackWarning: true # Whether the players will see a visible warning before the attack.

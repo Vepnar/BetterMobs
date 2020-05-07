@@ -1,6 +1,6 @@
 name: BetterMobs
 main: vepnar.bettermobs.Main
-version: 1.4
+version: 1.4.1
 api-version: 1.15
 author: Vepnar
 load: POSTWORLD
