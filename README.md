@@ -1,5 +1,6 @@
 # BetterMobs v1.4
-A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.
+A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
+[download](https://github.com/Vepnar/BetterMobs/releases)
 
 # Configuration
 default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/src/config.yml)
@@ -17,9 +18,12 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [ ] Ghasts can shoot less and more destructive fireballs.
 - [ ] Witches have more type of potion effects.
 - [ ] Players can tame polar bears.
-- [ ] Illusioner can spawn.
 - [ ] Iron golems have more health.
-- [ ] Creepers & spiders have more armour
+- [ ] Creepers & spiders have more armour.
+- [ ] Cave spiders can spawn
+- [ ] Bat drop do items.
+- [ ] Silverfishes do drop items.
+- [ ] Polar bears do drops
 
 ## Finished
 - [x] Spawn charged creepers.
@@ -32,7 +36,7 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [x] Add a fireball rain ability for the ender dragon.
 - [x] (Wither) skeletons can switch between weapons.
 - [x] (Wither) skeletons can mount (cave) spiders.
-
+- [x] Illusioner can spawn.
 
 # Amazing people who helped me out on this project!
 - [JeannotM](https://github.com/JeannotM/) Improving grammar errors & adding ideas.

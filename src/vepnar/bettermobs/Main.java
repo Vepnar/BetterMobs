@@ -119,6 +119,7 @@ public class Main extends JavaPlugin {
 		unusedEventList.add(new EnderDragonMites());
 		unusedEventList.add(new EnderDragonRain());
 		unusedEventList.add(new NoDragonPerching());
+		unusedEventList.add(new IllusionerSpawn());
 
 	}
 
@@ -138,8 +139,6 @@ public class Main extends JavaPlugin {
 			if (this.getConfig().getBoolean(event.configName(this) + ".enabled"))
 				eventList.add(event);
 		}
-
-		// Enable the listener.
 	}
 
 }
