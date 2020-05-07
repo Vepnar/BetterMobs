@@ -1,6 +1,6 @@
-# BetterMobs v1.4
+# BetterMobs v1.4.2
 A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
-click [here](https://github.com/Vepnar/BetterMobs/releases) to download the newest version
+click [here](https://github.com/Vepnar/BetterMobs/releases) to download the newest version!
 
 # Configuration
 default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/src/config.yml)
@@ -20,7 +20,6 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [ ] Players can tame polar bears.
 - [ ] Iron golems have more health.
 - [ ] Creepers & spiders have more armour.
-- [ ] Cave spiders can spawn
 - [ ] Bat drop do items.
 - [ ] Silverfishes do drop items.
 - [ ] Polar bears do drops
@@ -37,6 +36,7 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [x] (Wither) skeletons can switch between weapons.
 - [x] (Wither) skeletons can mount (cave) spiders.
 - [x] Illusioner can spawn.
+- [x] Cave spiders can spawn.
 
 # Amazing people who helped me out on this project!
 - [JeannotM](https://github.com/JeannotM/) Improving grammar errors & adding ideas.
