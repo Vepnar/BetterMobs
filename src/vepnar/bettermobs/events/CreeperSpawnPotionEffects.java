@@ -1,10 +1,11 @@
 package vepnar.bettermobs.events;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -52,8 +53,8 @@ public class CreeperSpawnPotionEffects implements EventClass {
 	@Override
 	public void callEvent(Event e) {
 		CreatureSpawnEvent spawn = (CreatureSpawnEvent) e;
-		// Check if given entity is a creeper
-		if (!(spawn.getEntity() instanceof Creeper))
+		// Check if given entity is a creeper and the spawn reason is natural.
+		if (spawn.getSpawnReason() != SpawnReason.NATURAL || spawn.getEntityType() != EntityType.CREEPER)
 			return;
 		// Check if the creeper should spawn with special effects.
 		if ((int) (Math.random() * spawnchance) != 1)
@@ -74,7 +75,7 @@ public class CreeperSpawnPotionEffects implements EventClass {
 
 		// Select a random effect of the big list and address it to the creeper.
 		int rand = (int) (Math.random() * effects.length);
-		PotionEffect effect = new PotionEffect((PotionEffectType) effects[rand], effectduration, 0);
+		PotionEffect effect = new PotionEffect((PotionEffectType) effects[rand], effectduration, 0, false);
 		((LivingEntity) spawn.getEntity()).addPotionEffect(effect);
 
 	}

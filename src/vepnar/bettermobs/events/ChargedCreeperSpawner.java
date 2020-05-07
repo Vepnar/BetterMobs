@@ -1,14 +1,17 @@
 package vepnar.bettermobs.events;
 
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import vepnar.bettermobs.EventClass;
 import vepnar.bettermobs.Main;
+import vepnar.bettermobs.util;
 
 public class ChargedCreeperSpawner implements EventClass {
-	int spawnchance;
+	int chance;
 
 	/**
 	 * Receive configuration information from the configuration file. And return the
@@ -19,7 +22,7 @@ public class ChargedCreeperSpawner implements EventClass {
 	 */
 	@Override
 	public String configName(Main m) {
-		spawnchance = m.getConfig().getInt("chargedCreeperSpawn.spawnChance");
+		chance = m.getConfig().getInt("chargedCreeperSpawn.spawnChance");
 		return "chargedCreeperSpawn";
 	}
 
@@ -31,11 +34,14 @@ public class ChargedCreeperSpawner implements EventClass {
 	@Override
 	public void callEvent(Event e) {
 		CreatureSpawnEvent spawn = (CreatureSpawnEvent) e;
-		if (spawn.getEntity() instanceof Creeper) {
-			int rand = (int) (Math.random() * spawnchance);
-			if (rand == 1)
-				((Creeper) spawn.getEntity()).setPowered(true);
-		}
+		
+		// Check if given entity is a creeper and the spawn reason is natural.
+		if (spawn.getSpawnReason() != SpawnReason.NATURAL || spawn.getEntityType() != EntityType.CREEPER)
+			return;
+		
+		// Set powered when the RNG agrees
+		if (util.random(0, chance) == 1)
+			((Creeper) spawn.getEntity()).setPowered(true);
 
 	}
 
