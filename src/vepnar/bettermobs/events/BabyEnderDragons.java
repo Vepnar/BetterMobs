@@ -51,8 +51,7 @@ public class BabyEnderDragons implements EventClass {
 	 * Handle spawn moments
 	 */
 	public void DragonPhaseEvent(EnderDragonChangePhaseEvent e) {
-		// Check if the dragon is in the correct phase
-		// Calculate chance.
+		// Run the random number generator and proceed when all stars align.
 		if (util.random(1, chance) != 1)
 			return;
 

@@ -45,6 +45,10 @@ public class EnderDragonMites extends BabyEnderDragons {
 		int randomRadius = (int) (Math.random() * radius) + 5;
 		int randomAmount = (int) (Math.random() * amount) + 1;
 		Location portalLocation = util.getEndPortal(e.getEntity());
+		
+		// Cancel when the chunk is not loaded.
+		if(portalLocation == null)
+			return;
 
 		// Check if there are players in range
 		if (util.filterPlayers(portalLocation, 150).size() == 0)

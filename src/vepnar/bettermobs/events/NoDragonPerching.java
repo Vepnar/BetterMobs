@@ -22,14 +22,14 @@ public class NoDragonPerching implements EventClass {
 	@Override
 	public void callEvent(Event e) {
 		EnderDragonChangePhaseEvent event = (EnderDragonChangePhaseEvent) e;
-		
+
 		// Check the current phase.
 		if (event.getCurrentPhase() == Phase.FLY_TO_PORTAL) {
 
 			// See if there are any players nearby.
 			EnderDragon dragon = event.getEntity();
 			if (util.filterPlayers(dragon.getLocation(), 64).size() == 0) {
-				// Set the phase of the ender dragon to circling. 
+				// Set the phase of the ender dragon to circling.
 				event.setNewPhase(Phase.CIRCLING);
 				return;
 			}
