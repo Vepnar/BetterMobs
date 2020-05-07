@@ -120,6 +120,7 @@ public class Main extends JavaPlugin {
 		unusedEventList.add(new EnderDragonRain());
 		unusedEventList.add(new NoDragonPerching());
 		unusedEventList.add(new IllusionerSpawn());
+		unusedEventList.add(new CaveSpiderSpawn());
 
 	}
 
