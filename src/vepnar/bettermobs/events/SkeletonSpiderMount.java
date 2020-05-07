@@ -19,7 +19,6 @@ public class SkeletonSpiderMount implements EventClass {
 
 	/**
 	 * Return the configuration name and receive some settings for this event.
-	 * dvzsdvsds
 	 */
 	@Override
 	public String configName(Main m) {

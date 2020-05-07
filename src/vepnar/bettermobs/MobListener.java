@@ -25,6 +25,7 @@ public class MobListener implements Listener {
 	public MobListener(Main m) {
 
 		javaplugin = m;
+		tick = javaplugin.getConfig().getInt("entityUpdateSpeed");
 	}
 
 	@EventHandler
@@ -35,7 +36,7 @@ public class MobListener implements Listener {
 			javaplugin.listen = false;
 
 		// Verify if the given delay has passed and if the event listener is enabled.
-		if (System.currentTimeMillis() - lastcheck > tick || javaplugin.listen)
+		if (System.currentTimeMillis() - lastcheck < tick || javaplugin.listen)
 			return;
 
 		// Reset the delay

@@ -17,7 +17,11 @@ public class EnderDragonMites extends BabyEnderDragons {
 	final String companionname = "§c§lDragon Mites";
 
 	/**
-	 * Receive values from the configuration file.
+	 * Get configuration data of the configuration file, also return the title of
+	 * this handler.
+	 * 
+	 * @param JavaPlugin
+	 * @return title of this event in the configuration file
 	 */
 	@Override
 	public String configName(Main m) {

@@ -56,6 +56,10 @@ public class EnderDragonRain implements EventClass {
 
 		// Get all players in range.
 		List<LivingEntity> players = util.filterPlayers(center, range);
+		
+		// Cancel when there are no players nearby.
+		if(players.isEmpty())
+			return;
 
 		// Generate random strength.
 		int randomStrength = util.random(1, strength) + 2;
@@ -76,6 +80,9 @@ public class EnderDragonRain implements EventClass {
 
 	}
 
+	/**
+	 * Verify if the event type match
+	 */
 	@Override
 	public boolean canBeCalled(Event e) {
 		return e instanceof EnderDragonChangePhaseEvent;

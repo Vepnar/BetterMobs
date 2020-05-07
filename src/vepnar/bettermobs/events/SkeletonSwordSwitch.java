@@ -24,7 +24,11 @@ public class SkeletonSwordSwitch implements EventClass {
 	int range;
 
 	/**
-	 * Receive configuration name and check if this event is enabled.
+	 * Get configuration data of the configuration file, also return the title of
+	 * this handler.
+	 * 
+	 * @param JavaPlugin
+	 * @return title of this event in the configuration file
 	 */
 	@Override
 	public String configName(Main m) {
