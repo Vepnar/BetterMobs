@@ -1,6 +1,6 @@
 # BetterMobs v1.4
 A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
-[download](https://github.com/Vepnar/BetterMobs/releases)
+click [here](https://github.com/Vepnar/BetterMobs/releases) to download the newest version
 
 # Configuration
 default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/src/config.yml)
