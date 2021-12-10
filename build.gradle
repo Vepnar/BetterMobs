@@ -4,19 +4,20 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
+
 }
 
-group 'vepnar.bettermobs'
-version '1.0-SNAPSHOT'
-
-targetCompatibility = 1.8
-sourceCompatibility = 1.8
+group pluginGroup
+version pluginVersion
 
 repositories {
     mavenCentral()
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven{ url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+
 }
+
+apply plugin: 'idea'
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
@@ -26,15 +27,19 @@ processResources {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation 'com.google.guava:guava:31.0.1-jre'
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+
 }
 
 task deploy {
     doLast {
         copy {
-            from 'build/libs'
+            from 'build/libs/BetterMobs-'+version+'.jar'
             into '/media/anon/Plots #2/Fun-Projects/Minecraft/plugins'
         }
     }
