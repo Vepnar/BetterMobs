@@ -14,11 +14,6 @@ public class CommandListener implements CommandExecutor {
     BasicCommandGroup bettermobs;
     String[] HELP = new String[] {"help"};
 
-    /**
-     * Initialize the Bettermobs author command listener
-     *
-     * @param m the JavaPlugin class or main file
-     */
     public CommandListener(Main m) {
         core = m;
         registerMainCommands();
