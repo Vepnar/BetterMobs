@@ -27,7 +27,10 @@ public class CommandListener implements CommandExecutor {
     public void registerMainCommands() {
         bettermobs = new BasicCommandGroup(null, "bettermobs");
         bettermobs.add(new HelpCommand(bettermobs));
-
+        bettermobs.add(new AuthorCommand(bettermobs));
+        bettermobs.add(new FeaturesCommand(bettermobs));
+        bettermobs.add(new EnableCommand(bettermobs));
+        bettermobs.add(new DisableCommand(bettermobs));
     }
 
 
