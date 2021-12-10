@@ -10,8 +10,7 @@ package vepnar.bettermobs;
 import com.google.common.io.ByteStreams;
 import com.google.common.reflect.ClassPath;
 import org.bukkit.plugin.java.JavaPlugin;
-import vepnar.bettermobs.commands.AuthorCommand;
-import vepnar.bettermobs.commands.ReloadCommand;
+import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.events.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
 import vepnar.bettermobs.genericMobs.MobListenerFactory;
@@ -27,8 +26,8 @@ public class Main extends JavaPlugin {
     public String prefix = "§7[§cBetterMobs§7]§f ";
     List<EventClass> eventList = new ArrayList<EventClass>();
     List<EventClass> unusedEventList = new ArrayList<EventClass>();
+	public List<IMobListener> mobListeners = new ArrayList<>();
 
-	List<IMobListener> mobListeners = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -69,6 +68,7 @@ public class Main extends JavaPlugin {
                     if (IMobListener.class.isAssignableFrom(cls)) {
                         Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
                         IMobListener listener = MobListenerFactory.createMobListener(this, mobListenerClass);
+
                         mobListeners.add(listener);
                     }
                 } catch (Exception ex) {
@@ -79,7 +79,7 @@ public class Main extends JavaPlugin {
 
     private void enableMobListeners() {
         for (IMobListener listener : mobListeners) {
-            listener.enable();
+            listener.initialize();
         }
     }
 
@@ -120,8 +120,7 @@ public class Main extends JavaPlugin {
      * Register command handlers.
      */
     public void initializeCommands() {
-        this.getCommand("bettermobs-reload").setExecutor(new ReloadCommand(this));
-        this.getCommand("bettermobs-author").setExecutor(new AuthorCommand(this));
+        getCommand("bettermobs").setExecutor(new CommandListener(this));
     }
 
     /**
