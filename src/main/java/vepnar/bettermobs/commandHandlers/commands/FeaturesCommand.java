@@ -33,7 +33,7 @@ public class FeaturesCommand implements ICommandExecuteAble {
 
     @Override
     public String[] getAlias() {
-        return new String [] {"feature", "f", "list", "l"};
+        return new String[]{"feature", "f", "list", "l"};
     }
 
     @Override
@@ -60,14 +60,16 @@ public class FeaturesCommand implements ICommandExecuteAble {
     public boolean execute(Main core, CommandSender sender, String[] args) {
         List<IMobListener> listeners = core.mobListeners;
         sender.sendMessage(core.prefix + "(" +listeners.size()+ ") Features installed:");
-        String output = "";
+        StringBuilder messageBuilder = new StringBuilder();
         for(IMobListener listener : listeners) {
-            String color = listener.isEnabled() ? "§a" : "§c";
-            output += color + listener.getName() + "§r, ";
+            messageBuilder.append(listener.isEnabled() ? "§a" : "§c");
+            messageBuilder.append(listener.getName());
+            messageBuilder.append("§r, ");
         }
-        if(output.length() != 0) {
-            output = output.substring(0, output.length() - 4);
-            sender.sendMessage(output);
+        if(messageBuilder.length() != 0) {
+            String message = messageBuilder.toString();
+            message = message.substring(0, message.length() - 4);
+            sender.sendMessage(message);
         }
         return true;
     }

@@ -27,7 +27,7 @@ public class EnableCommand implements ICommandExecuteAble {
 
     @Override
     public String[] getAlias() {
-        return new String [] {"e", "start"};
+        return new String[]{"e", "start"};
     }
 
     @Override
@@ -52,21 +52,22 @@ public class EnableCommand implements ICommandExecuteAble {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        String output = "";
-
+        StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
             for(IMobListener listener :  core.mobListeners) {
                 if (listener.getName().equalsIgnoreCase(feature) && !listener.isEnabled()) {
-                    output += "§a" + listener.getName() + "§r, ";
-                    listener.enable();
+                    messageBuilder.append("§a");
+                    messageBuilder.append(listener.getName());
+                    messageBuilder.append("§r, ");
                     break;
                 }
             }
         }
         sender.sendMessage(core.prefix + "The following features have been enabled:");
-        if(output.length() != 0) {
-            output = output.substring(0, output.length() - 4);
-            sender.sendMessage(output);
+        if(messageBuilder.length() != 0) {
+            String message = messageBuilder.toString();
+            message = message.substring(0, message.length() - 4);
+            sender.sendMessage(message);
         } else {
             sender.sendMessage("§cNone, because your input is invalid.");
         }

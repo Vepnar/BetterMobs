@@ -21,7 +21,7 @@ public class AuthorCommand implements ICommandExecuteAble {
 
     @Override
     public String getHelp() {
-        return "credits the developer";
+        return "Credits the developer";
     }
 
     @Override
