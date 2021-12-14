@@ -21,13 +21,13 @@ public class GenericMob implements IMobListener {
     }
 
     private File getConfigFile() {
-        String configName = getName() + ".yml";
+        String configName = "/" + getName() + ".yml";
 
-        File folder = core.getDataFolder();
+        File folder = new File(core.getDataFolder().getPath() + "/mobs/");
         if (!folder.exists())
             folder.mkdir();
 
-        return new File(folder + "/mobs/", configName);
+        return new File(folder + configName);
     }
 
     private void setDefaultConfig() {
@@ -55,7 +55,7 @@ public class GenericMob implements IMobListener {
 
         // Check if the config has the desired version.
         int configVersion = readConfig.getInt("version", 0);
-        if (configVersion == VERSION) return false;
+        if (configVersion != VERSION) return false;
         // Use the read config
         config = readConfig;
 
@@ -75,8 +75,9 @@ public class GenericMob implements IMobListener {
         setDefaultConfig();
         if (readConfig()) {
             enabled = true;
+            core.getLogger().info(getName() + " Loaded");
         }else {
-            core.getLogger().warning(getName() + " not loaded due to non matching config versions, please update or delete the old config.");
+            core.getLogger().info(getName() + " Not loaded");
         }
 
         // Register event listeners to the server.
