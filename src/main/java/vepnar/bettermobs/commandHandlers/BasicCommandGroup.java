@@ -1,7 +1,6 @@
 package vepnar.bettermobs.commandHandlers;
 
 import java.util.ArrayList;
-
 public class BasicCommandGroup implements ICommandGroup {
 
     private final ICommand parent;
@@ -37,8 +36,8 @@ public class BasicCommandGroup implements ICommandGroup {
     }
 
     @Override
-    public String[] getTabCompletion() {
-        return new String[0];
+    public CompletionType TabType() {
+        return CompletionType.SUBCOMMAND;
     }
 
     @Override

@@ -2,6 +2,7 @@ package vepnar.bettermobs.commandHandlers.commands;
 
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
+import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 import vepnar.bettermobs.genericMobs.IMobListener;
@@ -35,8 +36,8 @@ public class ReloadCommand implements ICommandExecuteAble {
     }
 
     @Override
-    public String[] getTabCompletion() {
-        return new String[0];
+    public CompletionType TabType() {
+        return CompletionType.MODULE;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package vepnar.bettermobs.commandHandlers.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.PluginDescriptionFile;
 import vepnar.bettermobs.Main;
+import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 import vepnar.bettermobs.genericMobs.IMobListener;
@@ -42,8 +42,8 @@ public class FeaturesCommand implements ICommandExecuteAble {
     }
 
     @Override
-    public String[] getTabCompletion() {
-        return new String[0];
+    public CompletionType TabType() {
+        return CompletionType.NOTHING;
     }
 
     @Override

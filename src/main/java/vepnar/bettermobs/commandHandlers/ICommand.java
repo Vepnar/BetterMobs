@@ -5,7 +5,9 @@ public interface ICommand {
     String getName();
     String[] getAlias();
     int getMinimalArguments();
-    String[] getTabCompletion();
+
+    CompletionType TabType();
+
     String getPermission();
     ICommand getParent();
 
