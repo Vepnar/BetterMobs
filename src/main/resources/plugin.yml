@@ -7,11 +7,17 @@ load: POSTWORLD
 commands:
   bettermobs:
     aliases: bm
-    description: Access bettermob plugin settings
+    description: Access bettermob plugin settings.
 permissions:
-  bettermobs.reload:
-    description: allows the the user to reload the config file
+  bettermobs.features.reload:
+    description: allows the the user to reload config files.
     default: op
-  bettermobs.author:
-    description: Allow the user to show the author of the better mobs plugin.
-    default: true
+  bettermobs.features.show:
+    description: allows the user look into the status of features.
+    default: op
+  bettermobs.features.enable:
+    description: allows the the user to enable features.
+    default: op
+  bettermobs.features.disable:
+    description: allows the the user to disable features.
+    default: op
