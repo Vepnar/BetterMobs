@@ -8,18 +8,6 @@ commands:
   bettermobs:
     aliases: bm
     description: Access bettermob plugin settings
-  bettermobs-reload:
-    description: reload the bettermobs config file
-    aliases: bmr
-    permission: bettermobs.reload
-    permission-message: You not have have permission to use this command.
-    usage: "Usage: /<command>"
-  bettermobs-author:
-    description: show the author of the bettermobs plugin
-    permission: bettermobs.author
-    permission-message: You not have have permission to use this command.
-    usage: "Usage: /<command>"
-
 permissions:
   bettermobs.reload:
     description: allows the the user to reload the config file
