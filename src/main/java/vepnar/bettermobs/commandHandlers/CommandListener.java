@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
-import vepnar.bettermobs.commandHandlers.commands.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,24 +11,13 @@ import java.util.Arrays;
 public class CommandListener implements CommandExecutor {
     Main core;
     BasicCommandGroup bettermobs;
-    String[] HELP = new String[] {"help"};
+    String[] HELP = new String[]{"help"};
 
-    public CommandListener(Main m) {
-        core = m;
-        registerMainCommands();
+    public CommandListener(Main m, BasicCommandGroup bettermobs) {
+        this.bettermobs = bettermobs;
+        this.core = m;
     }
 
-    public void registerMainCommands() {
-        bettermobs = new BasicCommandGroup(null, "bettermobs");
-        bettermobs.add(new HelpCommand(bettermobs));
-        bettermobs.add(new AuthorCommand(bettermobs));
-        bettermobs.add(new FeaturesCommand(bettermobs));
-        bettermobs.add(new EnableCommand(bettermobs));
-        bettermobs.add(new DisableCommand(bettermobs));
-    }
-
-
-    //private boolean helpCommand()
     public boolean executeCommand(ArrayList<ICommand> environment, CommandSender sender, String[] args) {
         if (args.length == 0) return false;
         String targetSubCommand = args[0].toLowerCase();
@@ -78,7 +66,7 @@ public class CommandListener implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // Show the help command when there are no commands entered
+        // Show the help command when there are no commands entered.
         if(args.length == 0 ) args = HELP;
         return executeCommand(bettermobs.getCommands(), sender, args);
     }

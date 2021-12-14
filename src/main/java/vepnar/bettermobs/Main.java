@@ -9,7 +9,10 @@ package vepnar.bettermobs;
 import com.google.common.io.ByteStreams;
 import com.google.common.reflect.ClassPath;
 import org.bukkit.plugin.java.JavaPlugin;
+import vepnar.bettermobs.commandHandlers.BasicCommandGroup;
 import vepnar.bettermobs.commandHandlers.CommandListener;
+import vepnar.bettermobs.commandHandlers.TabListener;
+import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
 import vepnar.bettermobs.genericMobs.MobListenerFactory;
 
@@ -120,6 +123,18 @@ public class Main extends JavaPlugin {
      * Register command handlers.
      */
     public void initializeCommands() {
-        getCommand("bettermobs").setExecutor(new CommandListener(this));
+
+        BasicCommandGroup bettermobs = new BasicCommandGroup(null, "bettermobs");
+        bettermobs.add(new HelpCommand(bettermobs));
+        bettermobs.add(new AuthorCommand(bettermobs));
+        bettermobs.add(new FeaturesCommand(bettermobs));
+        bettermobs.add(new EnableCommand(bettermobs));
+        bettermobs.add(new DisableCommand(bettermobs));
+
+        // Register command
+        getCommand("bettermobs").setExecutor(new CommandListener(this, bettermobs));
+
+        // Register tab completer
+        getCommand("bettermobs").setTabCompleter(new TabListener(this, bettermobs));
     }
 }
