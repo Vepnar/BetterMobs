@@ -27,7 +27,7 @@ public class TabListener implements TabCompleter {
         for (ICommand subCommand : command.getCommands()) {
 
             // Only show subcommands the sender has access to.
-            if (!CommandUtils.hasPermissions(sender, command)) continue;
+            if (!CommandUtils.hasPermissions(sender, subCommand)) continue;
 
             tabs.add(subCommand.getName());
         }
@@ -68,13 +68,7 @@ public class TabListener implements TabCompleter {
 
         // Return a subcommand if found.
         for (ICommand child : group.getCommands()) {
-            if (child.getName().equalsIgnoreCase(targetString)) {
-
-                // Verify if the sender has enough permissions
-                if (CommandUtils.hasPermissions(sender, child)) {
-                    return child;
-                } else return null;
-            }
+            if (child.getName().equalsIgnoreCase(targetString)) return child;
         }
         return null;
     }
@@ -85,7 +79,9 @@ public class TabListener implements TabCompleter {
         for (String target : args) {
             ICommand matching = getSubCommand(deepestCommand, sender, target);
             if (matching != null) {
-                deepestCommand = matching;
+                if (!CommandUtils.hasPermissions(sender, matching)) {
+                    return null;
+                } else deepestCommand = matching;
             } else break;
         }
         return getCompletionList(sender, deepestCommand);

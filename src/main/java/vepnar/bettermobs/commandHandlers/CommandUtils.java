@@ -14,7 +14,6 @@ public class CommandUtils {
         return messageBuilder.toString();
     }
 
-
     public static boolean hasPermissions(CommandSender sender, ICommand command) {
         return command.getPermission() == null || sender.hasPermission(command.getPermission());
     }

@@ -22,8 +22,6 @@ import java.util.List;
 
 public class Main extends JavaPlugin {
 
-    public final long serverStart = System.currentTimeMillis();
-    public boolean listen = true;
     public String prefix = "§7[§cBetterMobs§7]§f ";
 	public List<IMobListener> mobListeners = new ArrayList<>();
 
@@ -58,17 +56,17 @@ public class Main extends JavaPlugin {
 
     /**
      * Retrieve all installed mob listeners and add them to a linked list.
-     *
-     * @throws IOException
+     * @throws IOException if the attempt to read class path resources (jar files or directories) failed.
      */
     private void loadMobListeners() throws IOException {
-        ClassPath classpath = ClassPath.from(this.getClassLoader()); // scans the class path used by classloader
+        ClassPath classpath = ClassPath.from(this.getClassLoader());
+        // Scan for other classes.
         for (ClassPath.ClassInfo classInfo : classpath.getTopLevelClasses("vepnar.bettermobs.listeners")) {
             try {
                 Class<?> cls = classInfo.load();
 
                 // Check if the loaded class implements the interface IMobListener.
-                // If it does implements this interface add it to the linked list
+                // If it does implement this interface, add it to the linked list.
                 if (IMobListener.class.isAssignableFrom(cls)) {
                     Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
                     IMobListener listener = MobListenerFactory.createMobListener(this, mobListenerClass);
@@ -103,7 +101,9 @@ public class Main extends JavaPlugin {
         // Attempt to write to the configuration file.
         try {
             if (!resourceFile.exists()) {
-                resourceFile.createNewFile();
+                if (!resourceFile.createNewFile()) {
+                    throw new IOException("Couldn't create " + resourceFile.getAbsolutePath());
+                }
                 try (InputStream in = getResource("config.yml");
                      OutputStream out = new FileOutputStream(resourceFile)) {
                     ByteStreams.copy(in, out);
