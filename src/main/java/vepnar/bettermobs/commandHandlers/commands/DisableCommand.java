@@ -55,8 +55,9 @@ public class DisableCommand implements ICommandExecuteAble {
 
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for(IMobListener listener :  core.mobListeners) {
+            for(IMobListener listener : core.mobListeners) {
                 if (listener.getName().equalsIgnoreCase(feature) && listener.isEnabled()) {
+                    listener.disable();
                     messageBuilder.append("§c");
                     messageBuilder.append(listener.getName());
                     messageBuilder.append("§r, ");

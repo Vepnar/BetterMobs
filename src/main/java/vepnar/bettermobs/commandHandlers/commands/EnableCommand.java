@@ -56,6 +56,7 @@ public class EnableCommand implements ICommandExecuteAble {
         for(String feature : args) {
             for(IMobListener listener :  core.mobListeners) {
                 if (listener.getName().equalsIgnoreCase(feature) && !listener.isEnabled()) {
+                    listener.enable();
                     messageBuilder.append("§a");
                     messageBuilder.append(listener.getName());
                     messageBuilder.append("§r, ");
