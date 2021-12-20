@@ -20,7 +20,7 @@ public class CaveSpiderSpawn extends GenericMob {
 
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSpawn(CreatureSpawnEvent event) {
         if (event.getEntityType() != EntityType.SPIDER) return;
         if (spawnProbability < Math.random()) return;
