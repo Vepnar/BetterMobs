@@ -51,20 +51,22 @@ public class ReloadCommand implements ICommandExecuteAble {
     }
 
     public void executeArguments(Main core, CommandSender sender, String[] args) {
-        String output = "";
+        StringBuilder messageBuilder = new StringBuilder();
 
         for(String feature : args) {
             for(IMobListener listener :  core.mobListeners) {
-                if (listener.getName().equalsIgnoreCase(feature) && listener.isEnabled()) {
-                    output += "§a" + listener.getName() + "§r, ";
+                if (listener.getName().equalsIgnoreCase(feature)) {
+                    messageBuilder.append("§a");
+                    messageBuilder.append(listener.getName());
+                    messageBuilder.append("§r, ");
                     listener.reloadConfig();
                     break;
                 }
             }
         }
         sender.sendMessage(core.prefix + "The following features have been reloaded:");
-        if(output.length() != 0) {
-            output = output.substring(0, output.length() - 4);
+        if(messageBuilder.length() != 0) {
+            String output = messageBuilder.substring(0, messageBuilder.length() - 4);
             sender.sendMessage(output);
         } else {
             sender.sendMessage("§cNone, because your input is invalid.");
