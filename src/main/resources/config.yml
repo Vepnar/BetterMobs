@@ -25,11 +25,6 @@ zombieChickenMount:
   updateEntityfromPlayer: 16 # How many blocks from the player the updating starts. 
   mountFindRange: 4 # Amount of blocks that Baby Zombies will search for a Chicken to mount.
 
-# Makes it possible for Charged Creepers to spawn more regularly.
-chargedCreeperSpawn:
-  enabled: true
-  spawnChance: 50 # 1 in 50 Creepers will be a Charged Creeper.
-  
 # Makes Creepers spawn more regularly with effects.
 creeperSpawnPotionEffect:
   enabled: true
