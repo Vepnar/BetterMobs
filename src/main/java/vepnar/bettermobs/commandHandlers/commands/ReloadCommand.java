@@ -27,7 +27,7 @@ public class ReloadCommand implements ICommandExecuteAble {
 
     @Override
     public String[] getAlias() {
-        return new String [] {"r", "restart"};
+        return new String[]{"restart"};
     }
 
     @Override

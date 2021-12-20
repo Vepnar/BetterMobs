@@ -33,7 +33,7 @@ public class FeaturesCommand implements ICommandExecuteAble {
 
     @Override
     public String[] getAlias() {
-        return new String[]{"feature", "f", "list", "l"};
+        return new String[]{"feature", "list"};
     }
 
     @Override

@@ -27,7 +27,7 @@ public class EnableCommand implements ICommandExecuteAble {
 
     @Override
     public String[] getAlias() {
-        return new String[]{"e", "start"};
+        return new String[]{"start"};
     }
 
     @Override
