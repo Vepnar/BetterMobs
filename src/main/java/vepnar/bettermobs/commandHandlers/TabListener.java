@@ -7,6 +7,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.IMobListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -61,14 +62,15 @@ public class TabListener implements TabCompleter {
         }
     }
 
-    private ICommand getSubCommand(ICommand command, CommandSender sender, String targetString) {
+    private ICommand getSubCommand(ICommand command, String targetString) {
         // Only traverse command groups.
         if (!(command instanceof ICommandGroup)) return null;
         ICommandGroup group = (ICommandGroup) command;
 
         // Return a subcommand if found.
         for (ICommand child : group.getCommands()) {
-            if (child.getName().equalsIgnoreCase(targetString)) return child;
+            if (child.getName().equalsIgnoreCase(targetString) || Arrays.asList(child.getAlias()).contains(targetString))
+                return child;
         }
         return null;
     }
@@ -77,11 +79,11 @@ public class TabListener implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         ICommand deepestCommand = bettermobs;
         for (String target : args) {
-            ICommand matching = getSubCommand(deepestCommand, sender, target);
+            ICommand matching = getSubCommand(deepestCommand, target);
             if (matching != null) {
-                if (!CommandUtils.hasPermissions(sender, matching)) {
-                    return null;
-                } else deepestCommand = matching;
+                if (CommandUtils.hasPermissions(sender, matching)) {
+                    deepestCommand = matching;
+                } else return null;
             } else break;
         }
         return getCompletionList(sender, deepestCommand);
