@@ -14,7 +14,6 @@ import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
-import vepnar.bettermobs.genericMobs.MobListenerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,6 +59,10 @@ public class Main extends JavaPlugin {
      */
     private void loadMobListeners() throws IOException {
         ClassPath classpath = ClassPath.from(this.getClassLoader());
+
+        // Generate constructor arguments
+        Object[] args = new Object[]{this};
+
         // Scan for other classes.
         for (ClassPath.ClassInfo classInfo : classpath.getTopLevelClasses("vepnar.bettermobs.listeners")) {
             try {
@@ -69,9 +72,9 @@ public class Main extends JavaPlugin {
                 // If it does implement this interface, add it to the linked list.
                 if (IMobListener.class.isAssignableFrom(cls)) {
                     Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
-                    IMobListener listener = MobListenerFactory.createMobListener(this, mobListenerClass);
+                    IMobListener mobListener = mobListenerClass.getDeclaredConstructor(JavaPlugin.class).newInstance(args);
 
-                    mobListeners.add(listener);
+                    mobListeners.add(mobListener);
                 }
             } catch (Exception ex) {
                     getLogger().warning(ex.getMessage());
