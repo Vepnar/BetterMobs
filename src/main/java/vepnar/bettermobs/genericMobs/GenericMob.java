@@ -59,36 +59,37 @@ public class GenericMob implements IMobListener {
         // Use the read config
         config = readConfig;
 
-        // Check if the current listener is enabled.
+        // Check if the current listener should be enabled.
         return readConfig.getBoolean("enabled", false);
-
     }
 
 
     @Override
     public void reloadConfig() {
-        readConfig();
+        boolean newState = readConfig();
+        if (newState && !this.enabled) {
+            this.enable();
+        } else if (!newState && this.enabled) {
+            this.disable();
+        }
+
     }
 
     @Override
     public void initialize() {
         setDefaultConfig();
         if (readConfig()) {
-            enabled = true;
             core.getLogger().info(getName() + " Loaded");
+            this.reloadConfig();
+            this.enable();
         }else {
             core.getLogger().info(getName() + " Not loaded");
         }
-
-        // Register event listeners to the server.
-        core.getServer().getPluginManager().registerEvents(this, core);
-
     }
 
     @Override
     public void enable() {
         enabled = true;
-        readConfig();
 
     }
 
