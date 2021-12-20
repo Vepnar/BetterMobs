@@ -94,9 +94,32 @@ public class Main extends JavaPlugin {
      * no configuration file.
      */
     public void loadDefaultConfig() {
-        this.saveResourcenew File(
-            this.getDataFolder(), "config.yml"), false
-        );
+
+        // Create the BetterMobs directory when it does not exist.
+        File folder = getDataFolder();
+        if (!folder.exists())
+            folder.mkdir();
+        File resourceFile = new File(folder, "config.yml");
+
+        // Attempt to write to the configuration file.
+        try {
+            if (!resourceFile.exists()) {
+                if (!resourceFile.createNewFile()) {
+                    throw new IOException("Couldn't create " + resourceFile.getAbsolutePath());
+                }
+                try (InputStream in = getResource("config.yml");
+                     OutputStream out = new FileOutputStream(resourceFile)) {
+                    ByteStreams.copy(in, out);
+                }
+
+                // Report on our success.
+                getLogger().info("Config successfully created!");
+            }
+        } catch (Exception e) {
+            // Report the issue to the console.
+            getLogger().warning("Can't create config file");
+            e.printStackTrace();
+        }
     }
 
     /**
