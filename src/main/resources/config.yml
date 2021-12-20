@@ -96,8 +96,3 @@ enderDragonRain:
 illusionerSpawn:
   enabled: true
   spawnChance: 10 # Chance a witch will be replaced with an illusioner (note: larger number is a smaller chance)
-
-# Whether the cave spiders spawns naturally.
-caveSpiderSpawn:
-  enabled: true
-  spawnChance: 10 # Chance a spider will be replaced with an cave spider (note: larger number is a smaller chance)
