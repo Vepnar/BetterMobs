@@ -130,6 +130,7 @@ public class Main extends JavaPlugin {
         bettermobs.add(new FeaturesCommand(bettermobs));
         bettermobs.add(new EnableCommand(bettermobs));
         bettermobs.add(new DisableCommand(bettermobs));
+        bettermobs.add(new ReloadCommand(bettermobs));
 
         // Register command
         getCommand("bettermobs").setExecutor(new CommandListener(this, bettermobs));
