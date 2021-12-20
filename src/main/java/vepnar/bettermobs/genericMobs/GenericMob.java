@@ -11,10 +11,10 @@ import java.io.OutputStream;
 
 public class GenericMob implements IMobListener {
 
-    private final JavaPlugin core;
-    private final int VERSION = 1;
-    private YamlConfiguration config;
-    private boolean enabled = false;
+    protected final JavaPlugin core;
+    protected final int VERSION = 1;
+    protected YamlConfiguration config;
+    protected boolean enabled = false;
 
     public GenericMob(JavaPlugin javaPlugin) {
         core = javaPlugin;
