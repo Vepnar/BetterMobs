@@ -14,7 +14,8 @@ import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +73,6 @@ public class Main extends JavaPlugin {
                 if (IMobListener.class.isAssignableFrom(cls)) {
                     Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
                     IMobListener mobListener = mobListenerClass.getDeclaredConstructor(JavaPlugin.class).newInstance(args);
-
                     mobListeners.add(mobListener);
                 }
             } catch (Exception ex) {

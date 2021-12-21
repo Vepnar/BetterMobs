@@ -26,39 +26,46 @@ public class GenericMob implements IMobListener {
         return new File(folder + configName);
     }
 
-    private void setDefaultConfig() {
+    private boolean setDefaultConfig() {
         // Create path to desired configuration file
         File configFile = getConfigFile();
 
-        // Attempt to create a configuration file.
+
         try {
             if (!configFile.exists()) {
+                // Attempt to create a configuration file.
                 core.saveResource("mobs/" + getName() + ".yml", false);
                 core.getLogger().info(getName() + " config has been loaded.");
-            }
+                return true;
+            } return true;
         } catch (Exception e) {
             core.getLogger().warning(getName() + " config can't be created.");
             core.getLogger().warning(e.getMessage());
+            return false;
         }
+
     }
-
-    private boolean readConfig() {
-        YamlConfiguration readConfig = YamlConfiguration.loadConfiguration(getConfigFile());
-
-        // Check if the config has the desired version.
-        int configVersion = readConfig.getInt("version", 0);
-        if (configVersion != VERSION) return false;
-        // Use the read config
-        config = readConfig;
-
-        // Check if the current listener should be enabled.
-        return readConfig.getBoolean("enabled", false);
-    }
-
 
     @Override
     public void reloadConfig() {
-        boolean newState = readConfig();
+        // newState is the state the config should be updated to.
+        boolean newState = setDefaultConfig();
+
+        // When an attempt to create a new config fails the module should be disabled.
+
+        // Read the configuration file
+        config = YamlConfiguration.loadConfiguration(getConfigFile());
+
+        // Check config version.
+        int configVersion = config.getInt("version", 0);
+        if (configVersion != VERSION) {
+            newState = false;
+            core.getLogger().warning(this.getName() + " Config version don't match up. Expected: " + VERSION + " got: " + configVersion);
+        }
+
+        // Check if the plugin is enabled in the settings.
+        if (!config.getBoolean("enabled", false))  newState = false;
+
         if (newState && !this.enabled) {
             this.enable();
         } else if (!newState && this.enabled) {
@@ -69,11 +76,9 @@ public class GenericMob implements IMobListener {
 
     @Override
     public void initialize() {
-        setDefaultConfig();
-        if (readConfig()) {
+        reloadConfig();
+        if(enabled) {
             core.getLogger().info(getName() + " Loaded");
-            this.reloadConfig();
-            this.enable();
         }else {
             core.getLogger().info(getName() + " Not loaded");
         }
