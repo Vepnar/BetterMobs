@@ -1,0 +1,20 @@
+# Allow you to make creepers super powerfull.
+version: 1
+enabled: true
+
+# Should remain this turned on unless it causes conflict with other plugins
+listenToPowerEvent: true
+
+normalCreeper:
+  fuse: 20 # In ticks
+  explosionPower: 3
+  spawnPercentage: 50
+  onlyNatural: false
+
+# Charged creepers have different settings compared to normal creepers.
+chargedCreeper:
+  fuse: 20
+  explosionPower: 6
+  spawnPercentage: 50
+  onlyNatural: false
+
