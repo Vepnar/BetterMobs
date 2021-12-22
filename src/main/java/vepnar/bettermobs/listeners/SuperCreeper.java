@@ -7,7 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreeperPowerEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class SuperCreeper extends GenericMob {
@@ -25,7 +25,7 @@ public class SuperCreeper extends GenericMob {
     private boolean onlyNatural;
 
 
-    public SuperCreeper(JavaPlugin javaPlugin) {
+    public SuperCreeper(Main javaPlugin) {
         super(javaPlugin);
     }
 

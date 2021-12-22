@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class ChargedCreeperSpawn extends GenericMob {
@@ -14,12 +14,12 @@ public class ChargedCreeperSpawn extends GenericMob {
     private double spawnProbability;
     private boolean onlyNatural;
 
-    public ChargedCreeperSpawn(JavaPlugin javaPlugin) {
+    public ChargedCreeperSpawn(Main javaPlugin) {
         super(javaPlugin);
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onSpawn(CreatureSpawnEvent event) {
         if (event.getEntityType() != EntityType.CREEPER) return;
         if (spawnProbability < Math.random()) return;

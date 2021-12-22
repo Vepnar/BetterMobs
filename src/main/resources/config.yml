@@ -1,3 +1,5 @@
+debug: true
+
 # Entity Update frequency in Milliseconds.
 entityUpdateSpeed: 250
 # Delay before the events will start (in Milliseconds).

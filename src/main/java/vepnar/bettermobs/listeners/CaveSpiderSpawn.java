@@ -1,13 +1,12 @@
 package vepnar.bettermobs.listeners;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class CaveSpiderSpawn extends GenericMob {
@@ -15,12 +14,12 @@ public class CaveSpiderSpawn extends GenericMob {
     private double spawnProbability;
     private boolean onlyNatural;
 
-    public CaveSpiderSpawn(JavaPlugin javaPlugin) {
+    public CaveSpiderSpawn(Main javaPlugin) {
         super(javaPlugin);
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onSpawn(CreatureSpawnEvent event) {
         if (event.getEntityType() != EntityType.SPIDER) return;
         if (spawnProbability < Math.random()) return;
@@ -32,6 +31,7 @@ public class CaveSpiderSpawn extends GenericMob {
         event.getEntity().remove();
         // TODO: Research when spawnEntity produces an NullPointerException
         location.getWorld().spawnEntity(location, EntityType.CAVE_SPIDER);
+        event.setCancelled(true);
     }
 
     @Override

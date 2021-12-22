@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class IllusionerSpawn extends GenericMob {
@@ -15,7 +15,7 @@ public class IllusionerSpawn extends GenericMob {
     private double spawnProbability;
     private boolean onlyNatural;
 
-    public IllusionerSpawn(JavaPlugin javaPlugin) {
+    public IllusionerSpawn(Main javaPlugin) {
         super(javaPlugin);
     }
 

@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 
     public String prefix = "§7[§cBetterMobs§7]§f ";
 	public List<IMobListener> mobListeners = new ArrayList<>();
+    private boolean debugMode = false;
 
 
     @Override
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
 
         // Load configuration
         loadDefaultConfig();
+        reloadConfig();
         initializeCommands();
 
         try {
@@ -72,7 +74,7 @@ public class Main extends JavaPlugin {
                 // If it does implement this interface, add it to the linked list.
                 if (IMobListener.class.isAssignableFrom(cls)) {
                     Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
-                    IMobListener mobListener = mobListenerClass.getDeclaredConstructor(JavaPlugin.class).newInstance(args);
+                    IMobListener mobListener = mobListenerClass.getDeclaredConstructor(Main.class).newInstance(args);
                     mobListeners.add(mobListener);
                 }
             } catch (Exception ex) {
@@ -98,6 +100,16 @@ public class Main extends JavaPlugin {
             this.saveResource("config.yml", false);
         }
     }
+    public void reloadConfig() {
+        super.reloadConfig();
+        this.debugMode = getConfig().getBoolean("debug", false);
+    }
+
+    public void debug(String log) {
+        if(debugMode) {
+            getLogger().info(log);
+        }
+    }
 
     /**
      * Register command handlers.
@@ -117,5 +129,6 @@ public class Main extends JavaPlugin {
 
         // Register tab completer
         getCommand("bettermobs").setTabCompleter(new TabListener(this, bettermobs));
+        debug("All commands initialized");
     }
 }
