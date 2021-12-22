@@ -1,0 +1,6 @@
+# Allow illusioners to spawn instead of witches
+version: 1
+enabled: True
+
+spawnPercentage: 0.5
+onlyNatural: true

@@ -91,8 +91,3 @@ enderDragonRain:
   attackSpeed: 40 # How many ticks to wait before releasing another fireball on the player.
   attackRange: 100 # Max distance from the portal where the fireballs could spawn.
   attackWarning: true # Whether the players will see a visible warning before the attack.
-  
-# Whether the illusioner spawns naturally.
-illusionerSpawn:
-  enabled: true
-  spawnChance: 10 # Chance a witch will be replaced with an illusioner (note: larger number is a smaller chance)
