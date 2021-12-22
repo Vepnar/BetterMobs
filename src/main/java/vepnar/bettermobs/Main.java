@@ -53,6 +53,7 @@ public class Main extends JavaPlugin {
             listener.disable();
         }
         this.getLogger().info("Has been disabled.");
+        IntervalEventRunnable.getInstance().stop();
     }
 
     /**
@@ -103,6 +104,10 @@ public class Main extends JavaPlugin {
     public void reloadConfig() {
         super.reloadConfig();
         this.debugMode = getConfig().getBoolean("debug", false);
+
+        long interval = getConfig().getLong("updateInterval", 20);
+        IntervalEventRunnable.getInstance().start(this, interval);
+
     }
 
     public void debug(String log) {

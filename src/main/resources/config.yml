@@ -1,5 +1,8 @@
 debug: true
 
+# This could be set higher for less updates / second.
+updateInterval: 20 # (Ticks)
+
 # Entity Update frequency in Milliseconds.
 entityUpdateSpeed: 250
 # Delay before the events will start (in Milliseconds).
