@@ -45,6 +45,5 @@ public class IntervalEventRunnable extends BukkitRunnable {
     public void run() {
         IntervalEvent event = new IntervalEvent(interval);
         core.getServer().getPluginManager().callEvent(event);
-        core.debug("Interval");
     }
 }
