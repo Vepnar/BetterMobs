@@ -11,6 +11,7 @@ public class IntervalEvent extends Event {
         this.interval = interval;
     }
 
+    // This static function is required. Please don't remove.
     public static HandlerList getHandlerList() {
         return handlers;
     }

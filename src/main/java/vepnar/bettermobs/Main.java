@@ -21,8 +21,9 @@ import java.util.List;
 
 public class Main extends JavaPlugin {
 
-    public String prefix = "§7[§cBetterMobs§7]§f ";
-	public List<IMobListener> mobListeners = new ArrayList<>();
+    public final String prefix = "§7[§cBetterMobs§7]§f ";
+    public final String asciiName = "bettermobs";
+    public final List<IMobListener> mobListeners = new ArrayList<>();
     private boolean debugMode = false;
 
 
@@ -96,11 +97,13 @@ public class Main extends JavaPlugin {
      * no configuration file.
      */
     public void loadDefaultConfig() {
-        File config = new File(this.getDataFolder() + File.separator+ "config.yml");
-        if(!config.exists()) {
+        File config = new File(this.getDataFolder() + File.separator + "config.yml");
+        if (!config.exists()) {
             this.saveResource("config.yml", false);
         }
     }
+
+    @Override
     public void reloadConfig() {
         super.reloadConfig();
         this.debugMode = getConfig().getBoolean("debug", false);
@@ -124,7 +127,7 @@ public class Main extends JavaPlugin {
      */
     public void initializeCommands() {
 
-        BasicCommandGroup bettermobs = new BasicCommandGroup(null, "bettermobs");
+        BasicCommandGroup bettermobs = new BasicCommandGroup(null, asciiName);
         bettermobs.add(new HelpCommand(bettermobs));
         bettermobs.add(new AuthorCommand(bettermobs));
         bettermobs.add(new FeaturesCommand(bettermobs));
@@ -133,10 +136,10 @@ public class Main extends JavaPlugin {
         bettermobs.add(new ReloadCommand(bettermobs));
 
         // Register command
-        getCommand("bettermobs").setExecutor(new CommandListener(this, bettermobs));
+        getCommand(asciiName).setExecutor(new CommandListener(this, bettermobs));
 
         // Register tab completer
-        getCommand("bettermobs").setTabCompleter(new TabListener(this, bettermobs));
+        getCommand(asciiName).setTabCompleter(new TabListener(this, bettermobs));
         debug("All commands initialized");
     }
 }
