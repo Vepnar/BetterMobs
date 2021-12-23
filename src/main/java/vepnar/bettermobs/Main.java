@@ -106,6 +106,9 @@ public class Main extends JavaPlugin {
         this.debugMode = getConfig().getBoolean("debug", false);
 
         long interval = getConfig().getLong("updateInterval", 20);
+
+        // These have to be separate since the stop method destroys itself.
+        IntervalEventRunnable.getInstance().stop();
         IntervalEventRunnable.getInstance().start(this, interval);
 
     }
