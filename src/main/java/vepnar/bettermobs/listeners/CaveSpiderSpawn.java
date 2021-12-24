@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
@@ -15,8 +14,7 @@ public class CaveSpiderSpawn extends GenericMob {
     private boolean onlyNatural;
 
     public CaveSpiderSpawn(Main javaPlugin) {
-        super(javaPlugin);
-
+        super(javaPlugin, "CaveSpiderSpawn", 1);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -39,22 +37,5 @@ public class CaveSpiderSpawn extends GenericMob {
         super.reloadConfig();
         spawnProbability = this.config.getDouble("spawnPercentage", 0) / 100;
         onlyNatural = this.config.getBoolean("onlyNatural", true);
-    }
-
-    @Override
-    public String getName() {
-        return "CaveSpiderSpawn";
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        core.getServer().getPluginManager().registerEvents(this, core);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        HandlerList.unregisterAll(this);
     }
 }

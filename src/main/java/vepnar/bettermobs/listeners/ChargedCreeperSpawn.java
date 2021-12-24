@@ -4,7 +4,6 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
@@ -15,7 +14,7 @@ public class ChargedCreeperSpawn extends GenericMob {
     private boolean onlyNatural;
 
     public ChargedCreeperSpawn(Main javaPlugin) {
-        super(javaPlugin);
+        super(javaPlugin, "ChargedCreeperSpawn", 1);
 
     }
 
@@ -37,22 +36,5 @@ public class ChargedCreeperSpawn extends GenericMob {
         super.reloadConfig();
         spawnProbability = this.config.getDouble("spawnPercentage", 0) / 100;
         onlyNatural = this.config.getBoolean("onlyNatural", true);
-    }
-
-    @Override
-    public String getName() {
-        return "ChargedCreeperSpawn";
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        core.getServer().getPluginManager().registerEvents(this, core);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        HandlerList.unregisterAll(this);
     }
 }

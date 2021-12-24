@@ -4,7 +4,6 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreeperPowerEvent;
 import vepnar.bettermobs.Main;
@@ -26,7 +25,7 @@ public class SuperCreeper extends GenericMob {
 
 
     public SuperCreeper(Main javaPlugin) {
-        super(javaPlugin);
+        super(javaPlugin, "SuperCreeper", 1);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -81,22 +80,5 @@ public class SuperCreeper extends GenericMob {
 
         listenPower = config.getBoolean("listenToPowerEvent", true);
 
-    }
-
-    @Override
-    public String getName() {
-        return "SuperCreeper";
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        core.getServer().getPluginManager().registerEvents(this, core);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        HandlerList.unregisterAll(this);
     }
 }

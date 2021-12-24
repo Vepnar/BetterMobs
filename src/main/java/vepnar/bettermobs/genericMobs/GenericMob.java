@@ -1,26 +1,30 @@
 package vepnar.bettermobs.genericMobs;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.HandlerList;
 import vepnar.bettermobs.Main;
 
 import java.io.File;
 
 public class GenericMob implements IMobListener {
 
-    protected final Main core;
-    protected final int VERSION = 1;
+    protected final Main CORE;
+    protected final String NAME;
+    protected final int VERSION;
+
     protected YamlConfiguration config;
     protected boolean enabled = false;
 
-    public GenericMob(Main javaPlugin) {
-        core = javaPlugin;
+    public GenericMob(Main javaPlugin, String name, int version) {
+        CORE = javaPlugin;
+        NAME = name;
+        VERSION = version;
     }
 
     private File getConfigFile() {
         String configName = "/" + getName() + ".yml";
 
-        File folder = new File(core.getDataFolder().getPath() + "/mobs/");
+        File folder = new File(CORE.getDataFolder().getPath() + "/mobs/");
         if (!folder.exists())
             folder.mkdir();
 
@@ -33,13 +37,13 @@ public class GenericMob implements IMobListener {
         try {
             if (!configFile.exists()) {
                 // Attempt to create a configuration file.
-                core.saveResource("mobs/" + getName() + ".yml", false);
-                core.debug(getName() + " config has been created.");
+                CORE.saveResource("mobs/" + getName() + ".yml", false);
+                CORE.debug(getName() + " config has been created.");
             }
             return true;
         } catch (Exception e) {
-            core.getLogger().warning(getName() + " config can't be created.");
-            core.getLogger().warning(e.getMessage());
+            CORE.getLogger().warning(getName() + " config can't be created.");
+            CORE.getLogger().warning(e.getMessage());
             return false;
         }
 
@@ -59,13 +63,13 @@ public class GenericMob implements IMobListener {
         int configVersion = config.getInt("version", 0);
         if (configVersion != VERSION) {
             newState = false;
-            core.getLogger().warning(this.getName() + " Config version don't match up. Expected: `" + VERSION + "` got: `" + configVersion + "`");
+            CORE.getLogger().warning(this.getName() + " Config version don't match up. Expected: `" + VERSION + "` got: `" + configVersion + "`");
         }
 
         // Check if the plugin is enabled in the settings.
         if (!config.getBoolean("enabled", false))  newState = false;
 
-        core.debug(getName() + " state has been updated from: `" + this.enabled + "`, to: `" + newState + "`");
+        CORE.debug(getName() + " state has been updated from: `" + this.enabled + "`, to: `" + newState + "`");
         if (newState && !this.enabled) {
             this.enable();
         } else if (!newState && this.enabled) {
@@ -78,21 +82,22 @@ public class GenericMob implements IMobListener {
     public void initialize() {
         reloadConfig();
         if(enabled) {
-            core.debug(getName() + " Loaded");
+            CORE.debug(getName() + " Loaded");
         }else {
-            core.debug(getName() + " Not loaded");
+            CORE.debug(getName() + " Not loaded");
         }
     }
 
     @Override
     public void enable() {
         enabled = true;
-
+        CORE.getServer().getPluginManager().registerEvents(this, CORE);
     }
 
     @Override
     public void disable() {
         enabled = false;
+        HandlerList.unregisterAll(this);
     }
 
     @Override
@@ -102,6 +107,6 @@ public class GenericMob implements IMobListener {
 
     @Override
     public String getName() {
-        return "GenericMob";
+        return NAME;
     }
 }

@@ -3,7 +3,6 @@ package vepnar.bettermobs.listeners;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityTargetEvent;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
@@ -20,7 +19,7 @@ public class ZombieMount extends GenericMob {
     boolean brainWash;
 
     public ZombieMount(Main javaPlugin) {
-        super(javaPlugin);
+        super(javaPlugin, "ZombieMount", 1);
     }
 
     public boolean isValidEntity(LivingEntity entity) {
@@ -67,7 +66,7 @@ public class ZombieMount extends GenericMob {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onIntervalEvent(IntervalEvent event) {
-        for (Player player : core.getServer().getOnlinePlayers()) {
+        for (Player player : CORE.getServer().getOnlinePlayers()) {
             List<Entity> allNearbyEntity = player.getNearbyEntities(searchRadius, searchRadius, searchRadius);
             List<LivingEntity> nearbyRiders = findValidRider(allNearbyEntity);
             for (LivingEntity entity : nearbyRiders) {
@@ -115,22 +114,5 @@ public class ZombieMount extends GenericMob {
         brainWash = config.getBoolean("canBrainWash", false);
 
 
-    }
-
-    @Override
-    public String getName() {
-        return "ZombieMount";
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        core.getServer().getPluginManager().registerEvents(this, core);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        HandlerList.unregisterAll(this);
     }
 }

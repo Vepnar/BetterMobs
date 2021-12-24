@@ -3,7 +3,6 @@ package vepnar.bettermobs.listeners;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkeletonMount extends GenericMob {
-
     int searchRadius;
     int mountRadius;
     double mountProbability;
@@ -20,7 +18,7 @@ public class SkeletonMount extends GenericMob {
     boolean listenCaveSpiders;
 
     public SkeletonMount(Main javaPlugin) {
-        super(javaPlugin);
+        super(javaPlugin, "SkeletonMount", 1);
     }
 
     public boolean isValidEntity(LivingEntity entity) {
@@ -68,7 +66,7 @@ public class SkeletonMount extends GenericMob {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onIntervalEvent(IntervalEvent event) {
-        for (Player player : core.getServer().getOnlinePlayers()) {
+        for (Player player : CORE.getServer().getOnlinePlayers()) {
             List<Entity> allNearbyEntity = player.getNearbyEntities(searchRadius, searchRadius, searchRadius);
             List<LivingEntity> nearbyRiders = findValidRider(allNearbyEntity);
             for (LivingEntity entity : nearbyRiders) {
@@ -101,22 +99,5 @@ public class SkeletonMount extends GenericMob {
         listenCaveSpiders = config.getBoolean("includeCaveSpiders", false);
 
 
-    }
-
-    @Override
-    public String getName() {
-        return "SkeletonMount";
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        core.getServer().getPluginManager().registerEvents(this, core);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        HandlerList.unregisterAll(this);
     }
 }
