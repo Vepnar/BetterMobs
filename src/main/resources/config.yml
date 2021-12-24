@@ -1,4 +1,5 @@
-debug: true
+# Enabling this will induce a lot of spam in the console.
+debug: false
 
 # This could be set higher for less updates / second.
 updateInterval: 20 # (Ticks)
