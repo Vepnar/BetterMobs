@@ -4,26 +4,18 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityTargetEvent;
-import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
-import vepnar.bettermobs.genericMobs.GenericMob;
+import vepnar.bettermobs.genericMobs.GenericMountMob;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZombieMount extends GenericMob {
+public class ZombieMount extends GenericMountMob {
 
-    int searchRadius;
-    int mountRadius;
-    double mountProbability;
     boolean brainWash;
 
     public ZombieMount(Main javaPlugin) {
         super(javaPlugin, "ZombieMount", 1);
-    }
-
-    public boolean isValidEntity(LivingEntity entity) {
-        return !entity.isInsideVehicle() && entity.hasAI() && entity.isEmpty() && !entity.isLeashed() && entity.getFireTicks() == 0;
     }
 
     public List<LivingEntity> findValidRider(List<Entity> entities) {
@@ -35,7 +27,7 @@ public class ZombieMount extends GenericMob {
             Zombie lEntity = (Zombie) entity;
 
             // Check if the entity is restricted in some matter.
-            if (!isValidEntity(lEntity) || lEntity.isAdult()) continue;
+            if (isInvalidEntity(lEntity) || lEntity.isAdult()) continue;
 
             foundEntities.add(lEntity);
         }
@@ -57,34 +49,11 @@ public class ZombieMount extends GenericMob {
                 if (tameable.isTamed()) continue;
             }
             // Check if the entity is restricted in some matter.
-            if (!isValidEntity(animal)) continue;
+            if (isInvalidEntity(animal)) continue;
 
             foundEntities.add(animal);
         }
         return foundEntities;
-    }
-
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onIntervalEvent(IntervalEvent event) {
-        for (Player player : CORE.getServer().getOnlinePlayers()) {
-            List<Entity> allNearbyEntity = player.getNearbyEntities(searchRadius, searchRadius, searchRadius);
-            List<LivingEntity> nearbyRiders = findValidRider(allNearbyEntity);
-            for (LivingEntity entity : nearbyRiders) {
-
-                // Prevent mounting every interval
-                if (mountProbability < Math.random()) continue;
-
-                // Lookup nearby entities who are mountable.
-                List<Entity> inMountRadius = entity.getNearbyEntities(mountRadius, mountRadius, mountRadius);
-                List<LivingEntity> mountAble = findValidVehicle(inMountRadius);
-
-                // Don't attempt to mount when there are no mountable entities nearby.
-                if (mountAble.isEmpty()) continue;
-                int vehicle = (int) (Math.random() * mountAble.size());
-                mountAble.get(vehicle).addPassenger(entity);
-
-            }
-        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -106,13 +75,6 @@ public class ZombieMount extends GenericMob {
     @Override
     public void reloadConfig() {
         super.reloadConfig();
-
-        searchRadius = config.getInt("searchRadius", 10);
-        mountRadius = config.getInt("mountFindRange", 2);
-        mountProbability = config.getDouble("mountPercentage", 0) / 100;
-
         brainWash = config.getBoolean("canBrainWash", false);
-
-
     }
 }

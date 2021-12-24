@@ -1,19 +1,13 @@
 package vepnar.bettermobs.listeners;
 
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
-import vepnar.bettermobs.genericMobs.GenericMob;
+import vepnar.bettermobs.genericMobs.GenericMountMob;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkeletonMount extends GenericMob {
-    int searchRadius;
-    int mountRadius;
-    double mountProbability;
+public class SkeletonMount extends GenericMountMob {
     boolean listenWitherSkeleton;
     boolean listenCaveSpiders;
 
@@ -21,10 +15,7 @@ public class SkeletonMount extends GenericMob {
         super(javaPlugin, "SkeletonMount", 1);
     }
 
-    public boolean isValidEntity(LivingEntity entity) {
-        return !entity.isInsideVehicle() && entity.hasAI() && entity.isEmpty() && !entity.isLeashed() && entity.getFireTicks() == 0;
-    }
-
+    @Override
     public List<LivingEntity> findValidRider(List<Entity> entities) {
         List<LivingEntity> foundEntities = new ArrayList<>();
 
@@ -38,13 +29,14 @@ public class SkeletonMount extends GenericMob {
             LivingEntity lEntity = (LivingEntity) entity;
 
             // Check if the entity is restricted in some matter.
-            if (!isValidEntity(lEntity)) continue;
+            if (isInvalidEntity(lEntity)) continue;
 
             foundEntities.add(lEntity);
         }
         return foundEntities;
     }
 
+    @Override
     public List<LivingEntity> findValidVehicle(List<Entity> entities) {
         List<LivingEntity> foundEntities = new ArrayList<>();
 
@@ -57,44 +49,16 @@ public class SkeletonMount extends GenericMob {
             LivingEntity lEntity = (LivingEntity) entity;
 
             // Check if the entity is restricted in some matter.
-            if (!isValidEntity(lEntity)) continue;
+            if (isInvalidEntity(lEntity)) continue;
 
             foundEntities.add(lEntity);
         }
         return foundEntities;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onIntervalEvent(IntervalEvent event) {
-        for (Player player : CORE.getServer().getOnlinePlayers()) {
-            List<Entity> allNearbyEntity = player.getNearbyEntities(searchRadius, searchRadius, searchRadius);
-            List<LivingEntity> nearbyRiders = findValidRider(allNearbyEntity);
-            for (LivingEntity entity : nearbyRiders) {
-
-                // Prevent from skeleton mounting spiders every update.
-                if (mountProbability < Math.random()) continue;
-
-                // Lookup nearby entities who are mountable.
-                List<Entity> inMountRadius = entity.getNearbyEntities(mountRadius, mountRadius, mountRadius);
-                List<LivingEntity> mountAble = findValidVehicle(inMountRadius);
-
-                // Don't attempt to mount when there are no mountable entities nearby.
-                if (mountAble.isEmpty()) continue;
-                int vehicle = (int) (Math.random() * mountAble.size());
-                mountAble.get(vehicle).addPassenger(entity);
-
-            }
-        }
-    }
-
     @Override
     public void reloadConfig() {
         super.reloadConfig();
-
-        searchRadius = config.getInt("searchRadius", 10);
-        mountRadius = config.getInt("mountFindRange", 2);
-        mountProbability = config.getDouble("mountPercentage", 0) / 100;
-
         listenWitherSkeleton = config.getBoolean("includeWitherSkeletons", false);
         listenCaveSpiders = config.getBoolean("includeCaveSpiders", false);
 
