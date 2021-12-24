@@ -1,0 +1,12 @@
+version: 1
+enabled: True
+
+includeCaveSpiders: true
+includeWitherSkeletons: true
+
+# Change that a skeleton will mount a spider each interval.
+mountPercentage: 10
+
+# These can be lowered if there is a performance bottleneck.
+searchRadius: 16 # Distance around the player that will be checked for mountable entities.
+mountFindRange: 4 # Maximum distance between 2 entities to be able to mount.
