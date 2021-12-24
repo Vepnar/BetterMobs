@@ -55,10 +55,6 @@ witherEffects: # Includes: BLINDNESS, NAUSEA, HUNGER, MINING FATIQUE, WEAKNESS
   attackRadius: 8 # Maximum radius of the attack.
   attackDuration: 10 # Duration of the given potion effect.
 
-# Whether the Ender Dragon will rest on The End Portal.
-NoDragonPerching:
-  enabled: true
-
 # Whether The Ender Dragon spawns Baby Ender Dragons to kill the player.
 babyEnderDragons:
   enabled: true
