@@ -18,18 +18,6 @@ witherSkeletonSwordSwitch: # Wither Skeletons will use a bow with the flame ench
   enabled: true
   swordRange: 8
 
-# Makes it possible for (Wither) Skeletons to mount (Cave) Spiders.
-skeletonSpiderMount:
-  enabled: true
-  updateEntityfromPlayer: 16 # How many blocks from the player the updating starts. 
-  mountFindRange: 4 # Amount of blocks that (Wither) Skeletons will search for a (Cave) Spider to mount.
-
-# Makes it possible for Baby Zombies to mount Chickens.
-zombieChickenMount:
-  enabled: true
-  updateEntityfromPlayer: 16 # How many blocks from the player the updating starts. 
-  mountFindRange: 4 # Amount of blocks that Baby Zombies will search for a Chicken to mount.
-
 # Makes Creepers spawn more regularly with effects.
 creeperSpawnPotionEffect:
   enabled: true

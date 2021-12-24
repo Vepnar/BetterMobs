@@ -1,0 +1,12 @@
+version: 1
+enabled: True
+
+# This makes it possible for baby zombies to ride all animals. (Except tamed animals)
+canBrainWash: false
+
+# Change that a skeleton will mount a spider each interval.
+mountPercentage: 20
+
+# These can be lowered if there is a performance bottleneck.
+searchRadius: 16 # Distance around the player that will be checked for mountable entities.
+mountFindRange: 2 # Maximum distance between 2 entities to be able to mount.
