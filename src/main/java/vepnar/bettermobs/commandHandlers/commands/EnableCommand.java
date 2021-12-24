@@ -54,7 +54,7 @@ public class EnableCommand implements ICommandExecuteAble {
     public boolean execute(Main core, CommandSender sender, String[] args) {
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for(IMobListener listener :  core.mobListeners) {
+            for (IMobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature) && !listener.isEnabled()) {
                     listener.enable();
                     messageBuilder.append("§a");
@@ -64,7 +64,7 @@ public class EnableCommand implements ICommandExecuteAble {
                 }
             }
         }
-        sender.sendMessage(core.prefix + "The following features have been enabled:");
+        sender.sendMessage(Main.PREFIX + "The following features have been enabled:");
         if(messageBuilder.length() != 0) {
             String message = messageBuilder.toString();
             message = message.substring(0, message.length() - 4);

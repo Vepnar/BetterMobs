@@ -54,7 +54,7 @@ public class ReloadCommand implements ICommandExecuteAble {
         StringBuilder messageBuilder = new StringBuilder();
 
         for(String feature : args) {
-            for(IMobListener listener :  core.mobListeners) {
+            for (IMobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature)) {
                     messageBuilder.append("§a");
                     messageBuilder.append(listener.getName());
@@ -64,7 +64,7 @@ public class ReloadCommand implements ICommandExecuteAble {
                 }
             }
         }
-        sender.sendMessage(core.prefix + "The following features have been reloaded:");
+        sender.sendMessage(Main.PREFIX + "The following features have been reloaded:");
         if(messageBuilder.length() != 0) {
             String output = messageBuilder.substring(0, messageBuilder.length() - 4);
             sender.sendMessage(output);
@@ -81,10 +81,10 @@ public class ReloadCommand implements ICommandExecuteAble {
         }
         core.reloadConfig();
 
-        for(IMobListener listener :  core.mobListeners) {
+        for (IMobListener listener : Main.MOB_LISTENERS) {
             listener.reloadConfig();
         }
-        sender.sendMessage(core.prefix + "All the features have been reloaded.");
+        sender.sendMessage(Main.PREFIX + "All the features have been reloaded.");
         return true;
 
 

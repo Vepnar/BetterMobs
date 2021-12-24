@@ -57,7 +57,7 @@ public class AuthorCommand implements ICommandExecuteAble {
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
         PluginDescriptionFile pdf = core.getDescription();
-        sender.sendMessage(core.prefix + "Is made by §c" + pdf.getAuthors());
+        sender.sendMessage(Main.PREFIX + "Is made by §c" + pdf.getAuthors());
         sender.sendMessage("§cSource: §fhttps://github.com/Vepnar/BetterMobs");
         sender.sendMessage("§cVersion: §f" + pdf.getVersion());
         if (pdf.getWebsite() != null) {

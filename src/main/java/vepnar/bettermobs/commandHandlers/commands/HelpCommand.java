@@ -49,7 +49,7 @@ public class HelpCommand implements ICommandExecuteAble {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        sender.sendMessage(core.prefix + "Displaying help of: §c" + parent.getName());
+        sender.sendMessage(Main.PREFIX + "Displaying help of: §c" + parent.getName());
         for (ICommand command : parent.getCommands()) {
             if(CommandUtils.hasPermissions(sender, command)) {
                 sender.sendMessage(CommandUtils.getHelpCommand(command));

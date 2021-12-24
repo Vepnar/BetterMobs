@@ -55,7 +55,7 @@ public class DisableCommand implements ICommandExecuteAble {
 
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for(IMobListener listener : core.mobListeners) {
+            for (IMobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature) && listener.isEnabled()) {
                     listener.disable();
                     messageBuilder.append("§c");
@@ -65,7 +65,7 @@ public class DisableCommand implements ICommandExecuteAble {
                 }
             }
         }
-        sender.sendMessage(core.prefix + "The following features have been disabled:");
+        sender.sendMessage(Main.PREFIX + "The following features have been disabled:");
         if(messageBuilder.length() != 0) {
             String message = messageBuilder.toString();
             message = message.substring(0, message.length() - 4);

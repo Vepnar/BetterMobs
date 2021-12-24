@@ -21,9 +21,9 @@ import java.util.List;
 
 public class Main extends JavaPlugin {
 
-    public static final String prefix = "§7[§cBetterMobs§7]§f ";
-    public static final String asciiName = "bettermobs";
-    public static final List<IMobListener> mobListeners = new ArrayList<>();
+    public static final String PREFIX = "§7[§cBetterMobs§7]§f ";
+    public static final String ASCII_NAME = "bettermobs";
+    public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
     private boolean debugMode = false;
 
 
@@ -50,7 +50,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (IMobListener listener : mobListeners) {
+        for (IMobListener listener : MOB_LISTENERS) {
             listener.disable();
         }
         this.getLogger().info("Has been disabled.");
@@ -77,7 +77,7 @@ public class Main extends JavaPlugin {
                 if (IMobListener.class.isAssignableFrom(cls)) {
                     Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
                     IMobListener mobListener = mobListenerClass.getDeclaredConstructor(Main.class).newInstance(args);
-                    mobListeners.add(mobListener);
+                    MOB_LISTENERS.add(mobListener);
                 }
             } catch (Exception ex) {
                     getLogger().warning(ex.getMessage());
@@ -86,7 +86,7 @@ public class Main extends JavaPlugin {
     }
 
     private void initializeMobListener() {
-        for (IMobListener listener : mobListeners) {
+        for (IMobListener listener : MOB_LISTENERS) {
             // Initialize will also enable the listener if possible.
             listener.initialize();
         }
@@ -105,6 +105,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void reloadConfig() {
+        this.loadDefaultConfig();
         super.reloadConfig();
         this.debugMode = getConfig().getBoolean("debug", false);
 
@@ -127,7 +128,7 @@ public class Main extends JavaPlugin {
      */
     public void initializeCommands() {
 
-        BasicCommandGroup bettermobs = new BasicCommandGroup(null, asciiName);
+        BasicCommandGroup bettermobs = new BasicCommandGroup(null, ASCII_NAME);
         bettermobs.add(new HelpCommand(bettermobs));
         bettermobs.add(new AuthorCommand(bettermobs));
         bettermobs.add(new FeaturesCommand(bettermobs));
@@ -136,10 +137,10 @@ public class Main extends JavaPlugin {
         bettermobs.add(new ReloadCommand(bettermobs));
 
         // Register command
-        getCommand(asciiName).setExecutor(new CommandListener(this, bettermobs));
+        getCommand(ASCII_NAME).setExecutor(new CommandListener(this, bettermobs));
 
         // Register tab completer
-        getCommand(asciiName).setTabCompleter(new TabListener(this, bettermobs));
+        getCommand(ASCII_NAME).setTabCompleter(new TabListener(this, bettermobs));
         debug("All commands initialized");
     }
 }

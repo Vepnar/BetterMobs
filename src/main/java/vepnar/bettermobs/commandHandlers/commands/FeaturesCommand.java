@@ -58,15 +58,15 @@ public class FeaturesCommand implements ICommandExecuteAble {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        List<IMobListener> listeners = core.mobListeners;
-        sender.sendMessage(core.prefix + "(" +listeners.size()+ ") Features installed:");
+        List<IMobListener> listeners = Main.MOB_LISTENERS;
+        sender.sendMessage(Main.PREFIX + "(" + listeners.size() + ") Features installed:");
         StringBuilder messageBuilder = new StringBuilder();
-        for(IMobListener listener : listeners) {
+        for (IMobListener listener : listeners) {
             messageBuilder.append(listener.isEnabled() ? "§a" : "§c");
             messageBuilder.append(listener.getName());
             messageBuilder.append("§r, ");
         }
-        if(messageBuilder.length() != 0) {
+        if (messageBuilder.length() != 0) {
             String message = messageBuilder.toString();
             message = message.substring(0, message.length() - 4);
             sender.sendMessage(message);

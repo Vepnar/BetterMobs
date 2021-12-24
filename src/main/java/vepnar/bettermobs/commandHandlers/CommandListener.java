@@ -30,13 +30,13 @@ public class CommandListener implements CommandExecutor {
 
             // Verify it the user has enough permissions.
             if (!CommandUtils.hasPermissions(sender, command)) {
-                sender.sendMessage(core.prefix + "§cNot enough permissions.");
+                sender.sendMessage(Main.PREFIX + "§cNot enough permissions.");
                 return true;
             }
 
             // Verify if the command has enough arguments.
             if (command.getMinimalArguments() >= targetSubCommand.length()) {
-                sender.sendMessage(core.prefix + CommandUtils.getHelpCommand(command));
+                sender.sendMessage(Main.PREFIX + CommandUtils.getHelpCommand(command));
                 return true;
             }
 

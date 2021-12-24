@@ -37,7 +37,7 @@ public class TabListener implements TabCompleter {
 
     private List<String> getModules() {
         ArrayList<String> names = new ArrayList<>();
-        for (IMobListener listener : core.mobListeners) {
+        for (IMobListener listener : Main.MOB_LISTENERS) {
             names.add(listener.getName());
         }
         return names;
