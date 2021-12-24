@@ -21,9 +21,9 @@ import java.util.List;
 
 public class Main extends JavaPlugin {
 
-    public final String prefix = "§7[§cBetterMobs§7]§f ";
-    public final String asciiName = "bettermobs";
-    public final List<IMobListener> mobListeners = new ArrayList<>();
+    public static final String prefix = "§7[§cBetterMobs§7]§f ";
+    public static final String asciiName = "bettermobs";
+    public static final List<IMobListener> mobListeners = new ArrayList<>();
     private boolean debugMode = false;
 
 
