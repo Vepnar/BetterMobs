@@ -1,15 +1,22 @@
 # Disclaimer: this project doesn't work at the moment. I am refactoring it.
 
+[![License GNU GPLv3](https://img.shields.io/github/license/Vepnar/BetterMobs)](https://github.com/Vepnar/LICENSE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs)
+[![Discord](https://img.shields.io/discord/863436399113404456?label=Discord)](http://discord.gg/CeZwTS4WJ3)
+[![Version](https://img.shields.io/github/v/release/Vepnar/BetterMobs?include_prereleases)](https://github.com/Vepnar/BetterMobs/releases)
+
 # BetterMobs v1.4.2
+
 A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
 click [here](https://github.com/Vepnar/BetterMobs/releases) to download the newest version!
 
-# Configuration
-default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/src/config.yml)
+## Configuration
 
-# Tasks
+default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/src/config.yml) <br>
+Mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/tree/master/src/main/resources/mobs)
 
 ## TODO
+
 - [ ] Make the wither more aggressive.
 - [ ] Make ghasts more aggressive.
 - [ ] Make the ender dragon more aggressive.
@@ -40,5 +47,5 @@ default configuration: [here](https://github.com/Vepnar/BetterMobs/blob/master/s
 - [x] Illusioner can spawn.
 - [x] Cave spiders can spawn.
 
-# Amazing people who helped me out on this project!
+# Credits
 - [JeannotM](https://github.com/JeannotM/) Improving grammar errors & adding ideas.
