@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 
     public static final String PREFIX = "§7[§cBetterMobs§7]§f ";
     public static final String ASCII_NAME = "bettermobs";
+    private final int CONFIG_VERSION = 1;
     public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
     private boolean debugMode = false;
 
@@ -107,6 +108,13 @@ public class Main extends JavaPlugin {
     public void reloadConfig() {
         this.loadDefaultConfig();
         super.reloadConfig();
+
+        int currentVersion = getConfig().getInt("version", 0);
+        if (currentVersion != CONFIG_VERSION) {
+            getLogger().warning("Version number in `config.yml` doesn't match with the required config version.");
+            getLogger().warning("Plugin could behave in an unpredictable manner, please update the config.");
+        }
+
         this.debugMode = getConfig().getBoolean("debug", false);
 
         long interval = getConfig().getLong("updateInterval", 20);
@@ -118,9 +126,7 @@ public class Main extends JavaPlugin {
     }
 
     public void debug(String log) {
-        if(debugMode) {
-            getLogger().info(log);
-        }
+        if (debugMode) getLogger().info(log);
     }
 
     /**
