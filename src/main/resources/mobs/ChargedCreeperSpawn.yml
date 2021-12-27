@@ -1,11 +1,8 @@
 # This makes it possible for Charged Creepers to spawn regularly. without lightning strike.
 version: 1
-enabled: True
+enabled: false
 
 # Chance that a creeper will spawn charged.
 # When set to 100 or more all creepers will spawn charged.
 # When set to 0 no creepers will spawn charged.
-spawnPercentage: 2
-
-# Only charge creepers who spawned naturally.
-onlyNatural: true
+spawnPercentage: 0.5

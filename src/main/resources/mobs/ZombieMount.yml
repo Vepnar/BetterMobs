@@ -1,5 +1,5 @@
 version: 1
-enabled: True
+enabled: false
 
 # This makes it possible for baby zombies to ride all animals. (Except tamed animals)
 canBrainWash: false

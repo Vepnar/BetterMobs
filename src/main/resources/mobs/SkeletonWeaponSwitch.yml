@@ -1,5 +1,5 @@
 version: 1
-enabled: true
+enabled: false
 
 includeWitherSkeleton: true
 witherSkeletonShootFire: true

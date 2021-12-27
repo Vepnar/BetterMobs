@@ -1,11 +1,11 @@
 # This makes it possible for cave spiders to spawn naturally
 version: 1
-enabled: True
+enabled: false
 
 # Chance that a cave spider will spawn.
 # When set to 100 or more all spiders spawn will be cave spiders.
 # When set to 0 no cave spiders will spawn naturally.
-spawnPercentage: 5
+spawnPercentage: 2
 
 # Only charge creepers who spawned naturally.
 onlyNatural: true

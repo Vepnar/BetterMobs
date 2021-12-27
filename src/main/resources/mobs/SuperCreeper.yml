@@ -1,8 +1,8 @@
 # Allow you to make creepers super powerfull.
 version: 1
-enabled: true
+enabled: false
 
-# Should remain this turned on unless it causes conflict with other plugins
+# This should remain turned on unless it causes conflict with other plugins
 listenToPowerEvent: true
 
 normalCreeper:
