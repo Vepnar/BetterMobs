@@ -6,3 +6,23 @@ debug: false
 
 # This could be set higher for less updates / second.
 updateInterval: 20 # (Ticks)
+
+# You can uncomment the materials if they're available.
+meleeWeapons:
+  - minecraft:wooden_sword
+  - minecraft:stone_sword
+  - minecraft:iron_sword
+  - minecraft:golden_sword
+  - minecraft:diamond_sword
+  #- minecraft:netherite_sword
+  - minecraft:wooden_axe
+  - minecraft:stone_axe
+  - minecraft:iron_axe
+  - minecraft:golden_axe
+  - minecraft:diamond_axe
+  #- minecraft:netherite_axe
+
+
+rangedWeapons:
+  - minecraft:bow
+  #- minecraft:crossbow

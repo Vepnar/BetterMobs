@@ -13,6 +13,7 @@ import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.utils.ItemUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,11 +118,14 @@ public class Main extends JavaPlugin {
 
         this.debugMode = getConfig().getBoolean("debug", false);
 
+        // Change interval settings:
         long interval = getConfig().getLong("updateInterval", 20);
-
         // These have to be separate since the stop method destroys itself.
         IntervalEventRunnable.getInstance().stop();
         IntervalEventRunnable.getInstance().start(this, interval);
+
+        // Update utils
+        ItemUtil.reloadAll(this);
 
     }
 
@@ -134,19 +138,19 @@ public class Main extends JavaPlugin {
      */
     public void initializeCommands() {
 
-        BasicCommandGroup bettermobs = new BasicCommandGroup(null, ASCII_NAME);
-        bettermobs.add(new HelpCommand(bettermobs));
-        bettermobs.add(new AuthorCommand(bettermobs));
-        bettermobs.add(new FeaturesCommand(bettermobs));
-        bettermobs.add(new EnableCommand(bettermobs));
-        bettermobs.add(new DisableCommand(bettermobs));
-        bettermobs.add(new ReloadCommand(bettermobs));
+        BasicCommandGroup betterMobs = new BasicCommandGroup(null, ASCII_NAME);
+        betterMobs.add(new HelpCommand(betterMobs));
+        betterMobs.add(new AuthorCommand(betterMobs));
+        betterMobs.add(new FeaturesCommand(betterMobs));
+        betterMobs.add(new EnableCommand(betterMobs));
+        betterMobs.add(new DisableCommand(betterMobs));
+        betterMobs.add(new ReloadCommand(betterMobs));
 
         // Register command
-        getCommand(ASCII_NAME).setExecutor(new CommandListener(this, bettermobs));
+        getCommand(ASCII_NAME).setExecutor(new CommandListener(this, betterMobs));
 
         // Register tab completer
-        getCommand(ASCII_NAME).setTabCompleter(new TabListener(this, bettermobs));
+        getCommand(ASCII_NAME).setTabCompleter(new TabListener(this, betterMobs));
         debug("All commands initialized");
     }
 }
