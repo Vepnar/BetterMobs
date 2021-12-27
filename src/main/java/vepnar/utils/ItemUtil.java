@@ -11,7 +11,6 @@ import java.util.List;
 public class ItemUtil {
     public static final List<Material> MELEE_WEAPONS = new ArrayList<>();
     public static final List<Material> RANGED_WEAPONS = new ArrayList<>();
-    private static final ItemUtil instance = null;
 
     public static void reloadAll(Main core) {
         loadMeleeWeapons(core);
