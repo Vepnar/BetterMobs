@@ -23,7 +23,7 @@ public class GenericMob implements IMobListener {
 
     protected boolean shouldOccur(double probability) {
         // This function is implemented such the sonarlinter doesn't warn us everytime we use math.random.
-        return probability < Math.random();
+        return probability > Math.random();
     }
 
     private File getConfigFile() {
