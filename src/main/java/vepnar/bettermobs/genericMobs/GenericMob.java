@@ -21,6 +21,11 @@ public class GenericMob implements IMobListener {
         VERSION = version;
     }
 
+    protected boolean shouldOccur(double probability) {
+        // This function is implemented such the sonarlinter doesn't warn us everytime we use math.random.
+        return probability < Math.random();
+    }
+
     private File getConfigFile() {
         String configName = "/" + getName() + ".yml";
 
