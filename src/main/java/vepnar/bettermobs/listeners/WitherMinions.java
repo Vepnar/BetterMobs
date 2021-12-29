@@ -21,6 +21,7 @@ public class WitherMinions extends GenericMob {
     private double spawnProbability;
     private double spawnRadius;
     private double spawnCount;
+    private int minionCap;
     private int spawnCoolDown;
 
     public WitherMinions(Main javaPlugin) {
@@ -48,8 +49,6 @@ public class WitherMinions extends GenericMob {
             final List<Player> players = EntityUtil.getNearbyPlayers(entity, scanRadius);
             Wither wither = (Wither) entity;
 
-            CORE.getServer().broadcastMessage("123333");
-
             // See if the random number generator want the wither to apply their aura.
             // And of course check if there are any players nearby.
             if (!shouldOccur(spawnProbability) || players.isEmpty()) continue;
@@ -58,7 +57,9 @@ public class WitherMinions extends GenericMob {
             // Check if there is an active cool down on this wither.
             if (EntityUtil.hasCoolDown(wither, WITHER_MINION_COOL_DOWN_META, spawnCoolDown)) continue;
 
-            CORE.getServer().broadcastMessage("321");
+            // Prevent too many minions from lagging the server.
+            if (minionCap > 0 && EntityUtil.getAllLivingEntities(WitherSkeleton.class).size() >= minionCap) continue;
+
             // Decide how many minions should be spawned.
             int minionCount = (int) (Math.random() * (spawnCount + 1));
             int minionRadius = (int) (Math.random() * (spawnRadius + 1));
@@ -89,6 +90,7 @@ public class WitherMinions extends GenericMob {
         spawnProbability = config.getDouble("spawnPercentageChance", 0) / 100;
         spawnRadius = config.getDouble("spawnRadius", 5);
         spawnCount = config.getInt("spawnCount", 0);
+        minionCap = config.getInt("minionCap", 1);
         spawnCoolDown = config.getInt("coolDown", 0) * 50;
     }
 }

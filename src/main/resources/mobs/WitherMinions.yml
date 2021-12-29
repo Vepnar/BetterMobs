@@ -19,3 +19,8 @@ coolDown: 600
 
 # Chance the wither will call for reinforcement if there is no cool down.
 spawnPercentageChance: 100
+
+# The maximal amount of minions a wither can have at a given moment.
+# This is set to prevent lag. Since if a player would be afk with a wither in range it would spawn minions every time it could.
+# When this is set to 0 it will spawn minions without a limit.
+minionCap: 16
