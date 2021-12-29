@@ -1,0 +1,21 @@
+enabled: false
+version: 1
+
+# The minimal distance the player needs to be for this ability to take place.
+scanRadius: 16
+
+# Setting this to true prevents the player from using the minions to farm wither skulls.
+noMinionDrops: true
+
+# How far away from the wither the minions spawn.
+spawnRadius: 5
+
+# This is the maximal amount of minions able to spawn at the same time.
+# This could be lower since the random number generator decides how many there will spawn.
+spawnCount: 5
+
+# cool down between attacks in ticks
+coolDown: 600
+
+# Chance the wither will call for reinforcement if there is no cool down.
+spawnPercentageChance: 100
