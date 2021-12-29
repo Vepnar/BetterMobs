@@ -3,10 +3,11 @@ package vepnar.bettermobs.commandHandlers;
 import java.util.ArrayList;
 public class BasicCommandGroup implements ICommandGroup {
 
-    private final ICommand parent;
+    private final ICommandGroup parent;
     private final String name;
-    private ArrayList<ICommand> subCommands = new ArrayList<>();
-    public BasicCommandGroup (ICommand parent, String name){
+    private final ArrayList<ICommand> subCommands = new ArrayList<>();
+
+    public BasicCommandGroup(ICommandGroup parent, String name) {
         this.parent = parent;
         this.name = name;
     }
@@ -46,7 +47,7 @@ public class BasicCommandGroup implements ICommandGroup {
     }
 
     @Override
-    public ICommand getParent() {
+    public ICommandGroup getParent() {
         return parent;
     }
 

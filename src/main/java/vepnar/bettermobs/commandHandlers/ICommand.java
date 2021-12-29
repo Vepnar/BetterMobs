@@ -7,6 +7,7 @@ public interface ICommand {
     int getMinimalArguments();
     CompletionType TabType();
     String getPermission();
-    ICommand getParent();
+
+    ICommandGroup getParent();
 
 }
