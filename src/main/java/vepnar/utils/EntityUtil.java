@@ -2,11 +2,15 @@ package vepnar.utils;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import vepnar.bettermobs.Main;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityUtil {
+
+    private static Main CORE;
 
     public static long getLong(Entity entity, String key, long fallback) {
         if (entity.hasMetadata(key)) {
@@ -14,6 +18,11 @@ public class EntityUtil {
         } else {
             return fallback;
         }
+    }
+
+    public static void setLong(Entity entity, String key, long value) {
+        entity.setMetadata(key, new FixedMetadataValue(CORE, value));
+
     }
 
     public static boolean isPlayerNearby(Entity entity, int radius) {
@@ -32,5 +41,9 @@ public class EntityUtil {
 
     public static double distanceBetweenEntities(Entity ent1, Entity ent2) {
         return ent1.getLocation().distance(ent2.getLocation());
+    }
+
+    public static void reloadAll(Main core) {
+        CORE = core;
     }
 }

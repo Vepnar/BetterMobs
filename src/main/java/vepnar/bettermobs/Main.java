@@ -13,6 +13,7 @@ import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.utils.EntityUtil;
 import vepnar.utils.ItemUtil;
 
 import java.io.File;
@@ -126,6 +127,7 @@ public class Main extends JavaPlugin {
 
         // Update utils
         ItemUtil.reloadAll(this);
+        EntityUtil.reloadAll(this);
 
     }
 
