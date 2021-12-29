@@ -10,6 +10,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
+import vepnar.utils.EntityUtil;
 import vepnar.utils.ItemUtil;
 
 import java.util.ArrayList;
@@ -38,11 +39,6 @@ public class GenericWeaponSwitch extends GenericMob {
         return entity.getEquipment().getItemInMainHand().getType();
     }
 
-    private boolean hasPlayerWithinRange(LivingEntity entity) {
-        List<Entity> surrounding = entity.getNearbyEntities(meleeRadius, meleeRadius, meleeRadius);
-        return surrounding.stream().anyMatch(x -> x instanceof Player);
-    }
-
     protected boolean shouldChange(LivingEntity entity, boolean playerNearby) {
         EntityEquipment equipment = entity.getEquipment();
         ItemStack firstItem = equipment.getItemInMainHand();
@@ -62,7 +58,7 @@ public class GenericWeaponSwitch extends GenericMob {
         for (Player player : CORE.getServer().getOnlinePlayers()) {
             List<LivingEntity> livingEntities = filterEntity(player.getNearbyEntities(scanRadius, scanRadius, scanRadius));
             for (LivingEntity target : livingEntities) {
-                boolean playerInRange = hasPlayerWithinRange(target);
+                boolean playerInRange = EntityUtil.isPlayerNearby(target, meleeRadius);
                 if (shouldChange(target, playerInRange)) {
                     Material targetMaterial = changeItem(target, playerInRange);
                     ItemStack newWeapon = new ItemStack(targetMaterial, ItemUtil.randomDurability(targetMaterial));
