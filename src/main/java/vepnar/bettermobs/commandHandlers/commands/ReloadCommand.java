@@ -3,57 +3,27 @@ package vepnar.bettermobs.commandHandlers.commands;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
-import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
+import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 import vepnar.bettermobs.genericMobs.IMobListener;
 
-public class ReloadCommand implements ICommandExecuteAble {
+public class ReloadCommand extends GenericCommand {
 
-    private final ICommandGroup parent;
 
-    public ReloadCommand(ICommandGroup parent){
-        this.parent = parent;
+    public ReloadCommand(ICommandGroup parent) {
+        super("reload", parent, "§r<feature>§7 reload one or more features.", 0, CompletionType.MODULE, new String[]{"restart"});
     }
 
-    @Override
-    public String getHelp() {
-        return "§r<feature>§7 reload one or more features.";
-    }
-
-    @Override
-    public String getName() {
-        return "reload";
-    }
-
-    @Override
-    public String[] getAlias() {
-        return new String[]{"restart"};
-    }
-
-    @Override
-    public int getMinimalArguments() {
-        return 0;
-    }
-
-    @Override
-    public CompletionType TabType() {
-        return CompletionType.MODULE;
-    }
 
     @Override
     public String getPermission() {
         return "bettermobs.features.reload";
     }
 
-    @Override
-    public ICommandGroup getParent() {
-        return parent;
-    }
-
-    public void executeArguments(Main core, CommandSender sender, String[] args) {
+    public void executeArguments(CommandSender sender, String[] args) {
         StringBuilder messageBuilder = new StringBuilder();
 
-        for(String feature : args) {
+        for (String feature : args) {
             for (IMobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature)) {
                     messageBuilder.append("§a");
@@ -76,7 +46,7 @@ public class ReloadCommand implements ICommandExecuteAble {
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
         if(args.length != 0) {
-            executeArguments(core, sender, args);
+            executeArguments(sender, args);
             return true;
         }
         core.reloadConfig();

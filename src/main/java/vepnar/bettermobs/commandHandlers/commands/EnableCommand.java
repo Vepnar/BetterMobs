@@ -3,53 +3,21 @@ package vepnar.bettermobs.commandHandlers.commands;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
-import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
+import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 import vepnar.bettermobs.genericMobs.IMobListener;
 
-public class EnableCommand implements ICommandExecuteAble {
+public class EnableCommand extends GenericCommand {
 
-    private final ICommandGroup parent;
 
-    public EnableCommand(ICommandGroup parent){
-        this.parent = parent;
-    }
-
-    @Override
-    public String getHelp() {
-        return "§r<feature>§7 Enable a feature.";
-    }
-
-    @Override
-    public String getName() {
-        return "enable";
-    }
-
-    @Override
-    public String[] getAlias() {
-        return new String[]{"start"};
-    }
-
-    @Override
-    public int getMinimalArguments() {
-        return 1;
-    }
-
-    @Override
-    public CompletionType TabType() {
-        return CompletionType.MODULE;
+    public EnableCommand(ICommandGroup parent) {
+        super("enable", parent, "§r<feature>§7 Enable a feature.", 1, CompletionType.MODULE, new String[]{"start"});
     }
 
     @Override
     public String getPermission() {
         return "bettermobs.features.enable";
     }
-
-    @Override
-    public ICommandGroup getParent() {
-        return parent;
-    }
-
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
         StringBuilder messageBuilder = new StringBuilder();

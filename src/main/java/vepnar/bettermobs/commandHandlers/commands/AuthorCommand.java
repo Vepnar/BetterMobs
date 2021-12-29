@@ -4,54 +4,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginDescriptionFile;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
-import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
+import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 
 /**
  * Handle the /bettermobs author. Will print information about the
  * plugin parsed from plugin.yml
  */
-public class AuthorCommand implements ICommandExecuteAble {
+public class AuthorCommand extends GenericCommand {
 
-    private final ICommandGroup parent;
 
-    public AuthorCommand(ICommandGroup parent){
-        this.parent = parent;
-    }
-
-    @Override
-    public String getHelp() {
-        return "Credits the developer";
-    }
-
-    @Override
-    public String getName() {
-        return "author";
-    }
-
-    @Override
-    public String[] getAlias() {
-        return new String [] {"credit", "credits"};
-    }
-
-    @Override
-    public int getMinimalArguments() {
-        return 0;
-    }
-
-    @Override
-    public CompletionType TabType() {
-        return CompletionType.NOTHING;
-    }
-
-    @Override
-    public String getPermission() {
-        return null;
-    }
-
-    @Override
-    public ICommandGroup getParent() {
-        return parent;
+    public AuthorCommand(ICommandGroup parent) {
+        super("author", parent, "Credits the developer", 0, CompletionType.NOTHING, new String[]{"credit", "credits"});
     }
 
     @Override

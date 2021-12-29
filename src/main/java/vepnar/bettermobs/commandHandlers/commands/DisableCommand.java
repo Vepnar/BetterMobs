@@ -3,51 +3,20 @@ package vepnar.bettermobs.commandHandlers.commands;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
-import vepnar.bettermobs.commandHandlers.ICommandExecuteAble;
+import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
 import vepnar.bettermobs.genericMobs.IMobListener;
 
-public class DisableCommand implements ICommandExecuteAble {
+public class DisableCommand extends GenericCommand {
 
-    private final ICommandGroup parent;
 
-    public DisableCommand(ICommandGroup parent){
-        this.parent = parent;
-    }
-
-    @Override
-    public String getHelp() {
-        return "§r<feature>§7 Disable a feature.";
-    }
-
-    @Override
-    public String getName() {
-        return "disable";
-    }
-
-    @Override
-    public String[] getAlias() {
-        return new String[]{"d", "stop"};
-    }
-
-    @Override
-    public int getMinimalArguments() {
-        return 1;
-    }
-
-    @Override
-    public CompletionType TabType() {
-        return CompletionType.MODULE;
+    public DisableCommand(ICommandGroup parent) {
+        super("disable", parent, "§r<feature>§7 Disable a feature.", 1, CompletionType.MODULE, new String[]{"stop"});
     }
 
     @Override
     public String getPermission() {
         return "bettermobs.features.disable";
-    }
-
-    @Override
-    public ICommandGroup getParent() {
-        return parent;
     }
 
     @Override
