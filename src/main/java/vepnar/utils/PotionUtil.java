@@ -17,9 +17,4 @@ public class PotionUtil {
         }
         return potionEffects;
     }
-
-    public static int naturalDecay(int maxDuration, double distance, double decay) {
-        double distanceDecay = Math.exp(-1 * (distance * decay));
-        return (int) (maxDuration * distanceDecay);
-    }
 }

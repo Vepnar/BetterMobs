@@ -1,0 +1,29 @@
+enabled: false
+version: 1
+
+# Radius around the wither which is affected.
+scanRadius: 32
+
+# A higher number would result in a higher decay.
+distanceDecay: 0.1
+
+strength: 0
+
+# Maximal duration of the effect. The duration is affected by the distance between the wither and the player.
+duration: 1200
+# The duration & cool down are both in ticks
+coolDown: 1200
+
+# Chance the wither will do the aura attack while there is no cool down.
+chancePercentage: 10
+
+# Possible effects the wither can choose from.
+effects:
+  - HUNGER
+  - CONFUSION
+  - WEAKNESS
+  - SLOW_DIGGING
+  - SLOW
+  - WITHER
+  - POISON
+  - BLINDNESS
