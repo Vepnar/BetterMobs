@@ -7,6 +7,8 @@
 package vepnar.bettermobs;
 
 import com.google.common.reflect.ClassPath;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
 import vepnar.bettermobs.commandHandlers.BasicCommandGroup;
 import vepnar.bettermobs.commandHandlers.CommandListener;
@@ -24,6 +26,7 @@ import java.util.List;
 public class Main extends JavaPlugin {
 
     public static final String PREFIX = "§7[§cBetterMobs§7]§f ";
+    public static int pluginId = 13769;
     public static final String ASCII_NAME = "bettermobs";
     private final int CONFIG_VERSION = 1;
     public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
@@ -48,6 +51,8 @@ public class Main extends JavaPlugin {
             // The plugin will disable itself when it doesn't have access to the class path.
             this.getPluginLoader().disablePlugin(this);
         }
+
+        initializeMetrics();
         this.getLogger().info("Has been enabled.");
     }
 
@@ -154,5 +159,11 @@ public class Main extends JavaPlugin {
         // Register tab completer
         getCommand(ASCII_NAME).setTabCompleter(new TabListener(this, betterMobs));
         debug("All commands initialized");
+    }
+
+    private void initializeMetrics() {
+        Metrics metrics = new Metrics(this, pluginId);
+        metrics.addCustomChart(new SimplePie("Modules Enabled", () -> String.valueOf(MOB_LISTENERS.size())));
+
     }
 }
