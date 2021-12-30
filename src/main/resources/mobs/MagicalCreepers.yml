@@ -1,0 +1,47 @@
+enabled: false
+version: 1
+
+# Only apply effect to creepers who spawned in a natural manner.
+onlyNatural: true
+
+# Allow creepers to have more than one effect
+effectStacking: false
+
+# You can create your own classes by using the same modifiers
+classes:
+  positive:
+    enabled: true
+    spawnPercentageChance: 100
+    effects:
+      - SPEED
+      - HEAL
+      - JUMP
+      - ABSORPTION
+      - INCREASE_DAMAGE
+      - FIRE_RESISTANCE
+      - WATER_BREATHING
+      - FAST_DIGGING
+      - INVISIBILITY
+  negative:
+    enabled: true
+    spawnPercentageChance: 100
+    effects:
+      - SLOW
+      - POISON
+      - WEAKNESS
+      - WITHER
+      - CONFUSION
+      - BLINDNESS
+      - SLOW_DIGGING
+      - DAMAGE_RESISTANCE
+  strange:
+    enabled: true
+    spawnPercentageChance: 100
+    effects:
+      - GLOWING
+      - LEVITATION
+      - LUCK
+      - NIGHT_VISION
+      - DOLPHINS_GRACE
+      - CONDUIT_POWER
+      - UNLUCK
