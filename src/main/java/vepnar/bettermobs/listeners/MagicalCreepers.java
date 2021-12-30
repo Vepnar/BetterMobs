@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
-import vepnar.utils.PotionUtil;
+import vepnar.bettermobs.utils.PotionUtil;
 
 import java.util.ArrayList;
 import java.util.List;

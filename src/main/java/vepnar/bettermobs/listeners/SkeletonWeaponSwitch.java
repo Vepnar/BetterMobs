@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericWeaponSwitch;
-import vepnar.utils.ItemUtil;
+import vepnar.bettermobs.utils.ItemUtil;
 
 import java.util.ArrayList;
 import java.util.List;

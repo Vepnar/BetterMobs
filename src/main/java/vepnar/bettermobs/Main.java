@@ -13,8 +13,8 @@ import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
-import vepnar.utils.EntityUtil;
-import vepnar.utils.ItemUtil;
+import vepnar.bettermobs.utils.EntityUtil;
+import vepnar.bettermobs.utils.ItemUtil;
 
 import java.io.File;
 import java.io.IOException;

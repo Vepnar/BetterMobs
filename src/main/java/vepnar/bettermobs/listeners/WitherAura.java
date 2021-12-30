@@ -10,9 +10,9 @@ import org.bukkit.potion.PotionEffectType;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
-import vepnar.utils.EntityUtil;
-import vepnar.utils.MathsUtil;
-import vepnar.utils.PotionUtil;
+import vepnar.bettermobs.utils.EntityUtil;
+import vepnar.bettermobs.utils.MathsUtil;
+import vepnar.bettermobs.utils.PotionUtil;
 
 import java.util.List;
 

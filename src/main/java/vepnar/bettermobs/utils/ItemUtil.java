@@ -1,4 +1,4 @@
-package vepnar.utils;
+package vepnar.bettermobs.utils;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;

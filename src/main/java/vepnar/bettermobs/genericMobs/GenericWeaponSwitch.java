@@ -10,8 +10,8 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
-import vepnar.utils.EntityUtil;
-import vepnar.utils.ItemUtil;
+import vepnar.bettermobs.utils.EntityUtil;
+import vepnar.bettermobs.utils.ItemUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import vepnar.bettermobs.IntervalEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
-import vepnar.utils.EntityUtil;
+import vepnar.bettermobs.utils.EntityUtil;
 
 import java.util.List;
 
