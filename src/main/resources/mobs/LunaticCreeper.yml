@@ -1,9 +1,7 @@
-# Allow you to make creepers super powerfull.
+# Generated for BetterMobs version @version@
+# Allow creepers to explode instant or make their explosion more powerful.
 version: 1
 enabled: false
-
-# This should remain turned on unless it causes conflict with other plugins
-listenToPowerEvent: true
 
 normalCreeper:
   fuse: 20 # In ticks
@@ -18,3 +16,5 @@ chargedCreeper:
   spawnPercentage: 50
   onlyNatural: false
 
+# This should remain turned on unless it causes conflict with other plugins
+listenToPowerEvent: true

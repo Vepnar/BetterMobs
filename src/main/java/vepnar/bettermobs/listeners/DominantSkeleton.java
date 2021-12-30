@@ -7,12 +7,12 @@ import vepnar.bettermobs.genericMobs.GenericMountMob;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkeletonMount extends GenericMountMob {
+public class DominantSkeleton extends GenericMountMob {
     boolean listenWitherSkeleton;
     boolean listenCaveSpiders;
 
-    public SkeletonMount(Main javaPlugin) {
-        super(javaPlugin, "SkeletonMount", 1);
+    public DominantSkeleton(Main javaPlugin) {
+        super(javaPlugin, "DominantSkeleton", 1);
     }
 
     @Override

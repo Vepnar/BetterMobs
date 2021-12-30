@@ -1,8 +1,0 @@
-version: 1
-enabled: false
-
-includeWitherSkeleton: true
-witherSkeletonShootFire: true
-
-meleeRadius: 6
-scanRadius: 12

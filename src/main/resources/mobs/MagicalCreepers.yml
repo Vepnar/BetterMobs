@@ -1,13 +1,19 @@
+# Generated for BetterMobs version @version@
+# Magical creepers allows creepers to spawn with potion effects.
+# This either this could make them stronger or weaker, but the most interesting thing this does it make them more interesting.
 enabled: false
 version: 1
 
 # Only apply effect to creepers who spawned in a natural manner.
 onlyNatural: true
 
-# Allow creepers to have more than one effect
+# Allow creepers to have more than one effect.
 effectStacking: false
 
-# You can create your own classes by using the same modifiers
+# You can create your own classes by using the same modifiers.
+# Effects which are not found will be ignored.
+# List of available effects in 1.18:
+# https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
 classes:
   positive:
     enabled: true

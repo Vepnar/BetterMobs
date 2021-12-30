@@ -1,3 +1,6 @@
+# Generated for BetterMobs version @version@
+# With this enabled withers will get an ability to cause a strange effect in an area around it.
+# The only way to be safe is to keep your distance from the wither.
 enabled: false
 version: 1
 

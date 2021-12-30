@@ -7,9 +7,9 @@ import org.bukkit.event.entity.EnderDragonChangePhaseEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
-public class NoDragonPerching extends GenericMob {
-    public NoDragonPerching(Main javaPlugin) {
-        super(javaPlugin, "NoDragonPerching", 1);
+public class EnergizedDragon extends GenericMob {
+    public EnergizedDragon(Main javaPlugin) {
+        super(javaPlugin, "EnergizedDragon", 1);
     }
 
     @EventHandler(priority = EventPriority.HIGH)

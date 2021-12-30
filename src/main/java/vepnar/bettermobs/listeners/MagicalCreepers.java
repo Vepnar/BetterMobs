@@ -26,7 +26,7 @@ public class MagicalCreepers extends GenericMob {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onCreeperSpawn(CreatureSpawnEvent event) {
-        // Filter out all other entities
+        // Filter out all others.
         if (!(event.getEntity() instanceof Creeper)) return;
 
 

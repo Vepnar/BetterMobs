@@ -1,4 +1,5 @@
-# This makes it possible for Charged Creepers to spawn regularly. without lightning strike.
+# Generated for BetterMobs version @version@
+# This makes it possible for Charged Creepers to spawn regularly, without lightning strike!
 version: 1
 enabled: false
 

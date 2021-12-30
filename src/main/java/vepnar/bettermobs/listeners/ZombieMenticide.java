@@ -10,12 +10,12 @@ import vepnar.bettermobs.genericMobs.GenericMountMob;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZombieMount extends GenericMountMob {
+public class ZombieMenticide extends GenericMountMob {
 
     boolean brainWash;
 
-    public ZombieMount(Main javaPlugin) {
-        super(javaPlugin, "ZombieMount", 1);
+    public ZombieMenticide(Main javaPlugin) {
+        super(javaPlugin, "ZombieMenticide", 1);
     }
 
     public List<LivingEntity> findValidRider(List<Entity> entities) {

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.CreeperPowerEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
-public class SuperCreeper extends GenericMob {
+public class LunaticCreeper extends GenericMob {
 
     private boolean listenPower;
 
@@ -24,14 +24,14 @@ public class SuperCreeper extends GenericMob {
     private boolean onlyNatural;
 
 
-    public SuperCreeper(Main javaPlugin) {
-        super(javaPlugin, "SuperCreeper", 1);
+    public LunaticCreeper(Main javaPlugin) {
+        super(javaPlugin, "LunaticCreeper", 1);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onSpawn(CreatureSpawnEvent event) {
         if (event.getEntityType() != EntityType.CREEPER) return;
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
 
         Creeper target = (Creeper) event.getEntity();
         boolean naturalSpawnReason = event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.NATURAL);

@@ -13,13 +13,13 @@ import vepnar.bettermobs.utils.ItemUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkeletonWeaponSwitch extends GenericWeaponSwitch {
+public class SkeletonTactics extends GenericWeaponSwitch {
 
     private boolean includeWitherSkeletons;
     private boolean witherSkeletonShootsFire;
 
-    public SkeletonWeaponSwitch(Main javaPlugin) {
-        super(javaPlugin, "SkeletonWeaponSwitch", 1);
+    public SkeletonTactics(Main javaPlugin) {
+        super(javaPlugin, "SkeletonTactics", 1);
 
     }
 

@@ -1,3 +1,5 @@
+# Generated for BetterMobs version @version@
+# Make skeletons more dominant and let them take control of nearby spiders.
 version: 1
 enabled: false
 

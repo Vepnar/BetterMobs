@@ -1,0 +1,6 @@
+# Generated for BetterMobs version @version@
+# Give the EnderDragon a lot more Energy and thus weaker.
+# When minecraft is played in vanilla mode the dragon gets a bit tired after a while and sits on the portal.
+# This makes the dragon very vulnerable, thus we implemented a feature to prevent this.
+version: 1
+enabled: false

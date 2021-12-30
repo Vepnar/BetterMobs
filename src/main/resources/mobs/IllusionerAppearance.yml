@@ -1,0 +1,8 @@
+# Generated for BetterMobs version @version@
+# In a normal game of minecraft Illusioners hide from the public.
+# With this module you can make them less shy, so they will appear instead of witches.
+version: 1
+enabled: false
+
+spawnPercentage: 0.5
+onlyNatural: true
