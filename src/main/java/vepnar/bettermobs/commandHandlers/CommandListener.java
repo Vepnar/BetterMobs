@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CommandListener implements CommandExecutor {
-    Main core;
-    BasicCommandGroup bettermobs;
-    String[] HELP = new String[]{"help"};
+    final Main CORE;
+    final BasicCommandGroup BETTER_MOBS;
+    final String[] HELP = new String[]{"help"};
 
     public CommandListener(Main m, BasicCommandGroup bettermobs) {
-        this.bettermobs = bettermobs;
-        this.core = m;
+        this.BETTER_MOBS = bettermobs;
+        this.CORE = m;
     }
 
     public boolean executeCommand(ArrayList<ICommand> environment, CommandSender sender, String[] args) {
@@ -53,7 +53,7 @@ public class CommandListener implements CommandExecutor {
                 }
             } else if (command instanceof ICommandExecuteAble) {
                 ICommandExecuteAble executeAble = (ICommandExecuteAble) command;
-                return executeAble.execute(core, sender, poppedArgs);
+                return executeAble.execute(CORE, sender, poppedArgs);
             }
         }
         // Prevent infinite recursion.
@@ -68,6 +68,6 @@ public class CommandListener implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Show the help command when there are no commands entered.
         if(args.length == 0 ) args = HELP;
-        return executeCommand(bettermobs.getCommands(), sender, args);
+        return executeCommand(BETTER_MOBS.getCommands(), sender, args);
     }
 }

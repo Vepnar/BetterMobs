@@ -4,7 +4,7 @@ version: 1
 # Enabling this will induce a lot of spam in the console.
 debug: false
 
-# This could be set higher for less updates / second.
+# This could be set higher for fewer updates / second.
 updateInterval: 20 # (Ticks)
 
 # You can uncomment the materials if they're available.
