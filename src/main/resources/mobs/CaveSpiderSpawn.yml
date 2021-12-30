@@ -1,4 +1,7 @@
-# This makes it possible for cave spiders to spawn naturally
+# Generated for BetterMobs version @version@
+# This makes it possible for cave spiders to spawn naturally.
+# TODO: Rename cave spiders spawn to a cool name.
+
 version: 1
 enabled: false
 

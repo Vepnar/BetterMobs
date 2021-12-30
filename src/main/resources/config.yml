@@ -1,4 +1,5 @@
 # Version of the configuration file
+# Generated for BetterMobs version @version@
 version: 1
 
 # Enabling this will induce a lot of spam in the console.
@@ -14,15 +15,15 @@ meleeWeapons:
   - minecraft:iron_sword
   - minecraft:golden_sword
   - minecraft:diamond_sword
-  #- minecraft:netherite_sword
+  - minecraft:netherite_sword
   - minecraft:wooden_axe
   - minecraft:stone_axe
   - minecraft:iron_axe
   - minecraft:golden_axe
   - minecraft:diamond_axe
-  #- minecraft:netherite_axe
+  - minecraft:netherite_axe
 
 
 rangedWeapons:
   - minecraft:bow
-  #- minecraft:crossbow
+  - minecraft:crossbow
