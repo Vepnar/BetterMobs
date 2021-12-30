@@ -1,17 +1,19 @@
 <h1 align="center">BetterMobs v1.5.0</h1>
 <p align="center">
 <a href="https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs"><img src="https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status" alt="Quality Gate Status"/></a>
+<a href="https://discord.gg/3S2kPbSzNH"><img src="https://img.shields.io/discord/863436399113404456?label=Discord" alt="Discord"/></a>
 <a href="https://github.com/Vepnar/LICENSE"><img src="https://img.shields.io/github/license/Vepnar/BetterMobs" alt="License GNU GPLv3"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/issues"><img src="https://img.shields.io/github/issues/Vepnar/BetterMobs" alt="Issues"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/releases"><img src="https://img.shields.io/github/v/release/Vepnar/BetterMobs?include_prereleases" alt="Version"/></a>
-<a href="http://discord.gg/CeZwTS4WJ3"><img src="https://img.shields.io/discord/863436399113404456?label=Discord" alt="Discord"/></a>
+<a href="https://www.spigotmc.org/resources/bettermobs.98792"><img src="https://img.shields.io/spiget/downloads/98792" alt="Download Count"></a>
 </p>
 
 A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
 
 ### Installation
 
-1. Download the newest version of the plugin from [GitHub](https://github.com/Vepnar/BetterMobs/releases).
+1. Download the newest version of the plugin from [GitHub](https://github.com/Vepnar/BetterMobs/releases)
+   or [SpigotMC](https://www.spigotmc.org/resources/bettermobs.98792).
 2. Put the downloaded file in your `./server/plugins` directory.
 3. Start the server and let the plugin autogenerate the configuration files.
 4. Enable the special mobs you like. All the special mobs are disabled by default.
