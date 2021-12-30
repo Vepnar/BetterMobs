@@ -61,7 +61,7 @@ public class GenericWeaponSwitch extends GenericMob {
                 boolean playerInRange = EntityUtil.isPlayerNearby(target, meleeRadius);
                 if (shouldChange(target, playerInRange)) {
                     Material targetMaterial = changeItem(target, playerInRange);
-                    ItemStack newWeapon = new ItemStack(targetMaterial, ItemUtil.randomDurability(targetMaterial));
+                    ItemStack newWeapon = new ItemStack(targetMaterial);
                     target.getEquipment().setItemInMainHand(newWeapon);
                 }
             }

@@ -28,12 +28,6 @@ public class ItemUtil {
         return ItemType.NONE;
     }
 
-    public static int randomDurability(Material m) {
-        double max = Math.pow(m.getMaxDurability(), 2) / 2;
-        double random = Math.random() * max + 1;
-        return (int) Math.ceil(random) + 10;
-    }
-
     private static List<String> getCleanList(FileConfiguration config, String path) {
         List<String> result = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 # Generated for BetterMobs version @version@
 # Make skeletons more intelligent and allow them to switch weapon when the player is nearby.
+# Skeletons don't try to get their sword at broad daylight. They only attack with melee weapons at night.
 
 version: 1
 enabled: false
