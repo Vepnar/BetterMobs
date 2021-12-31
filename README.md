@@ -1,8 +1,8 @@
-<h1 align="center">BetterMobs v1.5.0</h1>
+<h1 align="center">BetterMobs v1.5.1</h1>
 <p align="center">
 <a href="https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs"><img src="https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status" alt="Quality Gate Status"/></a>
 <a href="https://discord.gg/3S2kPbSzNH"><img src="https://img.shields.io/discord/863436399113404456?label=Discord" alt="Discord"/></a>
-<a href="https://github.com/Vepnar/LICENSE"><img src="https://img.shields.io/github/license/Vepnar/BetterMobs" alt="License GNU GPLv3"/></a>
+<a href="https://github.com/Vepnar/BetterMobs/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Vepnar/BetterMobs" alt="License GNU GPLv3"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/issues"><img src="https://img.shields.io/github/issues/Vepnar/BetterMobs" alt="Issues"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/releases"><img src="https://img.shields.io/github/v/release/Vepnar/BetterMobs?include_prereleases" alt="Version"/></a>
 <a href="https://www.spigotmc.org/resources/bettermobs.98792"><img src="https://img.shields.io/spiget/downloads/98792" alt="Download Count"></a>
@@ -30,9 +30,17 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 ### Change  log
 
 <details open>
+  <summary><b>BetterMobs v1.5.1</b></summary>
+    <ul>
+      <li>Implemented: Ender Rage</li>
+      <li>Fixed: BStat metric issue</li>
+      <li>Fixed: sword stack drop (reported by: hitewaer)</li>
+    </ul>
+</details>
+<details>
   <summary><b>BetterMobs v1.5.0</b></summary>
     <ul>
-<li>Implemented Cave Spider Spawn (Will be renamed)</li>
+        <li>Implemented Cave Spider Spawn (Will be renamed)</li>
         <li>Implemented Creeper Potential</li>
         <li>Implemented Dominant Skeletons</li>
         <li>Implemented Energized Dragon</li>
@@ -59,6 +67,7 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Allow Ghasts to have more attack types.</li>
     <li>Increase zombie movement speed.</li>
     <li>Make monsters regenerate health.</li>
+    <li>Make more monsters switch their weapons</li>
     <li>Improve documentation configuration files.</li>
     <li>Improve in-code documentation.</li>
 </ul>
