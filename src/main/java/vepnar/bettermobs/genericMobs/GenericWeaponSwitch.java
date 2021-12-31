@@ -63,6 +63,7 @@ public class GenericWeaponSwitch extends GenericMob {
                     Material targetMaterial = changeItem(target, playerInRange);
                     ItemStack newWeapon = new ItemStack(targetMaterial);
                     target.getEquipment().setItemInMainHand(newWeapon);
+                    target.getEquipment().setItemInMainHandDropChance(0.01F);
                 }
             }
         }
