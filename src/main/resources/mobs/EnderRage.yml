@@ -1,0 +1,29 @@
+# Generated for BetterMobs version @version@
+# Allows the Ender Man to protect precious things around them.
+# For example Ender Man will protect ender crystals.
+version: 1
+enabled: false
+
+# The radius around which enderman are enraged in.
+scanRadius: 32
+
+# The maximal amount of enderman enraged in the radius previously set.
+# If you set this to a high number all enderman in the radius above will be enraged.
+# This number is also affected by a random number generator
+maxEnderManRage: 6
+
+
+# This should be set quite high if you want enderman to always get mad when an ender crystal is set.
+# When this is set to 50. 50% of the time a player hits an end crystal enderman will get enraged.
+angerPercentageChance: 100
+
+# The delay between each time this event occours.
+# This is implemented such that not every hit on the dragon will make enderman enraged.
+coolDown: 400 # (In Ticks)
+
+# If enderman should get angry if this entity gets hit.
+includeDragon: true
+includeCrystal: true
+
+# Prevent enderman from attacking the dragon.
+noInternalAnger: true

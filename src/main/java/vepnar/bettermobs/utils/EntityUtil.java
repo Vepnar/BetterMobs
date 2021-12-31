@@ -42,12 +42,21 @@ public class EntityUtil {
         return entity.getNearbyEntities(radius, radius, radius).stream().anyMatch(e -> e instanceof Player);
     }
 
+    public static List<Entity> getNearbyEntitiesOfType(Entity entity, int radius, Class entityType) {
+        final List<Entity> entities = new ArrayList<>();
+        for (Entity surrounding : entity.getNearbyEntities(radius, radius, radius)) {
+            if (entityType.isInstance(surrounding)) {
+                entities.add(surrounding);
+            }
+        }
+
+        return entities;
+    }
+
     public static List<Player> getNearbyPlayers(Entity entity, int radius) {
         final List<Player> players = new ArrayList<>();
-        for (Entity surrounding : entity.getNearbyEntities(radius, radius, radius)) {
-            if (surrounding instanceof Player) {
-                players.add((Player) surrounding);
-            }
+        for (Entity surrounding : getNearbyEntitiesOfType(entity, radius, Player.class)) {
+            players.add((Player) surrounding);
         }
         return players;
     }
