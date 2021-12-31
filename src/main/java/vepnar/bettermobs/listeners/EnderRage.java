@@ -60,7 +60,6 @@ public class EnderRage extends GenericMob {
             Enderman guard = (Enderman) entity;
             if (guard.getTarget() instanceof Player) continue;
             guard.setTarget(offender);
-            offender.sendMessage(entity.getUniqueId().toString());
             enderManAngered--;
         }
         EntityUtil.setLong(victim, ENDER_RAGE_COOL_DOWN, System.currentTimeMillis());
