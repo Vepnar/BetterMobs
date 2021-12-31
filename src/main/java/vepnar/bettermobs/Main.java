@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
     public static int pluginId = 13769;
     public static final String ASCII_NAME = "bettermobs";
     private final int CONFIG_VERSION = 1;
+    public static final String STATS_MODULES_ENABLED = "modules_enabled";
     public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
     private boolean debugMode = false;
 
@@ -161,9 +162,17 @@ public class Main extends JavaPlugin {
         debug("All commands initialized");
     }
 
+    private int getEnabledListenerCount() {
+        int count = 0;
+        for (IMobListener listener : MOB_LISTENERS) {
+            if (listener.isEnabled()) count++;
+        }
+        return count;
+    }
+
     private void initializeMetrics() {
         Metrics metrics = new Metrics(this, pluginId);
-        metrics.addCustomChart(new SimplePie("Modules Enabled", () -> String.valueOf(MOB_LISTENERS.size())));
+        metrics.addCustomChart(new SimplePie(STATS_MODULES_ENABLED, () -> String.valueOf(getEnabledListenerCount())));
 
     }
 }
