@@ -17,7 +17,7 @@ effectStacking: false
 classes:
   positive:
     enabled: true
-    spawnPercentageChance: 100
+    spawnPercentageChance: 2
     effects:
       - SPEED
       - HEAL
@@ -30,7 +30,7 @@ classes:
       - INVISIBILITY
   negative:
     enabled: true
-    spawnPercentageChance: 100
+    spawnPercentageChance: 1
     effects:
       - SLOW
       - POISON
@@ -42,7 +42,7 @@ classes:
       - DAMAGE_RESISTANCE
   strange:
     enabled: true
-    spawnPercentageChance: 100
+    spawnPercentageChance: 0.5
     effects:
       - GLOWING
       - LEVITATION
