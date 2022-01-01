@@ -50,11 +50,14 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
 
             // The plugin will disable itself when it doesn't have access to the class path.
-            this.getPluginLoader().disablePlugin(this);
+            getPluginLoader().disablePlugin(this);
         }
 
         initializeMetrics();
-        this.getLogger().info("Has been enabled.");
+        getLogger().info("Has been enabled.");
+        if (getEnabledListenerCount() == 0) {
+            getLogger().info("There are currently no modules enabled, enable some in the config.");
+        }
     }
 
     @Override
