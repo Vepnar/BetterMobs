@@ -1,11 +1,12 @@
 <h1 align="center">BetterMobs v1.5.1</h1>
 <p align="center">
 <a href="https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs"><img src="https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status" alt="Quality Gate Status"/></a>
+<a href="https://www.spigotmc.org/resources/bettermobs.98792/reviews"><img src="https://img.shields.io/spiget/rating/98792" alt="Spigot Rating"/></a>
+<a href="https://www.spigotmc.org/resources/bettermobs.98792"><img src="https://img.shields.io/spiget/downloads/98792" alt="Download Count"></a>
 <a href="https://discord.gg/3S2kPbSzNH"><img src="https://img.shields.io/discord/863436399113404456?label=Discord" alt="Discord"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Vepnar/BetterMobs" alt="License GNU GPLv3"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/issues"><img src="https://img.shields.io/github/issues/Vepnar/BetterMobs" alt="Issues"/></a>
 <a href="https://github.com/Vepnar/BetterMobs/releases"><img src="https://img.shields.io/github/v/release/Vepnar/BetterMobs?include_prereleases" alt="Version"/></a>
-<a href="https://www.spigotmc.org/resources/bettermobs.98792"><img src="https://img.shields.io/spiget/downloads/98792" alt="Download Count"></a>
 </p>
 
 A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more interesting to fight.<br>
