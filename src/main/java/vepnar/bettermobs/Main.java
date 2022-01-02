@@ -15,6 +15,8 @@ import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.runnables.IntervalEventRunnable;
+import vepnar.bettermobs.runnables.UpdateCheckerRunnable;
 import vepnar.bettermobs.utils.EntityUtil;
 import vepnar.bettermobs.utils.ItemUtil;
 
@@ -65,8 +67,11 @@ public class Main extends JavaPlugin {
         for (IMobListener listener : MOB_LISTENERS) {
             listener.disable();
         }
-        this.getLogger().info("Has been disabled.");
         IntervalEventRunnable.getInstance().stop();
+        UpdateCheckerRunnable.getInstance().stop();
+
+        this.getLogger().info("Has been disabled.");
+
     }
 
     /**
@@ -132,7 +137,23 @@ public class Main extends JavaPlugin {
         long interval = getConfig().getLong("updateInterval", 20);
         // These have to be separate since the stop method destroys itself.
         IntervalEventRunnable.getInstance().stop();
-        IntervalEventRunnable.getInstance().start(this, interval);
+
+        // Create a new schedule one tick later.
+        getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
+            IntervalEventRunnable.getInstance().start(this, interval);
+        }, 3);
+
+
+        // Initialize the update checker.
+        UpdateCheckerRunnable.getInstance().stop();
+
+        if (getConfig().getBoolean("checkUpdates", true)) {
+            // Start the update checker on a later moment.
+            getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
+                UpdateCheckerRunnable.getInstance().start(this);
+            }, 3);
+
+        }
 
         // Update utils
         ItemUtil.reloadAll(this);
