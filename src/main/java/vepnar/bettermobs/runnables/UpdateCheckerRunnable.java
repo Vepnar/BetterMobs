@@ -15,6 +15,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
     private static final String UPDATE_PATH = "https://api.github.com/repos/Vepnar/BetterMobs/releases/latest";
     private static final Pattern VERSION_MATCHER = Pattern.compile("\\\"tag_name\"\\s*:\\s*\"([0-9]*\\.[0-9]*\\.[0-9]*)\"\\s*,");
     private static final String NAME = "UpdateChecker";
+    public boolean outdated = false;
 
     public static UpdateCheckerRunnable getInstance() {
         if (instance == null) {
@@ -37,6 +38,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
 
     @Override
     public void run() {
+        if (outdated) return;
         BufferedReader bufferedReader = null;
         try {
             URL updateUrl = new URL(UPDATE_PATH);
@@ -58,7 +60,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
                 if (!currentVersion.equals(latestVersion)) {
                     CORE.debug("Currently installed: " + currentVersion + " the newest version available: " + latestVersion);
                     CORE.getLogger().warning("A newer version of this plugin is out, with bugfixes & additional mobs");
-                    this.stop();
+                    outdated = true;
                 } else CORE.debug("BetterMobs is up to date.");
             } else CORE.debug("Could not check for updates.");
 
