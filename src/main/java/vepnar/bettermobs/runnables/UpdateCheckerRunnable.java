@@ -39,19 +39,21 @@ public class UpdateCheckerRunnable extends GenericRunnable {
     @Override
     public void run() {
         if (outdated) return;
-        BufferedReader bufferedReader = null;
         try {
-            URL updateUrl = new URL(UPDATE_PATH);
-            URLConnection connection = updateUrl.openConnection();
-            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            // Connection setup.
+            final URL updateUrl = new URL(UPDATE_PATH);
+            final URLConnection connection = updateUrl.openConnection();
+            final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
 
+            // Retrieve information from remote host.
             StringBuilder result = new StringBuilder();
             while ((inputLine = bufferedReader.readLine()) != null)
                 result.append(inputLine);
 
+            // Use regular expression to match the version.
             Matcher match = VERSION_MATCHER.matcher(result.toString());
-
             if (match.find() && match.groupCount() > 0) {
                 String latestVersion = match.group(1);
                 String currentVersion = CORE.getDescription().getVersion();
@@ -63,15 +65,12 @@ public class UpdateCheckerRunnable extends GenericRunnable {
                     outdated = true;
                 } else CORE.debug("BetterMobs is up to date.");
             } else CORE.debug("Could not check for updates.");
-
+            bufferedReader.close();
 
         } catch (Exception ex) {
             CORE.debug("Could not check for updates.\n" + ex.getMessage());
-        } finally {
-            try {
-                bufferedReader.close();
-            } catch (Exception e) { /* Ignore exception */ }
         }
+
     }
 
 }
