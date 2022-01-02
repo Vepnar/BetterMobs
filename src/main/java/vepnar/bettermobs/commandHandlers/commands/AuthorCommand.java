@@ -15,7 +15,7 @@ public class AuthorCommand extends GenericCommand {
 
 
     public AuthorCommand(ICommandGroup parent) {
-        super("author", parent, "Credits the developer", 0, CompletionType.NOTHING, new String[]{"credit", "credits"});
+        super("author", parent, "Credits the developer", 0, CompletionType.NOTHING, new String[]{"credit", "credits", "version"});
     }
 
     @Override
