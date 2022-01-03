@@ -31,6 +31,17 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 ### Change  log
 
 <details open>
+  <summary><b>BetterMobs v1.5.2</b></summary>
+    <ul>
+      <li>Implemented PiglinTactics</li>
+      <li>Improved compatibility with previous versions.</li>
+      <li>Balanced spawn rates of Magical Creepers</li>
+      <li>Balanced weapon drop rate of skeletons</li>
+      <li>Notify admins when there are no modules enabled</li>
+      <li>Notify admins when there is a new update available</li>
+    </ul>
+</details>
+<details>
   <summary><b>BetterMobs v1.5.1</b></summary>
     <ul>
       <li>Implemented: Ender Rage</li>
@@ -71,6 +82,10 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Make more monsters switch their weapons</li>
     <li>Improve documentation configuration files.</li>
     <li>Improve in-code documentation.</li>
+    <li>Add poisonous zombies (idea: Grouchy)</li>
+    <li>Reimplement the Giant again (idea: Jeans)</li>
+    <li>Add option to remove certain mobs (idea: Grouchy)</li>
+    <li>Allow people to take feathers from chickens</li>
 </ul>
 
 ### Goals
