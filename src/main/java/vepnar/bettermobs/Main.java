@@ -93,7 +93,12 @@ public class Main extends JavaPlugin {
             try {
                 Class<IMobListener> module = (Class<IMobListener>) cls;
                 IMobListener mobListener = module.getDeclaredConstructor(Main.class).newInstance(args);
-                MOB_LISTENERS.add(mobListener);
+
+                // Check API compatibility.
+                if (mobListener.isCompatible()) {
+                    MOB_LISTENERS.add(mobListener);
+                } else
+                    debug(mobListener.getName() + " is not compatible with the current version (1." + API_VERSION + ".*)");
             } catch (Exception ex) {
                 ex.printStackTrace();
                 getLogger().warning(ex.getMessage());

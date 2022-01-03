@@ -25,7 +25,7 @@ public class WitherMinions extends GenericMob {
     private int spawnCoolDown;
 
     public WitherMinions(Main javaPlugin) {
-        super(javaPlugin, "WitherMinions", 1);
+        super(javaPlugin, "WitherMinions", 1, 13);
     }
 
 

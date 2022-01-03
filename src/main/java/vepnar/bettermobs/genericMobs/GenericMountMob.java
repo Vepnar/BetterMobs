@@ -17,8 +17,8 @@ public class GenericMountMob extends GenericMob {
     private int searchRadius;
     private int mountRadius;
 
-    public GenericMountMob(Main javaPlugin, String name, int version) {
-        super(javaPlugin, name, version);
+    public GenericMountMob(Main javaPlugin, String name, int version, int apiVersion) {
+        super(javaPlugin, name, version, apiVersion);
     }
 
     protected boolean isInvalidEntity(LivingEntity entity) {

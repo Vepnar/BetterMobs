@@ -14,7 +14,7 @@ public class CaveSpiderSpawn extends GenericMob {
     private boolean onlyNatural;
 
     public CaveSpiderSpawn(Main javaPlugin) {
-        super(javaPlugin, "CaveSpiderSpawn", 1);
+        super(javaPlugin, "CaveSpiderSpawn", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

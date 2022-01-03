@@ -19,7 +19,7 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     private boolean witherSkeletonShootsFire;
 
     public SkeletonTactics(Main javaPlugin) {
-        super(javaPlugin, "SkeletonTactics", 1);
+        super(javaPlugin, "SkeletonTactics", 1, 13);
 
     }
 

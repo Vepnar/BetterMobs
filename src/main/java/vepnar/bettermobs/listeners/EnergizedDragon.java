@@ -9,7 +9,7 @@ import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class EnergizedDragon extends GenericMob {
     public EnergizedDragon(Main javaPlugin) {
-        super(javaPlugin, "EnergizedDragon", 1);
+        super(javaPlugin, "EnergizedDragon", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.HIGH)

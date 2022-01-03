@@ -14,7 +14,7 @@ public class CreeperPotential extends GenericMob {
     private boolean onlyNatural;
 
     public CreeperPotential(Main javaPlugin) {
-        super(javaPlugin, "CreeperPotential", 1);
+        super(javaPlugin, "CreeperPotential", 1, 13);
 
     }
 

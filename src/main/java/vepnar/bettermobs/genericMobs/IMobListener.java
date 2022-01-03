@@ -13,5 +13,7 @@ public interface IMobListener extends Listener {
 
     boolean isEnabled();
 
+    boolean isCompatible();
+
     String getName();
 }

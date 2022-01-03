@@ -21,7 +21,7 @@ public class MagicalCreepers extends GenericMob {
     private boolean effectStacking;
 
     public MagicalCreepers(Main javaPlugin) {
-        super(javaPlugin, "MagicalCreepers", 1);
+        super(javaPlugin, "MagicalCreepers", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.HIGH)

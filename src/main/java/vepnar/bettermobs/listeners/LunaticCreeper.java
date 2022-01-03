@@ -25,7 +25,7 @@ public class LunaticCreeper extends GenericMob {
 
 
     public LunaticCreeper(Main javaPlugin) {
-        super(javaPlugin, "LunaticCreeper", 1);
+        super(javaPlugin, "LunaticCreeper", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.HIGH)

@@ -31,7 +31,7 @@ public class WitherAura extends GenericMob {
 
 
     public WitherAura(Main javaPlugin) {
-        super(javaPlugin, "WitherAura", 1);
+        super(javaPlugin, "WitherAura", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

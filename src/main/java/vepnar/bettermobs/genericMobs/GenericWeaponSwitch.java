@@ -22,8 +22,8 @@ public class GenericWeaponSwitch extends GenericMob {
     private int scanRadius;
 
 
-    public GenericWeaponSwitch(Main javaPlugin, String name, int version) {
-        super(javaPlugin, name, version);
+    public GenericWeaponSwitch(Main javaPlugin, String name, int version, int apiVersion) {
+        super(javaPlugin, name, version, apiVersion);
     }
 
     protected List<LivingEntity> filterEntity(List<Entity> entities) {

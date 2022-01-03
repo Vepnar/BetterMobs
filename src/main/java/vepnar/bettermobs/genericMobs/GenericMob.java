@@ -11,19 +11,26 @@ public class GenericMob implements IMobListener {
     protected final Main CORE;
     protected final String NAME;
     protected final int VERSION;
+    protected final int API_VERSION;
 
     protected YamlConfiguration config;
     protected boolean enabled = false;
 
-    public GenericMob(Main javaPlugin, String name, int version) {
+    public GenericMob(Main javaPlugin, String name, int version, int apiVersion) {
         CORE = javaPlugin;
         NAME = name;
         VERSION = version;
+        API_VERSION = apiVersion;
     }
 
     protected boolean shouldOccur(double probability) {
-        // This function is implemented such the sonarlinter doesn't warn us everytime we use math.random.
+        // This function is implemented such the sonarlinter doesn't warn us everytime we use `math.random`.
         return probability > Math.random();
+    }
+
+    @Override
+    public boolean isCompatible() {
+        return Main.API_VERSION >= API_VERSION;
     }
 
     private File getConfigFile() {

@@ -15,7 +15,7 @@ public class ZombieMenticide extends GenericMountMob {
     boolean brainWash;
 
     public ZombieMenticide(Main javaPlugin) {
-        super(javaPlugin, "ZombieMenticide", 1);
+        super(javaPlugin, "ZombieMenticide", 1, 13);
     }
 
     public List<LivingEntity> findValidRider(List<Entity> entities) {

@@ -12,7 +12,7 @@ public class DominantSkeleton extends GenericMountMob {
     boolean listenCaveSpiders;
 
     public DominantSkeleton(Main javaPlugin) {
-        super(javaPlugin, "DominantSkeleton", 1);
+        super(javaPlugin, "DominantSkeleton", 1, 13);
     }
 
     @Override

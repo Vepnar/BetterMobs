@@ -22,7 +22,7 @@ public class EnderRage extends GenericMob {
     private boolean noInternalAnger;
 
     public EnderRage(Main javaPlugin) {
-        super(javaPlugin, "EnderRage", 1);
+        super(javaPlugin, "EnderRage", 1, 13);
     }
 
     private Player getPlayerFromDamager(Entity entity) {

@@ -15,7 +15,7 @@ public class IllusionerAppearance extends GenericMob {
     private boolean onlyNatural;
 
     public IllusionerAppearance(Main javaPlugin) {
-        super(javaPlugin, "IllusionerAppearance", 1);
+        super(javaPlugin, "IllusionerAppearance", 1, 13);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
