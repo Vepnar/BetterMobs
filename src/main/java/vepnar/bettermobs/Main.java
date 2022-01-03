@@ -36,31 +36,29 @@ public class Main extends JavaPlugin {
     public static final String STATS_MODULES_ENABLED = "modules_enabled";
     public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
     public final int CONFIG_VERSION = 1;
+    public static int API_VERSION;
 
     private boolean debugMode = false;
 
 
     @Override
     public void onEnable() {
-
-        // Load configuration
-        loadDefaultConfig();
         reloadConfig();
+        parseApiVersion();
         initializeCommands();
+        initializeMetrics();
 
         try {
             // If for some reason we can't access the class path we should not load the plugin.
             loadMobListeners();
             initializeMobListener();
         } catch (IOException e) {
-            e.printStackTrace();
-
             // The plugin will disable itself when it doesn't have access to the class path.
+            e.printStackTrace();
             getPluginLoader().disablePlugin(this);
         }
 
-        initializeMetrics();
-        getLogger().info("Has been enabled.");
+        getLogger().info("Has been enabled for minecraft 1." + API_VERSION + ".*");
         if (getEnabledListenerCount() == 0) {
             getLogger().info("There are currently no modules enabled, enable some in the config.");
         }
@@ -160,6 +158,7 @@ public class Main extends JavaPlugin {
         ItemUtil.reloadAll(this);
         EntityUtil.reloadAll(this);
 
+
     }
 
     public void debug(String log) {
@@ -195,9 +194,21 @@ public class Main extends JavaPlugin {
         return count;
     }
 
+    /**
+     * Parse the current API version.
+     */
+    private void parseApiVersion() {
+        String versionString = getServer().getBukkitVersion();
+        for (int i = 13; 19 > i; i++) {
+            if (versionString.contains("1." + i)) {
+                API_VERSION = i;
+            }
+        }
+    }
+
+
     private void initializeMetrics() {
         Metrics metrics = new Metrics(this, PLUGIN_ID);
         metrics.addCustomChart(new SimplePie(STATS_MODULES_ENABLED, () -> String.valueOf(getEnabledListenerCount())));
-
     }
 }
