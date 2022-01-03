@@ -6,10 +6,10 @@
  */
 package vepnar.bettermobs;
 
-import com.google.common.reflect.ClassPath;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.reflections.Reflections;
 import vepnar.bettermobs.commandHandlers.BasicCommandGroup;
 import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
@@ -24,15 +24,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Main extends JavaPlugin {
 
     public static final String PREFIX = "§7[§cBetterMobs§7]§f ";
-    public static int pluginId = 13769;
+    public static final String LISTENER_SCOPE = "vepnar.bettermobs.listeners";
     public static final String ASCII_NAME = "bettermobs";
-    private final int CONFIG_VERSION = 1;
+    public static int PLUGIN_ID = 13769;
     public static final String STATS_MODULES_ENABLED = "modules_enabled";
     public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
+    public final int CONFIG_VERSION = 1;
+
     private boolean debugMode = false;
 
 
@@ -79,27 +83,24 @@ public class Main extends JavaPlugin {
      * @throws IOException if the attempt to read class path resources (jar files or directories) failed.
      */
     private void loadMobListeners() throws IOException {
-        ClassPath classpath = ClassPath.from(this.getClassLoader());
-
         // Generate constructor arguments
         Object[] args = new Object[]{this};
 
-        // Scan for other classes.
-        for (ClassPath.ClassInfo classInfo : classpath.getTopLevelClasses("vepnar.bettermobs.listeners")) {
-            try {
-                Class<?> cls = classInfo.load();
+        Reflections reflections = new Reflections(LISTENER_SCOPE);
 
-                // Check if the loaded class implements the interface IMobListener.
-                // If it does implement this interface, add it to the linked list.
-                if (IMobListener.class.isAssignableFrom(cls)) {
-                    Class<IMobListener> mobListenerClass = (Class<IMobListener>) cls;
-                    IMobListener mobListener = mobListenerClass.getDeclaredConstructor(Main.class).newInstance(args);
-                    MOB_LISTENERS.add(mobListener);
-                }
+        // See: https://github.com/ronmamo/reflections/issues/245
+        Set<Class<?>> modules = reflections.getSubTypesOf(IMobListener.class).stream().filter(v -> v.getPackage().getName().equals(LISTENER_SCOPE)).collect(Collectors.toSet());
+
+        for (Class<?> cls : modules) {
+            try {
+                Class<IMobListener> module = (Class<IMobListener>) cls;
+                IMobListener mobListener = module.getDeclaredConstructor(Main.class).newInstance(args);
+                MOB_LISTENERS.add(mobListener);
             } catch (Exception ex) {
-                    getLogger().warning(ex.getMessage());
-                }
+                ex.printStackTrace();
+                getLogger().warning(ex.getMessage());
             }
+        }
     }
 
     private void initializeMobListener() {
@@ -195,7 +196,7 @@ public class Main extends JavaPlugin {
     }
 
     private void initializeMetrics() {
-        Metrics metrics = new Metrics(this, pluginId);
+        Metrics metrics = new Metrics(this, PLUGIN_ID);
         metrics.addCustomChart(new SimplePie(STATS_MODULES_ENABLED, () -> String.valueOf(getEnabledListenerCount())));
 
     }

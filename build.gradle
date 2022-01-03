@@ -28,6 +28,7 @@ processResources {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.reflections:reflections:0.10.2'
     api 'org.bstats:bstats-bukkit:2.2.1'
 
 }
