@@ -1,12 +1,10 @@
-# Version of the configuration file
 # Generated for BetterMobs version @version@
-version: 1
 
 # This could be set higher for fewer updates / second.
 # The update interval are used for changing entities and casting their abilities.
 updateInterval: 20 # (Ticks)
 
-# You can uncomment the materials if they're available.
+# You can comment the materials if they're not available.
 meleeWeapons:
   - minecraft:wooden_sword
   - minecraft:stone_sword
@@ -25,8 +23,11 @@ rangedWeapons:
   - minecraft:bow
   - minecraft:crossbow
 
-# Check if there are updates available.
+# Check online if there are updates available.
 checkUpdates: true
 
 # Enabling this will induce a lot of spam in the console.
 debug: false
+
+# Please don't change the version of the config unless you know what you're doing.
+version: 1
