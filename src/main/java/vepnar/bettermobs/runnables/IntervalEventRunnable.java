@@ -9,6 +9,13 @@ public class IntervalEventRunnable extends GenericRunnable {
     private static IntervalEventRunnable instance;
     private long interval;
 
+    @Override
+    public void stop() {
+        // This has to be this explicit since this is a singleton.
+        super.stop();
+        instance = null;
+    }
+
     public static IntervalEventRunnable getInstance() {
         if (instance == null) {
             instance = new IntervalEventRunnable();
@@ -24,6 +31,7 @@ public class IntervalEventRunnable extends GenericRunnable {
             CORE.debug(NAME + " started!");
             return true;
         } catch (IllegalStateException exception) {
+            exception.printStackTrace();
             return false;
         }
     }

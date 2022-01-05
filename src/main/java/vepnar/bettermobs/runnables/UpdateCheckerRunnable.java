@@ -11,17 +11,25 @@ import java.util.regex.Pattern;
 
 public class UpdateCheckerRunnable extends GenericRunnable {
 
+    private static final String NAME = "UpdateChecker";
+    private static UpdateCheckerRunnable instance;
+
     private static final int INTERVAL = 72000;
+    public boolean outdated = false;
     private static final String UPDATE_PATH = "https://api.github.com/repos/Vepnar/BetterMobs/releases/latest";
     private static final Pattern VERSION_MATCHER = Pattern.compile("\\\"tag_name\"\\s*:\\s*\"([0-9]*\\.[0-9]*\\.[0-9]*)\"\\s*,");
-    private static final String NAME = "UpdateChecker";
-    public boolean outdated = false;
 
     public static UpdateCheckerRunnable getInstance() {
         if (instance == null) {
             instance = new UpdateCheckerRunnable();
         }
-        return (UpdateCheckerRunnable) instance;
+        return instance;
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        instance = null;
     }
 
 
