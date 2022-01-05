@@ -139,25 +139,14 @@ public class Main extends JavaPlugin {
 
         // Change interval settings:
         long interval = getConfig().getLong("updateInterval", 20);
+
         // These have to be separate since the stop method destroys itself.
         IntervalEventRunnable.getInstance().stop();
-
-        // Create a new schedule one tick later.
-        getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
-            IntervalEventRunnable.getInstance().start(this, interval);
-        }, 3);
-
+        IntervalEventRunnable.getInstance().start(this, interval);
 
         // Initialize the update checker.
         UpdateCheckerRunnable.getInstance().stop();
-
-        if (getConfig().getBoolean("checkUpdates", true)) {
-            // Start the update checker on a later moment.
-            getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
-                UpdateCheckerRunnable.getInstance().start(this);
-            }, 3);
-
-        }
+        UpdateCheckerRunnable.getInstance().start(this);
 
         // Update utils
         ItemUtil.reloadAll(this);
