@@ -34,7 +34,7 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
   <summary><b>BetterMobs v1.5.2</b></summary>
     <ul>
       <li>Implemented PiglinTactics</li>
-      <li>Improved compatibility with previous versions.</li>
+      <li>Improved compatibility with previous versions</li>
       <li>Balanced spawn rates of Magical Creepers</li>
       <li>Balanced weapon drop rate of skeletons</li>
       <li>Notify admins when there are no modules enabled</li>
@@ -104,6 +104,8 @@ Secondary goals
 ### Credits
 
 <ul>
-    <li><a href="https://github.com/JeannotM/">JeannotM</a>: Improving grammar errors & adding ideas.</li>
+   <li><a href="https://github.com/JeannotM/">JeannotM</a>: Improving grammar errors & adding ideas.</li>
+   <li>Grouchy: Adding items to the todo list.</li>
+   <li>hitewaer: Reporting issues.</li>
 </ul>
 
