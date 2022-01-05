@@ -1,0 +1,18 @@
+# The Evil saint is a god like figure for all monsters. Healing them slowly over time.
+# By default, monsters are not able to heal. Enabling this saint will do just that.
+enabled: false
+
+# Chance at each event that the mob will regenerate.
+# This combined with the cool down will prevent mobs getting invincible.
+regenerationPercentageChance: 10
+
+# Delay between each heal event.
+# This is in ticks. 20 ticks is a second.
+regenerationCoolDown: 40
+
+# The amount of health that should be generated at each moment.
+# 1 is half a heart.
+regenerationStrength: 1
+
+# Don't touch this unless you know what you're doing.
+version: 1
