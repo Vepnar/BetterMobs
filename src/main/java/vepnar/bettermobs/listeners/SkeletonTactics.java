@@ -59,7 +59,7 @@ public class SkeletonTactics extends GenericWeaponSwitch {
          if (playerInRange) {
              if (entity instanceof WitherSkeleton) {
                  return Material.STONE_SWORD;
-             } 
+             }
              return Material.WOODEN_SWORD;
          }
         return Material.BOW;
