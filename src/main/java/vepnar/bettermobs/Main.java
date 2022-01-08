@@ -17,6 +17,7 @@ import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
 import vepnar.bettermobs.runnables.IntervalEventRunnable;
 import vepnar.bettermobs.updateChecker.UpdateCheckerRunnable;
+import vepnar.bettermobs.updateChecker.UpdateListener;
 import vepnar.bettermobs.utils.EntityUtil;
 import vepnar.bettermobs.utils.ItemUtil;
 
@@ -48,16 +49,6 @@ public class Main extends JavaPlugin {
         initializeCommands();
         initializeMetrics();
 
-        try {
-            // If for some reason we can't access the class path we should not load the plugin.
-            loadMobListeners();
-            initializeMobListener();
-        } catch (IOException e) {
-            // The plugin will disable itself when it doesn't have access to the class path.
-            e.printStackTrace();
-            getPluginLoader().disablePlugin(this);
-        }
-
         getLogger().info("Has been enabled for minecraft 1." + API_VERSION + ".*");
         if (getEnabledListenerCount() == 0) {
             getLogger().info("There are currently no modules enabled, enable some in the config.");
@@ -76,8 +67,21 @@ public class Main extends JavaPlugin {
 
     }
 
+    public void initializeListeners() {
+        try {
+            // If for some reason we can't access the class path we should not load the plugin.
+            loadMobListeners();
+            initializeMobListener();
+        } catch (IOException e) {
+            // The plugin will disable itself when it doesn't have access to the class path.
+            e.printStackTrace();
+            getPluginLoader().disablePlugin(this);
+        }
+    }
+
     /**
      * Retrieve all installed mob listeners and add them to a linked list.
+     *
      * @throws IOException if the attempt to read class path resources (jar files or directories) failed.
      */
     private void loadMobListeners() throws IOException {
@@ -144,9 +148,16 @@ public class Main extends JavaPlugin {
         IntervalEventRunnable.getInstance().stop();
         IntervalEventRunnable.getInstance().start(this, interval);
 
-        // Initialize the update checker.
+
+        // Unregister update checker.
         UpdateCheckerRunnable.getInstance().stop();
-        UpdateCheckerRunnable.getInstance().start(this);
+        UpdateListener.disable();
+
+        // Initialize the update checker.
+        if (getConfig().getBoolean("checkUpdates", true)) {
+            UpdateCheckerRunnable.getInstance().start(this);
+            getServer().getPluginManager().registerEvents(UpdateListener.getInstance(), this);
+        }
 
         // Update utils
         ItemUtil.reloadAll(this);

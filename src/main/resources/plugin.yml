@@ -21,3 +21,6 @@ permissions:
   bettermobs.features.disable:
     description: allows the the user to disable features.
     default: op
+  bettermobs.messages.outdated:
+    description: Allow a user to get notified when the plugin is outdated.
+    default: op
