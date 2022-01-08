@@ -6,7 +6,8 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.ICommandGroup;
-import vepnar.bettermobs.runnables.UpdateCheckerRunnable;
+import vepnar.bettermobs.updateChecker.UpdateCheckerRunnable;
+import vepnar.bettermobs.updateChecker.UpdateState;
 
 /**
  * Handle the /bettermobs author. Will print information about the
@@ -25,7 +26,7 @@ public class AuthorCommand extends GenericCommand {
         sender.sendMessage(Main.PREFIX + "Is made by §c" + pdf.getAuthors());
         sender.sendMessage("§cSource: §fhttps://github.com/Vepnar/BetterMobs");
         sender.sendMessage("§cVersion: §f" + pdf.getVersion());
-        sender.sendMessage("§cLatest version: §f" + !UpdateCheckerRunnable.getInstance().outdated);
+        sender.sendMessage("§cUpdate checker: §f" + UpdateCheckerRunnable.getState().getDescription());
         if (pdf.getWebsite() != null) {
             sender.sendMessage("§cWebsite: §f" + pdf.getWebsite());
         }

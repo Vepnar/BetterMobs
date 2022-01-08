@@ -1,6 +1,7 @@
-package vepnar.bettermobs.runnables;
+package vepnar.bettermobs.updateChecker;
 
 import vepnar.bettermobs.Main;
+import vepnar.bettermobs.runnables.GenericRunnable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,11 +12,12 @@ import java.util.regex.Pattern;
 
 public class UpdateCheckerRunnable extends GenericRunnable {
 
-    private static final String NAME = "UpdateChecker";
-    private static UpdateCheckerRunnable instance;
+    // Prevent null pointer exception.
+    public UpdateState state = UpdateState.NOT_CHECKED;
 
+    private static UpdateCheckerRunnable instance ;
+    private static final String NAME = "UpdateChecker";
     private static final int INTERVAL = 72000;
-    public boolean outdated = false;
     private static final String UPDATE_PATH = "https://api.github.com/repos/Vepnar/BetterMobs/releases/latest";
     private static final Pattern VERSION_MATCHER = Pattern.compile("\\\"tag_name\"\\s*:\\s*\"([0-9]*\\.[0-9]*\\.[0-9]*)\"\\s*,");
 
@@ -24,6 +26,13 @@ public class UpdateCheckerRunnable extends GenericRunnable {
             instance = new UpdateCheckerRunnable();
         }
         return instance;
+    }
+
+    public static UpdateState getState() {
+        if(instance == null) return UpdateState.DISABLED;
+
+        return instance.state;
+
     }
 
     @Override
@@ -36,6 +45,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
     public boolean start(Main main) {
         if (!super.start(main, NAME)) return false;
         try {
+            // Check for updates every hour
             task = this.runTaskTimerAsynchronously(CORE, 0, INTERVAL);
             CORE.debug(NAME + " started!");
             return true;
@@ -46,7 +56,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
 
     @Override
     public void run() {
-        if (outdated) return;
+        if (state == UpdateState.OUTDATED) return;
         try {
 
             // Connection setup.
@@ -70,12 +80,19 @@ public class UpdateCheckerRunnable extends GenericRunnable {
                 if (!currentVersion.equals(latestVersion)) {
                     CORE.debug("Currently installed: " + currentVersion + " the newest version available: " + latestVersion);
                     CORE.getLogger().warning("A newer version of this plugin is out, with bugfixes & additional mobs");
-                    outdated = true;
-                } else CORE.debug("BetterMobs is up to date.");
-            } else CORE.debug("Could not check for updates.");
+                    state = UpdateState.OUTDATED;
+                } else {
+                    state = UpdateState.UPDATED;
+                    CORE.debug("BetterMobs is up to date.");
+                }
+            } else {
+                state = UpdateState.FAILED;
+                CORE.debug("Could not check for updates.");
+            }
             bufferedReader.close();
 
         } catch (Exception ex) {
+            state = UpdateState.FAILED;
             CORE.debug("Could not check for updates.\n" + ex.getMessage());
         }
 

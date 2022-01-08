@@ -16,7 +16,7 @@ import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
 import vepnar.bettermobs.genericMobs.IMobListener;
 import vepnar.bettermobs.runnables.IntervalEventRunnable;
-import vepnar.bettermobs.runnables.UpdateCheckerRunnable;
+import vepnar.bettermobs.updateChecker.UpdateCheckerRunnable;
 import vepnar.bettermobs.utils.EntityUtil;
 import vepnar.bettermobs.utils.ItemUtil;
 
