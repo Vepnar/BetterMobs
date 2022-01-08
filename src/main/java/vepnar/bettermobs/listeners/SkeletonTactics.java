@@ -56,19 +56,13 @@ public class SkeletonTactics extends GenericWeaponSwitch {
 
     @Override
     protected Material changeItem(LivingEntity entity, boolean playerInRange) {
-        if (entity instanceof WitherSkeleton) {
-            if (playerInRange) {
-                return Material.STONE_SWORD;
-            } else {
-                return Material.BOW;
-            }
-        } else {
-            if (playerInRange) {
-                return Material.WOODEN_SWORD;
-            } else {
-                return Material.BOW;
-            }
-        }
+         if (playerInRange) {
+             if (entity instanceof WitherSkeleton) {
+                 return Material.STONE_SWORD;
+             } 
+             return Material.WOODEN_SWORD;
+         }
+        return Material.BOW;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
