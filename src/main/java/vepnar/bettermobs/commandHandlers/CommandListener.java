@@ -35,7 +35,7 @@ public class CommandListener implements CommandExecutor {
             }
 
             // Verify if the command has enough arguments.
-            if (command.getMinimalArguments() >= targetSubCommand.length()) {
+            if ( command.getMinimalArguments() > poppedArgs.length) {
                 sender.sendMessage(Main.PREFIX + CommandUtils.getHelpCommand(command));
                 return true;
             }
