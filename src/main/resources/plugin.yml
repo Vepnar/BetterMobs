@@ -10,17 +10,17 @@ commands:
     description: Access bettermob plugin settings.
 permissions:
   bettermobs.features.reload:
-    description: allows the the user to reload config files.
+    description: Allow the player to reload the config files & features.
     default: op
   bettermobs.features.show:
-    description: allows the user look into the status of features.
+    description: Allow the player to see the status of all features.
     default: op
   bettermobs.features.enable:
-    description: allows the the user to enable features.
+    description: Allow the player to user to enable features.
     default: op
   bettermobs.features.disable:
-    description: allows the the user to disable features.
+    description: Allow the player to user to disable features.
     default: op
   bettermobs.messages.outdated:
-    description: Allow a user to get notified when the plugin is outdated.
+    description: Allow the player to get notified when the plugin is outdated.
     default: op

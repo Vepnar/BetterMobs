@@ -1,13 +1,11 @@
 # Generated for BetterMobs version @version@
-# Make skeletons more intelligent and allow them to switch weapon when the player is nearby.
-# Skeletons don't try to get their sword at broad daylight. They only attack with melee weapons at night.
-
-version: 1
+# Skeleton Tactics makes skeleton more aware of the situation they're in. When the player is in nearby, they will pull out their melee weapon and change strategy.
 enabled: false
 
+# Allow wither skeletons to switch weapons.
 includeWitherSkeleton: true
 
-# Make the ranged weapon of a weather skeleton stronger than a normal skeleton.
+# Make wither skeletons shoot flame arrows.
 witherSkeletonShootFire: true
 
 # When the player is in the melee radius the skeleton will switch to a melee weapon.
@@ -15,3 +13,5 @@ meleeRadius: 6
 
 # When the player is outside the melee radius and inside the scan radius it will switch back to the ranged weapon.
 scanRadius: 12
+
+version: 1

@@ -21,6 +21,9 @@ A Minecraft bukkit plugin to make normal Minecraft mobs stronger and more intere
 5. Restart the server or do `/bm reload` in the Minecraft chat
 6. Enjoy!
 
+### Details
+For more information such as the permissions you should go to the [wiki](https://github.com/Vepnar/BetterMobs/wiki).
+
 ### Configuration
 
 Each module has a separate configuration file. This makes it easy to set modules back to factory mode.
@@ -86,13 +89,14 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Reimplement the Giant again (idea: Jeans)</li>
     <li>Add option to remove certain mobs (idea: Grouchy)</li>
     <li>Allow people to take feathers from chickens</li>
+    <li>Keep original mob drops (idea: Boranger)</li>
 </ul>
 
 ### Goals
 
 Primary goals
 
-- [ ] 100 Downloads
+- [x] 100 Downloads
 - [ ] 500 Downloads
 - [ ] 1000 Downloads
 
@@ -107,5 +111,6 @@ Secondary goals
    <li><a href="https://github.com/JeannotM/">JeannotM</a>: Improving grammar errors & adding ideas.</li>
    <li>Grouchy: Adding items to the todo list.</li>
    <li>hitewaer: Reporting issues.</li>
+   <li>Boranger: Adding items to the todo list./li>
 </ul>
 
