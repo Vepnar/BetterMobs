@@ -38,20 +38,15 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     }
 
     @Override
-    protected List<LivingEntity> filterEntity(List<Entity> entities) {
-        List<LivingEntity> result = new ArrayList<>();
-        for (Entity entity : entities) {
+    protected boolean filterEntity(Entity entity) {
             // Filter all non skeleton entities.
-            if (!(entity instanceof Skeleton || entity instanceof WitherSkeleton)) continue;
+            if (!(entity instanceof Skeleton || entity instanceof WitherSkeleton)) return false;
 
             // Remove all wither skeletons if not enabled.
-            if (!includeWitherSkeletons && entity instanceof WitherSkeleton) continue;
+            if (!includeWitherSkeletons && entity instanceof WitherSkeleton) return false;
             LivingEntity skeleton = (LivingEntity) entity;
-            if (skeleton.isInvulnerable() || !skeleton.hasAI()) continue;
-
-            result.add(skeleton);
-        }
-        return result;
+            if (skeleton.isInvulnerable() || !skeleton.hasAI()) return false;
+            return true;
     }
 
     @Override

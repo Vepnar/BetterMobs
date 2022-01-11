@@ -6,6 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.IntervalEvent;
@@ -21,18 +22,26 @@ public class GenericWeaponSwitch extends GenericMob {
     private int meleeRadius;
     private int scanRadius;
 
-
     public GenericWeaponSwitch(Main javaPlugin, String name, int version, int apiVersion) {
         super(javaPlugin, name, version, apiVersion);
     }
 
-    protected List<LivingEntity> filterEntity(List<Entity> entities) {
+    private List<LivingEntity> filterEntities(List<Entity> entities) {
         List<LivingEntity> result = new ArrayList<>();
         for (Entity entity : entities) {
-            if (!(entity instanceof LivingEntity)) continue;
-            result.add((LivingEntity) result);
+           if(filterEntity(entity)) {
+               result.add((LivingEntity) entity);
+           }
         }
         return result;
+    }
+
+    protected boolean filterEntity(Entity entity ) {
+        if (!(entity instanceof LivingEntity)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected Material changeItem(LivingEntity entity, boolean playerNearby) {
@@ -56,19 +65,23 @@ public class GenericWeaponSwitch extends GenericMob {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onInterval(IntervalEvent event) {
         for (Player player : CORE.getServer().getOnlinePlayers()) {
-            List<LivingEntity> livingEntities = filterEntity(player.getNearbyEntities(scanRadius, scanRadius, scanRadius));
+            List<LivingEntity> livingEntities = filterEntities(player.getNearbyEntities(scanRadius, scanRadius, scanRadius));
             for (LivingEntity target : livingEntities) {
                 boolean playerInRange = EntityUtil.isPlayerNearby(target, meleeRadius);
                 if (shouldChange(target, playerInRange)) {
+
+                    // Create new weapon.
                     Material targetMaterial = changeItem(target, playerInRange);
                     ItemStack newWeapon = new ItemStack(targetMaterial);
+
+                    // Retain original drop chance
+                    float dropChance = target.getEquipment().getItemInMainHandDropChance();
                     target.getEquipment().setItemInMainHand(newWeapon);
-                    target.getEquipment().setItemInMainHandDropChance(0.01F);
+                    target.getEquipment().setItemInMainHandDropChance(dropChance);
                 }
             }
         }
     }
-
 
     @Override
     public void reloadConfig() {

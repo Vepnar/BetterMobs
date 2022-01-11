@@ -16,17 +16,13 @@ public class PiglinTactics extends GenericWeaponSwitch {
     }
 
     @Override
-    protected List<LivingEntity> filterEntity(List<Entity> entities) {
-        List<LivingEntity> result = new ArrayList<>();
-        for (Entity entity : entities) {
-            if (!(entity instanceof Piglin)) continue;
-            LivingEntity livingEntity = (LivingEntity) entity;
+    protected boolean filterEntity(Entity entity) {
+        if (!(entity instanceof Piglin)) return false;
+        LivingEntity livingEntity = (LivingEntity) entity;
 
-            if (!(livingEntity.isInvulnerable() || !livingEntity.hasAI())) {
-                result.add(livingEntity);
-            }
-        }
-        return result;
+        if (!(livingEntity.isInvulnerable() || !livingEntity.hasAI())) {
+            return true;
+        } else return false;
     }
 
     @Override
