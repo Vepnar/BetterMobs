@@ -52,6 +52,7 @@ public class Main extends JavaPlugin {
         parseApiVersion();
         initializeCommands();
         initializeMetrics();
+        initializeListeners();
 
         getLogger().info("Has been enabled for minecraft 1." + API_VERSION + ".*");
         if (getEnabledListenerCount() == 0) {

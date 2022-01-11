@@ -14,4 +14,7 @@ meleeRadius: 6
 # When the player is outside the melee radius and inside the scan radius it will switch back to the ranged weapon.
 scanRadius: 12
 
+# Keep the original mob drops and don't drop the newly acquired weapons.
+retainOriginalDrops: true
+
 version: 1

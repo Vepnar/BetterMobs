@@ -44,7 +44,7 @@ public class GenericWeaponSwitch extends GenericMob {
         }
     }
 
-    protected Material changeItem(LivingEntity entity, boolean playerNearby) {
+    protected Material changeMaterial(LivingEntity entity, boolean playerNearby) {
         return entity.getEquipment().getItemInMainHand().getType();
     }
 
@@ -62,6 +62,16 @@ public class GenericWeaponSwitch extends GenericMob {
         return !playerNearby && firstType.equals(ItemUtil.ItemType.MELEE);
     }
 
+    protected void changeItem(LivingEntity entity, Material material) {
+        ItemStack newWeapon = new ItemStack(material);
+
+        // Retain original drop chance
+        float dropChance = entity.getEquipment().getItemInMainHandDropChance();
+        entity.getEquipment().setItemInMainHand(newWeapon);
+        entity.getEquipment().setItemInMainHandDropChance(dropChance);
+    }
+
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.NORMAL)
     public void onInterval(IntervalEvent event) {
         for (Player player : CORE.getServer().getOnlinePlayers()) {
@@ -69,15 +79,10 @@ public class GenericWeaponSwitch extends GenericMob {
             for (LivingEntity target : livingEntities) {
                 boolean playerInRange = EntityUtil.isPlayerNearby(target, meleeRadius);
                 if (shouldChange(target, playerInRange)) {
-
                     // Create new weapon.
-                    Material targetMaterial = changeItem(target, playerInRange);
-                    ItemStack newWeapon = new ItemStack(targetMaterial);
+                    Material targetMaterial = changeMaterial(target, playerInRange);
+                    changeItem(target, targetMaterial);
 
-                    // Retain original drop chance
-                    float dropChance = target.getEquipment().getItemInMainHandDropChance();
-                    target.getEquipment().setItemInMainHand(newWeapon);
-                    target.getEquipment().setItemInMainHandDropChance(dropChance);
                 }
             }
         }
@@ -86,7 +91,6 @@ public class GenericWeaponSwitch extends GenericMob {
     @Override
     public void reloadConfig() {
         super.reloadConfig();
-
         meleeRadius = config.getInt("meleeRadius", 0);
         scanRadius = config.getInt("scanRadius", 0);
     }

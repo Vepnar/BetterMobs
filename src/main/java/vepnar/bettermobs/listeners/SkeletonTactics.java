@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.Main;
@@ -17,6 +19,7 @@ public class SkeletonTactics extends GenericWeaponSwitch {
 
     private boolean includeWitherSkeletons;
     private boolean witherSkeletonShootsFire;
+    private boolean retainOriginalDrops;
 
     public SkeletonTactics(Main javaPlugin) {
         super(javaPlugin, "SkeletonTactics", 1, 13);
@@ -50,7 +53,7 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     }
 
     @Override
-    protected Material changeItem(LivingEntity entity, boolean playerInRange) {
+    protected Material changeMaterial(LivingEntity entity, boolean playerInRange) {
          if (playerInRange) {
              if (entity instanceof WitherSkeleton) {
                  return Material.STONE_SWORD;
@@ -74,12 +77,34 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     }
 
 
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void damageEvent(EntityDamageEvent event) {
+        // Only switch weapons on target entities.
+        if(!filterEntity(event.getEntity())) return;
+        LivingEntity entity =  (LivingEntity) event.getEntity();
+
+        // Only return the weapon when the damage is fatal.
+        if(entity.getHealth() > event.getFinalDamage()) return;
+
+        if(entity.getType() == EntityType.SKELETON && shouldChange(entity, false)) {
+            Material original = changeMaterial(entity,false);
+            changeItem(entity, original);
+        } else if(entity.getType() == EntityType.WITHER_SKELETON && shouldChange(entity, true)) {
+            Material original = changeMaterial(entity,true);
+            changeItem(entity, original);
+        }
+    }
+
     @Override
     public void reloadConfig() {
         super.reloadConfig();
         includeWitherSkeletons = config.getBoolean("includeWitherSkeleton", false);
         witherSkeletonShootsFire = config.getBoolean("witherSkeletonShootFire", false);
+        retainOriginalDrops = config.getBoolean("retainOriginalDrops", false);
     }
+
+
 
 
 }

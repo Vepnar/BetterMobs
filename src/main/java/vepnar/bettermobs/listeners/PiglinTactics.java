@@ -26,11 +26,9 @@ public class PiglinTactics extends GenericWeaponSwitch {
     }
 
     @Override
-    protected Material changeItem(LivingEntity entity, boolean playerInRange) {
+    protected Material changeMaterial(LivingEntity entity, boolean playerInRange) {
         if (playerInRange) {
             return Material.GOLDEN_SWORD;
-        } else {
-            return Material.CROSSBOW;
-        }
+        } else return Material.CROSSBOW;
     }
 }
