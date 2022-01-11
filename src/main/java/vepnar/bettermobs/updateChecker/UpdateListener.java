@@ -37,7 +37,7 @@ public class UpdateListener implements Listener {
 
         // Send notification when outdated.
         if (UpdateCheckerRunnable.getState() == UpdateState.OUTDATED) {
-            player.sendMessage(Main.PREFIX + "is outdated. please install the newest version!");
+            player.sendMessage(Main.FANCY_NAME + "is outdated. please install the newest version!");
         }
 
     }

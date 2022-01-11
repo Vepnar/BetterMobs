@@ -34,7 +34,7 @@ public class ReloadCommand extends GenericCommand {
                 }
             }
         }
-        sender.sendMessage(Main.PREFIX + "The following features have been reloaded:");
+        sender.sendMessage(Main.FANCY_NAME + "The following features have been reloaded:");
         if(messageBuilder.length() != 0) {
             String output = messageBuilder.substring(0, messageBuilder.length() - 4);
             sender.sendMessage(output);
@@ -54,7 +54,7 @@ public class ReloadCommand extends GenericCommand {
         for (IMobListener listener : Main.MOB_LISTENERS) {
             listener.reloadConfig();
         }
-        sender.sendMessage(Main.PREFIX + "All the features have been reloaded.");
+        sender.sendMessage(Main.FANCY_NAME + "All the features have been reloaded.");
         return true;
 
 

@@ -28,7 +28,7 @@ public class FeaturesCommand extends GenericCommand {
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
         List<IMobListener> listeners = Main.MOB_LISTENERS;
-        sender.sendMessage(Main.PREFIX + "(" + listeners.size() + ") Features installed:");
+        sender.sendMessage(Main.FANCY_NAME + "(" + listeners.size() + ") Features installed:");
         StringBuilder messageBuilder = new StringBuilder();
         for (IMobListener listener : listeners) {
             messageBuilder.append(listener.isEnabled() ? "§a" : "§c");

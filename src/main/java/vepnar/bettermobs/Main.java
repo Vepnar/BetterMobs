@@ -25,25 +25,29 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main extends JavaPlugin {
 
-    public static final String PREFIX = "§7[§cBetterMobs§7]§f ";
-    public static final String LISTENER_SCOPE = "vepnar.bettermobs.listeners";
-    public static final String ASCII_NAME = "bettermobs";
-    public static int PLUGIN_ID = 13769;
-    public static final String STATS_MODULES_ENABLED = "modules_enabled";
-    public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
-    public final int CONFIG_VERSION = 1;
     public static int API_VERSION;
+    public final int CONFIG_VERSION = 1;
+    public static final int PLUGIN_ID = 13769;
+
+    public static final String ASCII_NAME = "bettermobs";
+    public static final String FANCY_NAME = "§7[§cBetterMobs§7]§f ";
+    public static final String STATS_MODULES_ENABLED = "modules_enabled";
+    public static final String LISTENER_SCOPE = "vepnar.bettermobs.listeners";
+
+    public static final List<IMobListener> MOB_LISTENERS = new ArrayList<>();
 
     private boolean debugMode = false;
-
+    private static Main instance;
 
     @Override
     public void onEnable() {
+        instance = this;
         reloadConfig();
         parseApiVersion();
         initializeCommands();
@@ -65,6 +69,10 @@ public class Main extends JavaPlugin {
 
         this.getLogger().info("Has been disabled.");
 
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 
     public void initializeListeners() {

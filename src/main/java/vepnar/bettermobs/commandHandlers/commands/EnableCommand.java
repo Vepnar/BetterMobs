@@ -32,7 +32,7 @@ public class EnableCommand extends GenericCommand {
                 }
             }
         }
-        sender.sendMessage(Main.PREFIX + "The following features have been enabled:");
+        sender.sendMessage(Main.FANCY_NAME + "The following features have been enabled:");
         if(messageBuilder.length() != 0) {
             String message = messageBuilder.toString();
             message = message.substring(0, message.length() - 4);

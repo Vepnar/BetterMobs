@@ -13,7 +13,7 @@ public class HelpCommand extends GenericCommand {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        sender.sendMessage(Main.PREFIX + "Displaying help of: §c" + getParent().getName());
+        sender.sendMessage(Main.FANCY_NAME + "Displaying help of: §c" + getParent().getName());
         for (ICommand command : getParent().getCommands()) {
             if (CommandUtils.hasPermissions(sender, command)) {
                 sender.sendMessage(CommandUtils.getHelpCommand(command));

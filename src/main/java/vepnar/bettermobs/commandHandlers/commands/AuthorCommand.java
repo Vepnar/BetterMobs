@@ -23,7 +23,7 @@ public class AuthorCommand extends GenericCommand {
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
         PluginDescriptionFile pdf = core.getDescription();
-        sender.sendMessage(Main.PREFIX + "Is made by §c" + pdf.getAuthors());
+        sender.sendMessage(Main.FANCY_NAME + "Is made by §c" + pdf.getAuthors());
         sender.sendMessage("§cSource: §fhttps://github.com/Vepnar/BetterMobs");
         sender.sendMessage("§cVersion: §f" + pdf.getVersion());
         sender.sendMessage("§cUpdate checker: §f" + UpdateCheckerRunnable.getState().getDescription());
