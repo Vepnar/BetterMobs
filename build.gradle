@@ -37,7 +37,7 @@ shadowJar {
     relocate 'org.bstat', 'vepnar.bettermobs.bstat'
 }
 
-task deploy {
+task deployLocal {
     doLast {
         copy {
             from 'build/libs/BetterMobs-' + version + '-all.jar'

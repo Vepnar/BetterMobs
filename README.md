@@ -33,6 +33,16 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 
 ### Change  log
 
+<details closed>
+  <summary><b>BetterMobs v1.6.0</b></summary>
+    <ul>
+      <li>Implemented EvilSaint</li>
+      <li>Implemented Infectious Zombie (Suggested by: Grouchy)</li>
+      <li>Notify admin on outdated version on join</li>
+      <li>Added feature to retain original drops of skeletons</li>
+      <li>Fixed reload bug</li>
+    </ul>
+</details>
 <details open>
   <summary><b>BetterMobs v1.5.2</b></summary>
     <ul>
@@ -81,15 +91,12 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Witches have more potion types.</li>
     <li>Allow Ghasts to have more attack types.</li>
     <li>Increase zombie movement speed.</li>
-    <li>Make monsters regenerate health.</li>
     <li>Make more monsters switch their weapons</li>
     <li>Improve documentation configuration files.</li>
     <li>Improve in-code documentation.</li>
-    <li>Add poisonous zombies (idea: Grouchy)</li>
     <li>Reimplement the Giant again (idea: Jeans)</li>
     <li>Add option to remove certain mobs (idea: Grouchy)</li>
     <li>Allow people to take feathers from chickens</li>
-    <li>Keep original mob drops (idea: Boranger)</li>
 </ul>
 
 ### Goals
@@ -111,6 +118,6 @@ Secondary goals
    <li><a href="https://github.com/JeannotM/">JeannotM</a>: Improving grammar errors & adding ideas.</li>
    <li>Grouchy: Adding items to the todo list.</li>
    <li>hitewaer: Reporting issues.</li>
-   <li>Boranger: Adding items to the todo list./li>
+   <li>Boranger: Adding items to the todo list.</li>
 </ul>
 

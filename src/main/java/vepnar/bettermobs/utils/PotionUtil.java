@@ -1,5 +1,6 @@
 package vepnar.bettermobs.utils;
 
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -18,5 +19,16 @@ public class PotionUtil {
             }
         }
         return potionEffects;
+    }
+
+    public static PotionEffect RNGPotionEffect(PotionEffectType effect, int duration , int amplifier) {
+        int effectAmplifier = (int) (Math.random() * (amplifier + 1));
+        int effectDuration = (int) (Math.random() * (duration + 1));
+        return new PotionEffect(effect, effectDuration, effectAmplifier);
+    }
+
+    public static PotionEffect RNGPotionEffects(Set<PotionEffectType> effects, int duration, int amplifier) {
+        PotionEffectType effect = MathsUtil.randomElemSet(effects);
+        return RNGPotionEffect(effect, duration, amplifier);
     }
 }

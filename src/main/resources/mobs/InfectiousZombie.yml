@@ -1,5 +1,24 @@
+# Generated for BetterMobs version 1.5.2
+# With this module enabled players would get a similar experience as zombies in movies.
+# When a player gets hit by a zombie they have a chance to get infected by them.
+# At the moment all zombie types are included in this.
 enabled: true
 
+# Percentage chance that the player will get an infection from a zombie.
+infectionPercentage: 40
 
+# Strength of the infection. This is also affected by the random number generator.
+infectionAmplifier: 0
 
+# Duration of the effect in ticks. Parts of this duration is affected by the random number generator.
+infectionDuration: 100
+
+# https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+# It is recommended to keep only one infection type when the infection percentage is high.
+infectionType:
+  - POISON
+#  - WEAKNESS
+#  - HUNGER
+
+# Don't change this unless you know what you're doing.
 version: 1
