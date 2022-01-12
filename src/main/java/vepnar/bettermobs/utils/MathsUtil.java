@@ -2,6 +2,8 @@ package vepnar.bettermobs.utils;
 
 import org.bukkit.Location;
 
+import java.util.Set;
+
 public class MathsUtil {
 
     /**
@@ -31,5 +33,16 @@ public class MathsUtil {
     public static int naturalDecay(int maxDuration, double distance, double decay) {
         double distanceDecay = Math.exp(-1 * (distance * decay));
         return (int) (maxDuration * distanceDecay);
+    }
+
+    public static <T> T randomElemSet(Set<T> set) {
+        int index = (int) (Math.random() * set.size());
+        for(T element : set)
+        {
+            if (index == 0)
+                return element;
+            index--;
+        }
+        return null;
     }
 }

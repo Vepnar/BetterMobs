@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
+import vepnar.bettermobs.utils.MathsUtil;
 import vepnar.bettermobs.utils.PotionUtil;
 
 import java.util.ArrayList;
@@ -41,8 +42,8 @@ public class MagicalCreepers extends GenericMob {
 
             // Prepare potion effect.
             int strength = (int) (Math.random() * (creeperClass.effectStrength + 1));
-            int effectIndex = (int) (Math.random() * creeperClass.effects.size());
-            PotionEffect effect = new PotionEffect(creeperClass.effects.get(effectIndex), 9999, strength);
+            PotionEffectType randomEffect =  MathsUtil.randomElemSet(creeperClass.effects);
+            PotionEffect effect = new PotionEffect(randomEffect, 9999, strength);
             creeper.addPotionEffect(effect);
 
             // Allow a creeper to be more than one class
@@ -66,14 +67,14 @@ public class MagicalCreepers extends GenericMob {
         }
 
         for (String key : keys) {
-            ConfigurationSection subConfig = config.getConfigurationSection("classes").getConfigurationSection(key);
-            if (!subConfig.getBoolean("enabled", false)) continue;
+            ConfigurationSection section = config.getConfigurationSection("classes").getConfigurationSection(key);
+            if (!section.getBoolean("enabled", false)) continue;
 
             // Create new class
             CreeperClass creeperClass = new CreeperClass();
-            creeperClass.effects = PotionUtil.parsePotionEffects(subConfig.getStringList("effects"));
-            creeperClass.effectStrength = subConfig.getInt("effectStrength", 0);
-            creeperClass.spawnProbability = subConfig.getDouble("spawnPercentageChance", 0) / 100;
+            creeperClass.effects = PotionUtil.parsePotionEffects(section.getStringList("effects"));
+            creeperClass.effectStrength = section.getInt("effectStrength", 0);
+            creeperClass.spawnProbability = section.getDouble("spawnPercentageChance", 0) / 100;
             creeperClasses.add(creeperClass);
             if (creeperClass.effects.isEmpty())
                 CORE.debug(key + " in MagicalCreepers contains no valid potion effects.");
@@ -88,6 +89,6 @@ public class MagicalCreepers extends GenericMob {
 
 class CreeperClass {
     public double spawnProbability;
-    public List<PotionEffectType> effects;
+    public Set<PotionEffectType> effects;
     public int effectStrength;
 }

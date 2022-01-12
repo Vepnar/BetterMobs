@@ -15,6 +15,7 @@ import vepnar.bettermobs.utils.MathsUtil;
 import vepnar.bettermobs.utils.PotionUtil;
 
 import java.util.List;
+import java.util.Set;
 
 public class WitherAura extends GenericMob {
 
@@ -25,7 +26,7 @@ public class WitherAura extends GenericMob {
     private double effectDecay;
     private int effectStrength;
     private int effectDuration;
-    private List<PotionEffectType> availableEffects;
+    private Set<PotionEffectType> availableEffects;
     private double effectProbability;
     private int effectCoolDown;
 
@@ -48,8 +49,7 @@ public class WitherAura extends GenericMob {
             if (EntityUtil.hasCoolDown(wither, WITHER_AURA_META, effectCoolDown) || availableEffects.isEmpty())
                 continue;
 
-            int randomIndex = (int) (Math.random() * availableEffects.size());
-            PotionEffectType randomEffect = availableEffects.get(randomIndex);
+            PotionEffectType randomEffect =  MathsUtil.randomElemSet(availableEffects);
 
             // Apply an effect to all players nearby.
             for (Player player : players) {
