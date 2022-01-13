@@ -1,0 +1,25 @@
+# Generated for BetterMobs version @version@
+# Make zombies more hungry and thus more motivated to get the player.
+# The speed of the zombie will be randomly set. This could either mean a quicker zombie or one who is more lazy.
+# By default, they can only be the normal speed or quicker.
+enabled: false
+
+# Only apply speed to the zombie who spawned in a natural manner.
+onlyNatural: true
+
+# Percentage chance that a zombie will spawn in a rush to eat.
+rushPercentageChance: 75
+
+# Speed range of adult zombies.
+adult:
+  minSpeed: 2.3
+  maxSpeed: 3.4
+
+# Speed range of baby zombies.
+baby:
+  minSpeed: 3.4
+  maxSpeed: 4.5
+
+
+# Don't change this unless you know what you're doing.
+version: 1
