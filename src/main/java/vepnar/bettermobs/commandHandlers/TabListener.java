@@ -9,6 +9,7 @@ import vepnar.bettermobs.genericMobs.IMobListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The current implementation doesn't support multi-argument commands.
@@ -43,7 +44,20 @@ public class TabListener implements TabCompleter {
         return names;
     }
 
-    private List<String> getCompletionList(CommandSender sender, ICommand command) {
+    private ICommand getSubCommand(ICommand command, String targetString) {
+        // Only traverse command groups.
+        if (!(command instanceof ICommandGroup)) return null;
+        ICommandGroup group = (ICommandGroup) command;
+
+        // Return a subcommand if found.
+        for (ICommand child : group.getCommands()) {
+            if (child.getName().equalsIgnoreCase(targetString) || Arrays.asList(child.getAlias()).contains(targetString))
+                return child;
+        }
+        return null;
+    }
+
+    private List<String> getSuggestionList(CommandSender sender, ICommand command) {
         switch (command.TabType()) {
             case SUBCOMMAND:
                 if (command instanceof ICommandGroup) {
@@ -62,30 +76,30 @@ public class TabListener implements TabCompleter {
         }
     }
 
-    private ICommand getSubCommand(ICommand command, String targetString) {
-        // Only traverse command groups.
-        if (!(command instanceof ICommandGroup)) return null;
-        ICommandGroup group = (ICommandGroup) command;
-
-        // Return a subcommand if found.
-        for (ICommand child : group.getCommands()) {
-            if (child.getName().equalsIgnoreCase(targetString) || Arrays.asList(child.getAlias()).contains(targetString))
-                return child;
-        }
-        return null;
+    private List<String> improveSuggestions(List<String> suggestions, String input) {
+        if (suggestions.isEmpty()) return suggestions;
+        return suggestions.stream().filter(suggestion -> suggestion.toLowerCase().startsWith(input)).collect(Collectors.toList());
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         ICommand deepestCommand = bettermobs;
-        for (String target : args) {
-            ICommand matching = getSubCommand(deepestCommand, target);
+        int deepestIndex = 0;
+        for (String arg : args) {
+            ICommand matching = getSubCommand(deepestCommand, arg);
             if (matching != null) {
                 if (CommandUtils.hasPermissions(sender, matching)) {
                     deepestCommand = matching;
+                    deepestIndex += 1;
                 } else return null;
             } else break;
         }
-        return getCompletionList(sender, deepestCommand);
+        List<String> suggestions = getSuggestionList(sender, deepestCommand);
+        if (deepestIndex == args.length - 1) {
+            suggestions = improveSuggestions(suggestions, args[deepestIndex]);
+        }
+
+
+        return suggestions;
     }
 }
