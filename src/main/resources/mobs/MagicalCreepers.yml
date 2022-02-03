@@ -1,8 +1,7 @@
 # Generated for BetterMobs version @version@
 # Magical creepers allows creepers to spawn with potion effects.
 # This either this could make them stronger or weaker, but the most interesting thing this does it make them more interesting.
-enabled: false
-version: 1
+enabled: true
 
 # Only apply effect to creepers who spawned in a natural manner.
 onlyNatural: true
@@ -51,3 +50,5 @@ classes:
       - DOLPHINS_GRACE
       - CONDUIT_POWER
       - UNLUCK
+
+version: 1

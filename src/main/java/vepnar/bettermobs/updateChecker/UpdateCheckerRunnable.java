@@ -79,7 +79,7 @@ public class UpdateCheckerRunnable extends GenericRunnable {
                 // Notify the admins that the plugin is outdated.
                 if (!currentVersion.equals(latestVersion)) {
                     CORE.debug("Currently installed: " + currentVersion + " the newest version available: " + latestVersion);
-                    CORE.getLogger().warning("A newer version of this plugin is out, with bugfixes & additional mobs");
+                    CORE.getLogger().warning("A newer version of this plugin is available, with bugfixes & additional mobs");
                     state = UpdateState.OUTDATED;
                 } else {
                     state = UpdateState.UPDATED;

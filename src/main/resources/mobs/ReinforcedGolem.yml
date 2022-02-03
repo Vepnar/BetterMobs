@@ -4,7 +4,7 @@ enabled: true
 
 # This is in health points. 2 Health points is one heart.
 maxHealthIron: 200 # Default 100
-maxHealthSnow: 20 # Default 4
+maxHealthSnow: 8 # Default 4
 
 # Don't touch this unless you know what you're doing.
 version: 1

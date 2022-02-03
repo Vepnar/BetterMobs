@@ -1,7 +1,7 @@
 # Generated for BetterMobs version @version@
 # The Evil saint is a god like figure for all monsters. Healing them slowly over time.
 # By default, monsters are not able to heal. Enabling this saint will do just that.
-enabled: false
+enabled: true
 
 # Chance at each event that the mob will regenerate.
 # This combined with the cool down will prevent mobs getting invincible.

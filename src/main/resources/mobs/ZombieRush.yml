@@ -2,7 +2,7 @@
 # Make zombies more hungry and thus more motivated to get the player.
 # The speed of the zombie will be randomly set. This could either mean a quicker zombie or one who is more lazy.
 # By default, they can only be the normal speed or quicker.
-enabled: false
+enabled: true
 
 # Only apply speed to the zombie who spawned in a natural manner.
 onlyNatural: true

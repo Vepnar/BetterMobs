@@ -33,20 +33,21 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 
 ### Change  log
 
-<details closed>
+<details open>
   <summary><b>BetterMobs v1.6.0</b></summary>
     <ul>
       <li>Implemented Zombie Rush</li>
       <li>Implemented Zombie Passage</li>
       <li>Implemented Reinforced Golems</li>
       <li>Implemented Evil Saint</li>
+      <li>Enabled a large percentage of modules by default</li>
       <li>Implemented Infectious Zombie (Suggested by: Grouchy)</li>
       <li>Notify admin on outdated version on join</li>
       <li>Added feature to retain original drops of skeletons</li>
       <li>Fixed reload bug</li>
     </ul>
 </details>
-<details open>
+<details closed>
   <summary><b>BetterMobs v1.5.2</b></summary>
     <ul>
       <li>Implemented PiglinTactics</li>

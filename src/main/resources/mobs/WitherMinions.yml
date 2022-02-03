@@ -1,6 +1,6 @@
 # Generated for BetterMobs version @version@
 # Like with spiders withers are never alone. This makes this saying true.
-enabled: false
+enabled: true
 version: 1
 
 # The minimal distance the player needs to be for this ability to take place.

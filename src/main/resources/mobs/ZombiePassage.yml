@@ -1,12 +1,12 @@
 # Generated for BetterMobs version @version@
 # Allow specific zombies to spawn which masted time to cheat death.
-enabled: false
+enabled: true
 
 # Only allow naturally spawned zombies to have this ability.
 onlyNatural: true
 
 # Chance that a zombie will spawn with this ability.
-spawnPercentageChance: 10
+spawnPercentageChance: 5
 
 # Don't touch this unless you know what you're doing.
 version: 1

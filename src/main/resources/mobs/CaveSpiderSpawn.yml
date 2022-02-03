@@ -1,6 +1,6 @@
 # Generated for BetterMobs version @version@
 # This makes it possible for cave spiders to spawn naturally.
-enabled: false
+enabled: true
 
 # Chance that a cave spider will spawn.
 # When set to 100 or more all spiders spawn will be cave spiders.

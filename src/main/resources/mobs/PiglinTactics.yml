@@ -3,7 +3,7 @@
 # This is essentially the same as skeleton tactics but more simplified.
 # This will module will not show up in the module list if your version of minecraft doesn't support piglins.
 version: 1
-enabled: false
+enabled: true
 
 # When the player is in the melee radius the piglin will switch to a melee weapon.
 meleeRadius: 6

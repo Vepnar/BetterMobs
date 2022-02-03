@@ -1,8 +1,8 @@
-# Generated for BetterMobs version 1.5.2
+# Generated for BetterMobs version @version@
 # With this module enabled players would get a similar experience as zombies in movies.
 # When a player gets hit by a zombie they have a chance to get infected by them.
 # At the moment all zombie types are included in this.
-enabled: true
+enabled: false
 
 # Percentage chance that the player will get an infection from a zombie.
 infectionPercentage: 40

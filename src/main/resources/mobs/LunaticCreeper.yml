@@ -1,6 +1,5 @@
 # Generated for BetterMobs version @version@
 # Allow creepers to explode instantly or make their explosion more powerful.
-version: 1
 enabled: false
 
 normalCreeper:
@@ -18,3 +17,5 @@ chargedCreeper:
 
 # This should remain turned on unless it causes conflict with other plugins
 listenToPowerEvent: true
+
+version: 1

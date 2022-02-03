@@ -1,5 +1,4 @@
 # This makes baby zombies more intelligent and able to control chickens.
-version: 1
 enabled: false
 
 # This makes it possible for baby zombies to ride all animals. (Except tamed animals)
@@ -11,3 +10,5 @@ mountPercentage: 20
 # These can be lowered if there is a performance bottleneck.
 searchRadius: 16 # Distance around the player that will be checked for mountable entities.
 mountFindRange: 2 # Maximum distance between 2 entities to be able to mount.
+
+version: 1

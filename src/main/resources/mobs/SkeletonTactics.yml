@@ -1,6 +1,6 @@
 # Generated for BetterMobs version @version@
 # Skeleton Tactics makes skeleton more aware of the situation they're in. When the player is in nearby, they will pull out their melee weapon and change strategy.
-enabled: false
+enabled: true
 
 # Allow wither skeletons to switch weapons.
 includeWitherSkeleton: true

@@ -1,8 +1,7 @@
 # Generated for BetterMobs version @version@
 # Allows the Ender Man to protect precious things around them.
 # For example Ender Man will protect ender crystals.
-version: 1
-enabled: false
+enabled: true
 
 # The radius around which enderman are enraged in.
 scanRadius: 32
@@ -27,3 +26,5 @@ includeCrystal: true
 
 # Prevent enderman from attacking the dragon.
 noInternalAnger: true
+
+version: 1
