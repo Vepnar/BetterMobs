@@ -1,4 +1,4 @@
-<h1 align="center">BetterMobs v1.5.1</h1>
+<h1 align="center">BetterMobs v1.5.2</h1>
 <p align="center">
 <a href="https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs"><img src="https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status" alt="Quality Gate Status"/></a>
 <a href="https://www.spigotmc.org/resources/bettermobs.98792/reviews"><img src="https://img.shields.io/spiget/rating/98792" alt="Spigot Rating"/></a>
@@ -36,7 +36,9 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 <details closed>
   <summary><b>BetterMobs v1.6.0</b></summary>
     <ul>
+      <li>Implemented Zombie Rush</li>
       <li>Implemented Zombie Passage</li>
+      <li>Implemented Reinforced Golems</li>
       <li>Implemented Evil Saint</li>
       <li>Implemented Infectious Zombie (Suggested by: Grouchy)</li>
       <li>Notify admin on outdated version on join</li>
@@ -86,12 +88,10 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Add a fireball rain ability for the Ender Dragon.</li>
     <li>Let the Ender Dragon spawns baby dragons.</li>
     <li>Allow witches to spawn baby zombies at night.</li>
-    <li>Let Iron Golems have more health.</li>
     <li>Silverfishes do drop items.</li>
     <li>Let Bats drop items.</li>
     <li>Witches have more potion types.</li>
     <li>Allow Ghasts to have more attack types.</li>
-    <li>Increase zombie movement speed.</li>
     <li>Improve documentation configuration files.</li>
     <li>Improve in-code documentation.</li>
     <li>Reimplement the Giant again (idea: Jeans)</li>
