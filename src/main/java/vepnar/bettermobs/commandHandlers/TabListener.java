@@ -77,7 +77,7 @@ public class TabListener implements TabCompleter {
     }
 
     private List<String> improveSuggestions(List<String> suggestions, String input) {
-        if (suggestions.isEmpty()) return suggestions;
+        if (suggestions == null || suggestions.isEmpty()) return null;
         return suggestions.stream().filter(suggestion -> suggestion.toLowerCase().startsWith(input)).collect(Collectors.toList());
     }
 
