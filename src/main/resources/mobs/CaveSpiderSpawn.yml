@@ -1,8 +1,5 @@
 # Generated for BetterMobs version @version@
 # This makes it possible for cave spiders to spawn naturally.
-# TODO: Rename cave spiders spawn to a cool name.
-
-version: 1
 enabled: false
 
 # Chance that a cave spider will spawn.
@@ -12,3 +9,6 @@ spawnPercentage: 2
 
 # Only charge creepers who spawned naturally.
 onlyNatural: true
+
+# Don't touch this unless you know what you're doing.
+version: 1

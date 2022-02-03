@@ -36,7 +36,8 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 <details closed>
   <summary><b>BetterMobs v1.6.0</b></summary>
     <ul>
-      <li>Implemented EvilSaint</li>
+      <li>Implemented Zombie Passage</li>
+      <li>Implemented Evil Saint</li>
       <li>Implemented Infectious Zombie (Suggested by: Grouchy)</li>
       <li>Notify admin on outdated version on join</li>
       <li>Added feature to retain original drops of skeletons</li>
@@ -91,7 +92,6 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
     <li>Witches have more potion types.</li>
     <li>Allow Ghasts to have more attack types.</li>
     <li>Increase zombie movement speed.</li>
-    <li>Make more monsters switch their weapons</li>
     <li>Improve documentation configuration files.</li>
     <li>Improve in-code documentation.</li>
     <li>Reimplement the Giant again (idea: Jeans)</li>

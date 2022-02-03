@@ -75,7 +75,7 @@ public class GenericMob implements IMobListener {
         int configVersion = config.getInt("version", 0);
         if (configVersion != VERSION) {
             newState = false;
-            CORE.getLogger().warning(this.getName() + " Config version don't match up. Expected: `" + VERSION + "` got: `" + configVersion + "`");
+            CORE.getLogger().warning(this.getName() + " config version don't match up. Expected: `" + VERSION + "` got: `" + configVersion + "`");
         }
 
         // Check if the plugin is enabled in the settings.
