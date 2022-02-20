@@ -1,6 +1,6 @@
 package vepnar.bettermobs.commandHandlers;
 
-public interface ICommand {
+public interface Command {
     String getHelp();
     String getName();
     String[] getAlias();
@@ -8,6 +8,6 @@ public interface ICommand {
     CompletionType TabType();
     String getPermission();
 
-    ICommandGroup getParent();
+    CommandGroup getParent();
 
 }

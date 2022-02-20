@@ -3,16 +3,16 @@ package vepnar.bettermobs.commandHandlers;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 
-public class GenericCommand implements ICommandExecuteAble {
+public class GenericCommand implements CommandExecuteAble {
 
     private final String NAME;
     private final int MINIMAL_ARGUMENTS;
     private final CompletionType COMPLETION_TYPE;
     private final String[] ALIASES;
-    private final ICommandGroup PARENT;
+    private final CommandGroup PARENT;
     private final String HELP;
 
-    public GenericCommand(String name, ICommandGroup parent, String help, int minimal_arguments, CompletionType completion_type, String[] aliases) {
+    public GenericCommand(String name, CommandGroup parent, String help, int minimal_arguments, CompletionType completion_type, String[] aliases) {
         NAME = name;
         MINIMAL_ARGUMENTS = minimal_arguments;
         COMPLETION_TYPE = completion_type;
@@ -53,7 +53,7 @@ public class GenericCommand implements ICommandExecuteAble {
     }
 
     @Override
-    public ICommandGroup getParent() {
+    public CommandGroup getParent() {
         return PARENT;
     }
 

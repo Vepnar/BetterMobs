@@ -4,13 +4,13 @@ import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
-import vepnar.bettermobs.commandHandlers.ICommandGroup;
-import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.commandHandlers.CommandGroup;
+import vepnar.bettermobs.genericMobs.MobListener;
 
 public class ReloadCommand extends GenericCommand {
 
 
-    public ReloadCommand(ICommandGroup parent) {
+    public ReloadCommand(CommandGroup parent) {
         super("reload", parent, "§r<feature>§7 reload one or more features.", 0, CompletionType.MODULE, new String[]{"restart"});
     }
 
@@ -24,7 +24,7 @@ public class ReloadCommand extends GenericCommand {
         StringBuilder messageBuilder = new StringBuilder();
 
         for (String feature : args) {
-            for (IMobListener listener : Main.MOB_LISTENERS) {
+            for (MobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature)) {
                     messageBuilder.append("§a");
                     messageBuilder.append(listener.getName());
@@ -51,7 +51,7 @@ public class ReloadCommand extends GenericCommand {
         }
         core.reloadConfig();
 
-        for (IMobListener listener : Main.MOB_LISTENERS) {
+        for (MobListener listener : Main.MOB_LISTENERS) {
             listener.reloadConfig();
         }
         sender.sendMessage(Main.FANCY_NAME + "All the features have been reloaded.");

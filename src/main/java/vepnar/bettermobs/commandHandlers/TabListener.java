@@ -1,10 +1,9 @@
 package vepnar.bettermobs.commandHandlers;
 
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import vepnar.bettermobs.Main;
-import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.genericMobs.MobListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +23,9 @@ public class TabListener implements TabCompleter {
         this.bettermobs = bettermobs;
     }
 
-    private List<String> getSubCommands(CommandSender sender, ICommandGroup command) {
+    private List<String> getSubCommands(CommandSender sender, CommandGroup command) {
         ArrayList<String> tabs = new ArrayList<>();
-        for (ICommand subCommand : command.getCommands()) {
+        for (Command subCommand : command.getCommands()) {
 
             // Only show subcommands the sender has access to.
             if (!CommandUtils.hasPermissions(sender, subCommand)) continue;
@@ -38,30 +37,30 @@ public class TabListener implements TabCompleter {
 
     private List<String> getModules() {
         ArrayList<String> names = new ArrayList<>();
-        for (IMobListener listener : Main.MOB_LISTENERS) {
+        for (MobListener listener : Main.MOB_LISTENERS) {
             names.add(listener.getName());
         }
         return names;
     }
 
-    private ICommand getSubCommand(ICommand command, String targetString) {
+    private Command getSubCommand(Command command, String targetString) {
         // Only traverse command groups.
-        if (!(command instanceof ICommandGroup)) return null;
-        ICommandGroup group = (ICommandGroup) command;
+        if (!(command instanceof CommandGroup)) return null;
+        CommandGroup group = (CommandGroup) command;
 
         // Return a subcommand if found.
-        for (ICommand child : group.getCommands()) {
+        for (Command child : group.getCommands()) {
             if (child.getName().equalsIgnoreCase(targetString) || Arrays.asList(child.getAlias()).contains(targetString))
                 return child;
         }
         return null;
     }
 
-    private List<String> getSuggestionList(CommandSender sender, ICommand command) {
+    private List<String> getSuggestionList(CommandSender sender, Command command) {
         switch (command.TabType()) {
             case SUBCOMMAND:
-                if (command instanceof ICommandGroup) {
-                    return getSubCommands(sender, (ICommandGroup) command);
+                if (command instanceof CommandGroup) {
+                    return getSubCommands(sender, (CommandGroup) command);
                 } else {
                     core.getLogger().warning("Error trying to expand tab of " + command.getName());
                     return null;
@@ -82,11 +81,11 @@ public class TabListener implements TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        ICommand deepestCommand = bettermobs;
+    public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias, String[] args) {
+        Command deepestCommand = bettermobs;
         int deepestIndex = 0;
         for (String arg : args) {
-            ICommand matching = getSubCommand(deepestCommand, arg);
+            Command matching = getSubCommand(deepestCommand, arg);
             if (matching != null) {
                 if (CommandUtils.hasPermissions(sender, matching)) {
                     deepestCommand = matching;

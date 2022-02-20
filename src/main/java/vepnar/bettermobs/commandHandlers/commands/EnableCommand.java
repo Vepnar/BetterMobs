@@ -4,13 +4,13 @@ import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
-import vepnar.bettermobs.commandHandlers.ICommandGroup;
-import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.commandHandlers.CommandGroup;
+import vepnar.bettermobs.genericMobs.MobListener;
 
 public class EnableCommand extends GenericCommand {
 
 
-    public EnableCommand(ICommandGroup parent) {
+    public EnableCommand(CommandGroup parent) {
         super("enable", parent, "§r<feature>§7 Enable a feature.", 1, CompletionType.MODULE, new String[]{"start"});
     }
 
@@ -22,7 +22,7 @@ public class EnableCommand extends GenericCommand {
     public boolean execute(Main core, CommandSender sender, String[] args) {
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for (IMobListener listener : Main.MOB_LISTENERS) {
+            for (MobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature) && !listener.isEnabled()) {
                     listener.enable();
                     messageBuilder.append("§a");

@@ -6,7 +6,7 @@ import vepnar.bettermobs.Main;
 
 import java.io.File;
 
-public class GenericMob implements IMobListener {
+public class GenericMob implements MobListener {
 
     protected final Main CORE;
     protected final String NAME;

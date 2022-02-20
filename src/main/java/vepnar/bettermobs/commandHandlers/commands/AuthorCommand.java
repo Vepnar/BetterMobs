@@ -5,9 +5,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
-import vepnar.bettermobs.commandHandlers.ICommandGroup;
+import vepnar.bettermobs.commandHandlers.CommandGroup;
 import vepnar.bettermobs.updateChecker.UpdateCheckerRunnable;
-import vepnar.bettermobs.updateChecker.UpdateState;
 
 /**
  * Handle the /bettermobs author. Will print information about the
@@ -16,7 +15,7 @@ import vepnar.bettermobs.updateChecker.UpdateState;
 public class AuthorCommand extends GenericCommand {
 
 
-    public AuthorCommand(ICommandGroup parent) {
+    public AuthorCommand(CommandGroup parent) {
         super("author", parent, "Credits the developer", 0, CompletionType.NOTHING, new String[]{"credit", "credits", "version"});
     }
 

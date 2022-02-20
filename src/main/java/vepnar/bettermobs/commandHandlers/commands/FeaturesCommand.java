@@ -4,8 +4,8 @@ import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
-import vepnar.bettermobs.commandHandlers.ICommandGroup;
-import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.commandHandlers.CommandGroup;
+import vepnar.bettermobs.genericMobs.MobListener;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FeaturesCommand extends GenericCommand {
 
-    public FeaturesCommand(ICommandGroup parent) {
+    public FeaturesCommand(CommandGroup parent) {
         super("features", parent, "Shows all installed features", 0, CompletionType.NOTHING, new String[]{"feature", "list", "modules", "module"});
     }
 
@@ -27,10 +27,10 @@ public class FeaturesCommand extends GenericCommand {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        List<IMobListener> listeners = Main.MOB_LISTENERS;
+        List<MobListener> listeners = Main.MOB_LISTENERS;
         sender.sendMessage(Main.FANCY_NAME + "(" + listeners.size() + ") Features installed:");
         StringBuilder messageBuilder = new StringBuilder();
-        for (IMobListener listener : listeners) {
+        for (MobListener listener : listeners) {
             messageBuilder.append(listener.isEnabled() ? "§a" : "§c");
             messageBuilder.append(listener.getName());
             messageBuilder.append("§r, ");

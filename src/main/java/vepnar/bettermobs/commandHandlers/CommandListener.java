@@ -1,6 +1,5 @@
 package vepnar.bettermobs.commandHandlers;
 
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
@@ -18,11 +17,11 @@ public class CommandListener implements CommandExecutor {
         this.CORE = m;
     }
 
-    public boolean executeCommand(ArrayList<ICommand> environment, CommandSender sender, String[] args) {
+    public boolean executeCommand(ArrayList<Command> environment, CommandSender sender, String[] args) {
         if (args.length == 0) return false;
         String targetSubCommand = args[0].toLowerCase();
         String[] poppedArgs = Arrays.copyOfRange(args, 1, args.length);
-        for (ICommand command : environment) {
+        for (Command command : environment) {
             // Only process commands that match
             if (!(command.getName().equals(targetSubCommand) || Arrays.stream(command.getAlias()).anyMatch(c -> c.equals(targetSubCommand)))) {
                 continue;
@@ -40,9 +39,9 @@ public class CommandListener implements CommandExecutor {
                 return true;
             }
 
-            if (command instanceof ICommandGroup) {
+            if (command instanceof CommandGroup) {
 
-                ICommandGroup commandGroup = (ICommandGroup) command;
+                CommandGroup commandGroup = (CommandGroup) command;
 
                 boolean result = executeCommand(commandGroup.getCommands(), sender, poppedArgs);
                 if(!result) {
@@ -51,8 +50,8 @@ public class CommandListener implements CommandExecutor {
                 } else {
                     return true;
                 }
-            } else if (command instanceof ICommandExecuteAble) {
-                ICommandExecuteAble executeAble = (ICommandExecuteAble) command;
+            } else if (command instanceof CommandExecuteAble) {
+                CommandExecuteAble executeAble = (CommandExecuteAble) command;
                 return executeAble.execute(CORE, sender, poppedArgs);
             }
         }
@@ -65,7 +64,7 @@ public class CommandListener implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         // Show the help command when there are no commands entered.
         if(args.length == 0 ) args = HELP;
         return executeCommand(BETTER_MOBS.getCommands(), sender, args);

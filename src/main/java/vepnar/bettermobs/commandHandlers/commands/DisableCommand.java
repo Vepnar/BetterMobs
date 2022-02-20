@@ -4,13 +4,13 @@ import org.bukkit.command.CommandSender;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
-import vepnar.bettermobs.commandHandlers.ICommandGroup;
-import vepnar.bettermobs.genericMobs.IMobListener;
+import vepnar.bettermobs.commandHandlers.CommandGroup;
+import vepnar.bettermobs.genericMobs.MobListener;
 
 public class DisableCommand extends GenericCommand {
 
 
-    public DisableCommand(ICommandGroup parent) {
+    public DisableCommand(CommandGroup parent) {
         super("disable", parent, "§r<feature>§7 Disable a feature.", 1, CompletionType.MODULE, new String[]{"stop"});
     }
 
@@ -24,7 +24,7 @@ public class DisableCommand extends GenericCommand {
 
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for (IMobListener listener : Main.MOB_LISTENERS) {
+            for (MobListener listener : Main.MOB_LISTENERS) {
                 if (listener.getName().equalsIgnoreCase(feature) && listener.isEnabled()) {
                     listener.disable();
                     messageBuilder.append("§c");

@@ -2,7 +2,7 @@ package vepnar.bettermobs.genericMobs;
 
 import org.bukkit.event.Listener;
 
-public interface IMobListener extends Listener {
+public interface MobListener extends Listener {
     void reloadConfig();
 
     void initialize();
