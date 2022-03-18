@@ -5,7 +5,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.CommandGroup;
-import vepnar.bettermobs.genericMobs.MobListener;
+import vepnar.bettermobs.genericMobs.GenericMob;
 
 import java.util.List;
 
@@ -27,12 +27,12 @@ public class FeaturesCommand extends GenericCommand {
 
     @Override
     public boolean execute(Main core, CommandSender sender, String[] args) {
-        List<MobListener> listeners = Main.MOB_LISTENERS;
+        List<GenericMob> listeners = Main.MOB_LISTENERS;
         sender.sendMessage(Main.FANCY_NAME + "(" + listeners.size() + ") Features installed:");
         StringBuilder messageBuilder = new StringBuilder();
-        for (MobListener listener : listeners) {
-            messageBuilder.append(listener.isEnabled() ? "§a" : "§c");
-            messageBuilder.append(listener.getName());
+        for (GenericMob module : listeners) {
+            messageBuilder.append(module.isEnabled() ? "§a" : "§c");
+            messageBuilder.append(module.getName());
             messageBuilder.append("§r, ");
         }
         if (messageBuilder.length() != 0) {

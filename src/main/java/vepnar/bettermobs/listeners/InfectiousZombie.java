@@ -11,6 +11,7 @@ import vepnar.bettermobs.utils.PotionUtil;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class InfectiousZombie extends GenericMob {
     double infectionProbability;
     int effectAmplifier;
@@ -36,8 +37,7 @@ public class InfectiousZombie extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         infectionProbability = config.getDouble("infectionPercentage", 0) / 100;
         effectAmplifier = config.getInt("infectionAmplifier", 0);
         effectDuration = config.getInt("infectionDuration", 0);

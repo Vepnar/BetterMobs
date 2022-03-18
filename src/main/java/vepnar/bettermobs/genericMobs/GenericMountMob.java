@@ -11,7 +11,7 @@ import vepnar.bettermobs.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericMountMob extends GenericMob {
+public abstract class GenericMountMob extends GenericMob {
 
     private double mountProbability;
     private int searchRadius;
@@ -41,6 +41,7 @@ public class GenericMountMob extends GenericMob {
         return findValidRider(entities);
     }
 
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.NORMAL)
     public void onIntervalEvent(IntervalEvent event) {
         for (Player player : CORE.getServer().getOnlinePlayers()) {

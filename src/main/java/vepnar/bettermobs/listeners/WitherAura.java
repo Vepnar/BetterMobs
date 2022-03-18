@@ -17,6 +17,7 @@ import vepnar.bettermobs.utils.PotionUtil;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class WitherAura extends GenericMob {
 
     public static final String WITHER_AURA_META = "WitherAuraCoolDown";
@@ -69,9 +70,7 @@ public class WitherAura extends GenericMob {
 
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
-
+    public void readConfig() {
         // General configuration
         scanRadius = config.getInt("scanRadius", 0);
 
@@ -82,6 +81,5 @@ public class WitherAura extends GenericMob {
         effectProbability = config.getDouble("chancePercentage", 0) / 100;
         effectCoolDown = config.getInt("coolDown", 0) * 50;
         availableEffects = PotionUtil.parsePotionEffects(config.getStringList("effects"));
-
     }
 }

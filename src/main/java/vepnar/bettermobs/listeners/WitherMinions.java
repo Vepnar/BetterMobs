@@ -11,6 +11,7 @@ import vepnar.bettermobs.utils.EntityUtil;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class WitherMinions extends GenericMob {
 
     public static final String WITHER_MINION_META = "IsMinion";
@@ -83,8 +84,7 @@ public class WitherMinions extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         scanRadius = config.getInt("scanRadius", 0);
         noMinionDrops = config.getBoolean("noMinionDrops", true);
         spawnProbability = config.getDouble("spawnPercentageChance", 0) / 100;

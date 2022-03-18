@@ -2,11 +2,12 @@ package vepnar.bettermobs.genericMobs;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 import vepnar.bettermobs.Main;
 
 import java.io.File;
 
-public class GenericMob implements MobListener {
+public abstract class GenericMob implements Listener {
 
     protected final Main CORE;
     protected final String NAME;
@@ -23,16 +24,29 @@ public class GenericMob implements MobListener {
         API_VERSION = apiVersion;
     }
 
+    /**
+     *
+     * @param probability
+     * @return
+     */
     protected boolean shouldOccur(double probability) {
         // This function is implemented such the sonarlinter doesn't warn us everytime we use `math.random`.
         return probability > Math.random();
     }
 
-    @Override
+    /**
+     * Check if this feature is compatible with the current server minecraft version.
+     * @return True if compatible.
+     */
     public boolean isCompatible() {
         return Main.API_VERSION >= API_VERSION;
     }
 
+    /**
+     * Create the required directories for the configuration file.
+     * And create a configuration file object.
+     * @return Configuration file.
+     */
     private File getConfigFile() {
         String configName = "/" + getName() + ".yml";
 
@@ -43,6 +57,10 @@ public class GenericMob implements MobListener {
         return new File(folder + configName);
     }
 
+    /**
+     * Copy the default configuration from the jar to the plugin directory.
+     * @return True if successful & false if failed.
+     */
     private boolean setDefaultConfig() {
         // Create path to desired configuration file
         File configFile = getConfigFile();
@@ -61,8 +79,16 @@ public class GenericMob implements MobListener {
 
     }
 
-    @Override
-    public void reloadConfig() {
+    /**
+     * Read feature specific configuration.
+     */
+    public abstract void readConfig();
+
+    /**
+     * Read general mob listener configuration.
+     * And update the state of the feature accordingly.
+     */
+    public void initializeConfig() {
         // newState is the state the config should be updated to.
         boolean newState = setDefaultConfig();
 
@@ -87,37 +113,56 @@ public class GenericMob implements MobListener {
         } else if (!newState && this.enabled) {
             this.disable();
         }
-
     }
 
-    @Override
+    /**
+     * Read general mob configuration.
+     * Child abstract classes should also read specific class configuration here and not in readConfig.
+     */
+    public void reloadConfig() {
+        initializeConfig();
+        readConfig();
+    }
+
+    /**
+     * Load the configuration & enable the listener if the feature is enabled.
+     */
+    @SuppressWarnings("unused")
     public void initialize() {
         reloadConfig();
         if(enabled) {
             CORE.debug(getName() + " Loaded");
-        }else {
-            CORE.debug(getName() + " Not loaded");
-        }
+        }else CORE.debug(getName() + " Not loaded");
     }
 
-    @Override
+    /**
+     * Register the current listener into the server.
+     */
     public void enable() {
         enabled = true;
         CORE.getServer().getPluginManager().registerEvents(this, CORE);
     }
 
-    @Override
+    /**
+     * Deregister this mob listener.
+     */
     public void disable() {
         enabled = false;
         HandlerList.unregisterAll(this);
     }
 
-    @Override
+    /**
+     * Check if the current feature is enabled.
+     * @return True if enabled
+     */
     public boolean isEnabled() {
         return enabled;
     }
 
-    @Override
+    /**
+     * Retrieve the specific name of this feature.
+     * @return Name of the feature.
+     */
     public String getName() {
         return NAME;
     }

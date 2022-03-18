@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class MagicalCreepers extends GenericMob {
     private final List<CreeperClass> creeperClasses = new ArrayList<>();
     private boolean onlyNatural;
@@ -52,9 +53,7 @@ public class MagicalCreepers extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
-
+    public void readConfig() {
         onlyNatural = config.getBoolean("onlyNatural", true);
         effectStacking = config.getBoolean("effectStacking", false);
 
@@ -83,7 +82,6 @@ public class MagicalCreepers extends GenericMob {
             CORE.debug("No valid creeperClasses have been added.");
             this.disable();
         }
-
     }
 }
 

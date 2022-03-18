@@ -5,7 +5,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.CommandGroup;
-import vepnar.bettermobs.genericMobs.MobListener;
+import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class ReloadCommand extends GenericCommand {
 
@@ -24,12 +24,12 @@ public class ReloadCommand extends GenericCommand {
         StringBuilder messageBuilder = new StringBuilder();
 
         for (String feature : args) {
-            for (MobListener listener : Main.MOB_LISTENERS) {
-                if (listener.getName().equalsIgnoreCase(feature)) {
+            for (GenericMob module : Main.MOB_LISTENERS) {
+                if (module.getName().equalsIgnoreCase(feature)) {
                     messageBuilder.append("§a");
-                    messageBuilder.append(listener.getName());
+                    messageBuilder.append(module.getName());
                     messageBuilder.append("§r, ");
-                    listener.reloadConfig();
+                    module.reloadConfig();
                     break;
                 }
             }
@@ -51,8 +51,8 @@ public class ReloadCommand extends GenericCommand {
         }
         core.reloadConfig();
 
-        for (MobListener listener : Main.MOB_LISTENERS) {
-            listener.reloadConfig();
+        for (GenericMob mob : Main.MOB_LISTENERS) {
+            mob.reloadConfig();
         }
         sender.sendMessage(Main.FANCY_NAME + "All the features have been reloaded.");
         return true;

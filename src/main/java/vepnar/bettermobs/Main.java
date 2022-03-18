@@ -14,7 +14,7 @@ import vepnar.bettermobs.commandHandlers.BasicCommandGroup;
 import vepnar.bettermobs.commandHandlers.CommandListener;
 import vepnar.bettermobs.commandHandlers.TabListener;
 import vepnar.bettermobs.commandHandlers.commands.*;
-import vepnar.bettermobs.genericMobs.MobListener;
+import vepnar.bettermobs.genericMobs.GenericMob;
 import vepnar.bettermobs.runnables.IntervalEventRunnable;
 import vepnar.bettermobs.updateChecker.UpdateCheckerRunnable;
 import vepnar.bettermobs.updateChecker.UpdateListener;
@@ -39,7 +39,7 @@ public class Main extends JavaPlugin {
     public static final String STATS_MODULES_ENABLED = "modules_enabled";
     public static final String LISTENER_SCOPE = "vepnar.bettermobs.listeners";
 
-    public static final List<MobListener> MOB_LISTENERS = new ArrayList<>();
+    public static final List<GenericMob> MOB_LISTENERS = new ArrayList<>();
 
     private boolean debugMode = false;
     private static Main instance;
@@ -61,7 +61,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (MobListener listener : MOB_LISTENERS) {
+        for (GenericMob listener : MOB_LISTENERS) {
             listener.disable();
         }
         IntervalEventRunnable.getInstance().stop();
@@ -99,18 +99,18 @@ public class Main extends JavaPlugin {
         Reflections reflections = new Reflections(LISTENER_SCOPE);
 
         // See: https://github.com/ronmamo/reflections/issues/245
-        Set<Class<?>> modules = reflections.getSubTypesOf(MobListener.class).stream().filter(v -> v.getPackage().getName().equals(LISTENER_SCOPE)).collect(Collectors.toSet());
+        Set<Class<?>> modules = reflections.getSubTypesOf(GenericMob.class).stream().filter(v -> v.getPackage().getName().equals(LISTENER_SCOPE)).collect(Collectors.toSet());
 
         for (Class<?> cls : modules) {
             try {
-                Class<MobListener> module = (Class<MobListener>) cls;
-                MobListener mobListener = module.getDeclaredConstructor(Main.class).newInstance(args);
+                Class<GenericMob> module = (Class<GenericMob>) cls;
+                GenericMob mob = module.getDeclaredConstructor(Main.class).newInstance(args);
 
                 // Check API compatibility.
-                if (mobListener.isCompatible()) {
-                    MOB_LISTENERS.add(mobListener);
+                if (mob.isCompatible()) {
+                    MOB_LISTENERS.add(mob);
                 } else
-                    debug(mobListener.getName() + " is not compatible with the current version (1." + API_VERSION + ".*)");
+                    debug(mob.getName() + " is not compatible with the current version (1." + API_VERSION + ".*)");
             } catch (Exception ex) {
                 ex.printStackTrace();
                 getLogger().warning(ex.getMessage());
@@ -119,9 +119,9 @@ public class Main extends JavaPlugin {
     }
 
     private void initializeMobListener() {
-        for (MobListener listener : MOB_LISTENERS) {
+        for (GenericMob mob : MOB_LISTENERS) {
             // Initialize will also enable the listener if possible.
-            listener.initialize();
+            mob.initialize();
         }
     }
 
@@ -201,8 +201,8 @@ public class Main extends JavaPlugin {
 
     private int getEnabledListenerCount() {
         int count = 0;
-        for (MobListener listener : MOB_LISTENERS) {
-            if (listener.isEnabled()) count++;
+        for (GenericMob mob : MOB_LISTENERS) {
+            if (mob.isEnabled()) count++;
         }
         return count;
     }

@@ -10,6 +10,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 import vepnar.bettermobs.utils.EntityUtil;
 
+@SuppressWarnings("unused")
 public class EnderRage extends GenericMob {
 
     public static final String ENDER_RAGE_COOL_DOWN = "enderRage";
@@ -76,9 +77,7 @@ public class EnderRage extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
-
+    public void readConfig() {
         scanRadius = config.getInt("scanRadius", 32);
         maxEnderManRage = config.getInt("maxEnderManRage", 0);
         coolDown = config.getInt("coolDown", 600) * 50; // Convert tick => second.
@@ -89,4 +88,5 @@ public class EnderRage extends GenericMob {
         includeCrystal = config.getBoolean("includeCrystal", false);
         includeDragon = config.getBoolean("includeDragon", false);
     }
+
 }

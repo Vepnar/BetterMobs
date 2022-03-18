@@ -11,6 +11,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 import vepnar.bettermobs.utils.EntityUtil;
 
+@SuppressWarnings("unused")
 public class EvilSaint extends GenericMob {
 
     public static final String REGENERATION_COOL_DOWN = "RegenerationCoolDown";
@@ -46,8 +47,7 @@ public class EvilSaint extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         regenerationProbability = config.getDouble("regenerationPercentageChance", 0) / 100;
         regenerationDelay = config.getInt("regenerationCoolDown", 0) * 50;
         regenerationStrength = config.getDouble("regenerationStrength", 0);

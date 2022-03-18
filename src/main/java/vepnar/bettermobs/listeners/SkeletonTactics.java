@@ -15,6 +15,8 @@ import vepnar.bettermobs.utils.ItemUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@SuppressWarnings("unused")
 public class SkeletonTactics extends GenericWeaponSwitch {
 
     private boolean includeWitherSkeletons;
@@ -81,7 +83,7 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void damageEvent(EntityDamageEvent event) {
         // Only switch weapons on target entities.
-        if(!filterEntity(event.getEntity())) return;
+        if(!filterEntity(event.getEntity()) || !retainOriginalDrops) return;
         LivingEntity entity =  (LivingEntity) event.getEntity();
 
         // Only return the weapon when the damage is fatal.
@@ -97,15 +99,10 @@ public class SkeletonTactics extends GenericWeaponSwitch {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         includeWitherSkeletons = config.getBoolean("includeWitherSkeleton", false);
         witherSkeletonShootsFire = config.getBoolean("witherSkeletonShootFire", false);
         retainOriginalDrops = config.getBoolean("retainOriginalDrops", false);
     }
-
-
-
-
 }
 

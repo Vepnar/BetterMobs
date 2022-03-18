@@ -5,7 +5,7 @@ import vepnar.bettermobs.Main;
 import vepnar.bettermobs.commandHandlers.CompletionType;
 import vepnar.bettermobs.commandHandlers.GenericCommand;
 import vepnar.bettermobs.commandHandlers.CommandGroup;
-import vepnar.bettermobs.genericMobs.MobListener;
+import vepnar.bettermobs.genericMobs.GenericMob;
 
 public class DisableCommand extends GenericCommand {
 
@@ -24,11 +24,11 @@ public class DisableCommand extends GenericCommand {
 
         StringBuilder messageBuilder = new StringBuilder();
         for(String feature : args) {
-            for (MobListener listener : Main.MOB_LISTENERS) {
-                if (listener.getName().equalsIgnoreCase(feature) && listener.isEnabled()) {
-                    listener.disable();
+            for (GenericMob module : Main.MOB_LISTENERS) {
+                if (module.getName().equalsIgnoreCase(feature) && module.isEnabled()) {
+                    module.disable();
                     messageBuilder.append("§c");
-                    messageBuilder.append(listener.getName());
+                    messageBuilder.append(module.getName());
                     messageBuilder.append("§r, ");
                     break;
                 }

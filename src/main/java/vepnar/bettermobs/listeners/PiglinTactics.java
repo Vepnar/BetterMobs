@@ -31,4 +31,9 @@ public class PiglinTactics extends GenericWeaponSwitch {
             return Material.GOLDEN_SWORD;
         } else return Material.CROSSBOW;
     }
+
+    @Override
+    public void readConfig() {
+
+    }
 }

@@ -11,10 +11,10 @@ import vepnar.bettermobs.genericMobs.GenericMob;
 @SuppressWarnings("unused")
 public class ZombieRush extends GenericMob {
 
-    double min_speed;
-    double max_speed;
-    double min_baby_speed;
-    double max_baby_speed;
+    double minSpeed;
+    double maxSpeed;
+    double minBabySpeed;
+    double maxBabySpeed;
     boolean onlyNatural;
     double rushProbability;
 
@@ -40,24 +40,20 @@ public class ZombieRush extends GenericMob {
         double newSpeed;
 
         if (zombie.isAdult()) {
-            newSpeed=min_speed + (max_speed-min_speed) * multiplier;
-        } else newSpeed=min_baby_speed + (max_baby_speed-min_baby_speed) * multiplier;
+            newSpeed=minSpeed + (maxSpeed-minSpeed) * multiplier;
+        } else newSpeed=minBabySpeed + (maxBabySpeed-minBabySpeed) * multiplier;
       zombie.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(newSpeed);
 
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
-
+    public void readConfig() {
         onlyNatural = config.getBoolean("onlyNatural", true);
         rushProbability = config.getDouble("rushPercentageChance", 0) / 100;
 
-        min_speed = config.getDouble("adult.minSpeed", 2.3) / 10;
-        max_speed = config.getDouble("adult.maxSpeed", 3.4) / 10;
-        min_baby_speed = config.getDouble("baby.maxSpeed", 3.4) / 10;
-        max_baby_speed = config.getDouble("baby.maxSpeed", 4.5) / 10;
+        minSpeed = config.getDouble("adult.minSpeed", 2.3) / 10;
+        maxSpeed = config.getDouble("adult.maxSpeed", 3.4) / 10;
+        minBabySpeed = config.getDouble("baby.maxSpeed", 3.4) / 10;
+        maxBabySpeed = config.getDouble("baby.maxSpeed", 4.5) / 10;
     }
-
-
 }

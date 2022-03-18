@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
+@SuppressWarnings("unused")
 public class ReinforcedGolem extends GenericMob {
 
     private double maxHealthIron;
@@ -30,17 +31,15 @@ public class ReinforcedGolem extends GenericMob {
         golem.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
         golem.setHealth(maxHealth);
 
-
     }
-
 
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         maxHealthIron = config.getDouble("maxHealthIron", 100);
         maxHealthSnow = config.getDouble("maxHealthSnow", 4);
     }
+
 
 
 }

@@ -18,13 +18,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GenericWeaponSwitch extends GenericMob {
+public abstract class GenericWeaponSwitch extends GenericMob {
     private int meleeRadius;
     private int scanRadius;
 
     public GenericWeaponSwitch(Main javaPlugin, String name, int version, int apiVersion) {
         super(javaPlugin, name, version, apiVersion);
     }
+
+    /**
+     * Remove all entities which are ineligible to be processed by this module.
+     * Only filter based on entity type and not on the inventory or other features.
+     * @param entity Random nearby entity.
+     * @return true if eligible for weapon updates.
+     */
+    protected abstract boolean filterEntity(Entity entity);
+
+    /**
+     * Material to which the weapon should be changed.
+     * NOTE: the only weapon switch possible is between ranged weapons and melee weapons.
+     * @param entity Living entity which is eligible for a weapon update.
+     * @param playerNearby True if the player is within the given radius.
+     * @return
+     */
+    protected abstract Material changeMaterial(LivingEntity entity, boolean playerNearby);
+
 
     private List<LivingEntity> filterEntities(List<Entity> entities) {
         List<LivingEntity> result = new ArrayList<>();
@@ -34,18 +52,6 @@ public class GenericWeaponSwitch extends GenericMob {
            }
         }
         return result;
-    }
-
-    protected boolean filterEntity(Entity entity ) {
-        if (!(entity instanceof LivingEntity)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected Material changeMaterial(LivingEntity entity, boolean playerNearby) {
-        return entity.getEquipment().getItemInMainHand().getType();
     }
 
     protected boolean shouldChange(LivingEntity entity, boolean playerNearby) {

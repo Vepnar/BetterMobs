@@ -3,7 +3,7 @@ package vepnar.bettermobs.commandHandlers;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import vepnar.bettermobs.Main;
-import vepnar.bettermobs.genericMobs.MobListener;
+import vepnar.bettermobs.genericMobs.GenericMob;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,8 +37,8 @@ public class TabListener implements TabCompleter {
 
     private List<String> getModules() {
         ArrayList<String> names = new ArrayList<>();
-        for (MobListener listener : Main.MOB_LISTENERS) {
-            names.add(listener.getName());
+        for (GenericMob module : Main.MOB_LISTENERS) {
+            names.add(module.getName());
         }
         return names;
     }

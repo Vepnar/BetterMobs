@@ -57,6 +57,11 @@ public class DominantSkeleton extends GenericMountMob {
     }
 
     @Override
+    public void readConfig() {
+
+    }
+
+    @Override
     public void reloadConfig() {
         super.reloadConfig();
         listenWitherSkeleton = config.getBoolean("includeWitherSkeletons", false);

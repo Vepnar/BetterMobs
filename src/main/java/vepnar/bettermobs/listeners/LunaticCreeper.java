@@ -9,6 +9,7 @@ import org.bukkit.event.entity.CreeperPowerEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
+@SuppressWarnings("unused")
 public class LunaticCreeper extends GenericMob {
 
     private boolean listenPower;
@@ -66,8 +67,7 @@ public class LunaticCreeper extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         fuseTicksCharged = config.getInt("chargedCreeper.fuse", 3);
         explosionPowerCharged = config.getInt("chargedCreeper.explosionPower", 30);
         spawnProbabilityCharged = config.getDouble("chargedCreeper.spawnPercentage", 100) / 100;
@@ -79,6 +79,5 @@ public class LunaticCreeper extends GenericMob {
         onlyNatural = config.getBoolean("normalCreeper.onlyNatural", false);
 
         listenPower = config.getBoolean("listenToPowerEvent", true);
-
     }
 }

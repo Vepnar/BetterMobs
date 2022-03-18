@@ -10,6 +10,8 @@ import vepnar.bettermobs.genericMobs.GenericMountMob;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@SuppressWarnings("unused")
 public class ZombieMenticide extends GenericMountMob {
 
     boolean brainWash;
@@ -73,8 +75,7 @@ public class ZombieMenticide extends GenericMountMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         brainWash = config.getBoolean("canBrainWash", false);
     }
 }

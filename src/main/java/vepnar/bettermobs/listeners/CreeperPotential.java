@@ -8,6 +8,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
+@SuppressWarnings("unused")
 public class CreeperPotential extends GenericMob {
 
     private double spawnProbability;
@@ -32,8 +33,7 @@ public class CreeperPotential extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         spawnProbability = this.config.getDouble("spawnPercentage", 0) / 100;
         onlyNatural = this.config.getBoolean("onlyNatural", true);
     }

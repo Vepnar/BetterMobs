@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import vepnar.bettermobs.Main;
 import vepnar.bettermobs.genericMobs.GenericMob;
 
+@SuppressWarnings("unused")
 public class ZombiePassage extends GenericMob {
 
     private double spawnProbability;
@@ -21,7 +22,7 @@ public class ZombiePassage extends GenericMob {
         super(javaPlugin, "ZombiePassage", 1, 13);
     }
 
-    @SuppressWarnings("unused")
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onZombieDeath(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Zombie)) return;
@@ -44,7 +45,6 @@ public class ZombiePassage extends GenericMob {
         }
     }
 
-    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.NORMAL)
     public void onSpawn(CreatureSpawnEvent event) {
         if (!(event.getEntity() instanceof Zombie)) return;
@@ -65,8 +65,7 @@ public class ZombiePassage extends GenericMob {
     }
 
     @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void readConfig() {
         onlyNatural = config.getBoolean("onlyNatural", true);
         spawnProbability = config.getDouble("spawnPercentageChance", 0) / 100;
     }
