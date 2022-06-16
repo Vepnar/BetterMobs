@@ -1,4 +1,4 @@
-<h1 align="center">BetterMobs v1.5.2</h1>
+<h1 align="center">BetterMobs v1.6.1</h1>
 <p align="center">
 <a href="https://sonarcloud.io/summary/new_code?id=Vepnar_BetterMobs"><img src="https://sonarcloud.io/api/project_badges/measure?project=Vepnar_BetterMobs&metric=alert_status" alt="Quality Gate Status"/></a>
 <a href="https://www.spigotmc.org/resources/bettermobs.98792/reviews"><img src="https://img.shields.io/spiget/rating/98792" alt="Spigot Rating"/></a>
@@ -34,6 +34,12 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 ### Change  log
 
 <details open>
+  <summary><b>BetterMobs v1.6.1</b></summary>
+    <ul>
+      <li>1.19.* Patch. reported by Rusa#1727</li>
+    </ul>
+</details>
+<details>
   <summary><b>BetterMobs v1.6.0</b></summary>
     <ul>
       <li>Implemented Zombie Rush</li>

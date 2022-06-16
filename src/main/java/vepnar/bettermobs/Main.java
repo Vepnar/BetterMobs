@@ -212,9 +212,10 @@ public class Main extends JavaPlugin {
      */
     private void parseApiVersion() {
         String versionString = getServer().getBukkitVersion();
-        for (int i = 13; 19 > i; i++) {
+        for (int i = 13; 25 > i; i++) {
             if (versionString.contains("1." + i)) {
                 API_VERSION = i;
+                break;
             }
         }
     }
