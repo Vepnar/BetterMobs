@@ -111,8 +111,9 @@ Default mob specific configuration: [here](https://github.com/Vepnar/BetterMobs/
 Primary goals
 
 - [x] 100 Downloads
-- [ ] 500 Downloads
+- [x] 500 Downloads
 - [ ] 1000 Downloads
+- [ ] 5000 Downloads
 
 Secondary goals
 
