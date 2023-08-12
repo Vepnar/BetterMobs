@@ -23,6 +23,7 @@ import vepnar.bettermobs.utils.ItemUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -98,12 +99,12 @@ public class Main extends JavaPlugin {
 
         Reflections reflections = new Reflections(LISTENER_SCOPE);
 
-        // See: https://github.com/ronmamo/reflections/issues/245
-        Set<Class<?>> modules = reflections.getSubTypesOf(GenericMob.class).stream().filter(v -> v.getPackage().getName().equals(LISTENER_SCOPE)).collect(Collectors.toSet());
+        Set<Class<? extends GenericMob>> modules = reflections.getSubTypesOf(GenericMob.class);
 
-        for (Class<?> cls : modules) {
+        for (Class<?> clazz : modules) {
+            if(Modifier.isAbstract(clazz.getModifiers())) continue;
             try {
-                Class<GenericMob> module = (Class<GenericMob>) cls;
+                Class<GenericMob> module = (Class<GenericMob>) clazz;
                 GenericMob mob = module.getDeclaredConstructor(Main.class).newInstance(args);
 
                 // Check API compatibility.
